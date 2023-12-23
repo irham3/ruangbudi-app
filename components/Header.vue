@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const user = useSupabaseUser()
 const supabase = useSupabaseClient();
+const { $toast: toast } = useNuxtApp()
 
 const logout = async () => {
   const { error } = await supabase.auth.signOut();
@@ -11,7 +12,9 @@ const logout = async () => {
   }
 
   await navigateTo('/');
-  alert('Berhasil keluar')
+  toast("Anda telah keluar", {
+    type: toast.TYPE.INFO
+  });
 };
 </script>
 
@@ -51,17 +54,19 @@ const logout = async () => {
               </ul>
             </div>
             <div class="flex items-center gap-x-1">
-              <!-- <NuxtLink
-              class="cursor-pointer hidden px-4 py-2 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block">
-              <span>Log In</span>
-            </NuxtLink> -->
-              <NuxtLink
-                v-if="!user"
-                to="/auth/signupwithemail"
-                class="cursor-pointer hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
-                type="button">
-                <span>Daftar dengan email</span>
-              </NuxtLink>
+              <div v-if="!user">
+                <NuxtLink
+                  to="/auth/signin"
+                  class="cursor-pointer hidden px-4 py-2 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block">
+                  <span>Masuk</span>
+                </NuxtLink>
+                <NuxtLink
+                  to="/auth/signup"
+                  class="cursor-pointer hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+                  type="button">
+                  <span>Daftar</span>
+                </NuxtLink>
+              </div>
               <button
                 v-else
                 @click="logout"

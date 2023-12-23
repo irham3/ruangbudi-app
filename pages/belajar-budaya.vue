@@ -17,6 +17,7 @@ console.log(cultures.value);
 
 <template>
   <NuxtLayout>
+    <!-- Testing -->
     <h1>Halaman Belajar Budaya</h1>
     <ul>
       <li v-for="{ id, culture_name } in cultures" :key="id">{{id}}. {{culture_name}}</li>

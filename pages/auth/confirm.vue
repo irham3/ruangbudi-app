@@ -8,5 +8,5 @@ watch(user, () => {
 
 </script>
 <template>
-  <div>Waiting for login...</div>
+  <p>Menunggu masuk ke akun Anda...</p>
 </template>
