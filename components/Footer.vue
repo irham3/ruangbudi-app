@@ -1,6 +1,11 @@
+<script lang="ts" setup>
+const currentDate = new Date();
+const currentYear = ref(currentDate.getFullYear())
+</script>
+
 <template>
   <footer class="relative w-full">
-    <div class="w-full px-8 mx-auto max-w-7xl">
+    <div class="w-full mx-auto max-w-7xl">
       <div class="grid w-full grid-cols-1 gap-8 py-12 mx-auto md:grid-cols-2 lg:grid-cols-4">
         <div class="w-full">
           <p
@@ -119,8 +124,8 @@
         class="flex flex-col items-center justify-center w-full py-4 border-t border-blue-gray-50 md:flex-row md:justify-between">
         <p
           class="block mb-4 font-sans text-sm antialiased font-normal leading-normal text-center text-blue-gray-900 md:mb-0">
-          © 2023{" "}
-          <a href="https://material-tailwind.com/">Material Tailwind</a>. All
+          © {{ currentYear }}
+          <NuxtLink href="/">Ruang Budi</NuxtLink>. All
           Rights Reserved.
         </p>
         <div class="flex gap-4 text-blue-gray-900 sm:justify-center">
