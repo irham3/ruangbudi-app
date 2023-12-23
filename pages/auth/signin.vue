@@ -1,9 +1,11 @@
 <script setup lang="ts">
+
 definePageMeta({
   title: 'Masuk'
 })
 
 const supabase = useSupabaseClient()
+const { $toast: toast } = useNuxtApp()
 
 // Form Data
 const email = ref('')
@@ -23,6 +25,9 @@ const signIn = async () => {
   }
   
   await navigateTo('/');
+  toast("Berhasil masuk!", {
+    type: toast.TYPE.SUCCESS,
+  });
 }
 </script>
 

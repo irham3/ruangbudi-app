@@ -1,8 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/supabase'],
-  css: ['~/assets/css/main.css'],
+  modules: [
+    '@nuxtjs/supabase',
+  ],
+  
+  css: [
+    '~/assets/css/main.css'
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -11,7 +16,7 @@ export default defineNuxtConfig({
   },
   // https://supabase.nuxtjs.org/get-started#options
   supabase: {
-    redirect: true,
+    redirect: false,
     redirectOptions: {
       login: '/auth/signin',
       callback: '/auth/confirm',
@@ -20,5 +25,6 @@ export default defineNuxtConfig({
     clientOptions: {
       
     }
-  }
+  },
+
 })

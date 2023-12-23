@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const user = useSupabaseUser()
 const supabase = useSupabaseClient();
+const { $toast: toast } = useNuxtApp()
 
 const logout = async () => {
   const { error } = await supabase.auth.signOut();
@@ -11,7 +12,9 @@ const logout = async () => {
   }
 
   await navigateTo('/');
-  alert('Berhasil keluar')
+  toast("Anda telah keluar", {
+    type: toast.TYPE.INFO
+  });
 };
 </script>
 

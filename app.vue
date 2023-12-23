@@ -2,8 +2,8 @@
 const route = useRoute()
 
 useHead({
-  title: `Ruang Budi - ${route.meta.title}`,
-  meta: [{ property: 'og:title', content: `Ruang Budi - ${route.meta.title}` }],
+  title: route.meta.title ? `Ruang Budi - ${route.meta.title}`  : 'Ruang Budi',
+  meta: [{ property: 'og:title', content: route.meta.title ? `Ruang Budi - ${route.meta.title}`  : 'Ruang Budi' }],
   link: [{ rel: 'icon', type: 'image/png', href: '/favicon.ico' }]
 })
 </script>

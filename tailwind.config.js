@@ -8,6 +8,9 @@ module.exports = {
     "./app.vue",
     "./error.vue",
   ],
+  corePlugins: {
+    preflight: true,
+  },
   theme: {
     extend: {},
   },

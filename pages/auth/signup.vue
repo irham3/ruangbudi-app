@@ -4,6 +4,7 @@ definePageMeta({
 })
 
 const supabase = useSupabaseClient()
+const { $toast: toast } = useNuxtApp()
 
 // Form Data
 const firstName = ref('')
@@ -53,6 +54,9 @@ const signUp = async () => {
   }
   
   await navigateTo('/auth/signin');
+  toast("Berhasil! Akunmu telah dibuat", {
+    type: toast.TYPE.SUCCESS,
+  });
 }
 </script>
 
