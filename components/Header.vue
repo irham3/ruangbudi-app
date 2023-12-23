@@ -19,7 +19,81 @@ const logout = async () => {
 </script>
 
 <template>
-  <div class="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
+  <nav class="navbar bg-base-100 w-full px-8 mx-auto max-w-7xl">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          <li>
+            <NuxtLink to="/">
+              Beranda
+            </NuxtLink>
+          </li>
+          <li>
+            <a>Belajar</a>
+            <ul class="p-2 z-[1]">
+              <li>
+                <NuxtLink to="/belajar-budaya">
+                  Belajar Budaya
+                </NuxtLink>
+              </li>
+              <li><a>Submenu 2</a></li>
+            </ul>
+          </li>
+          <li><a>Item 3</a></li>
+        </ul>
+      </div>
+      <NuxtLink to="/" class="btn btn-ghost text-xl">Ruang Budi</NuxtLink>
+    </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        <li>
+        <NuxtLink to="/">
+          Beranda
+        </NuxtLink>
+      </li>
+        <li>
+          <details>
+            <summary>Belajar</summary>
+            <ul class="p-2 z-[1]">
+              <li>
+                <NuxtLink to="/belajar-budaya">
+                  Belajar Budaya
+                </NuxtLink>
+              </li>
+              <li><a>Submenu 2</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a>Item 3</a></li>
+      </ul>
+    </div>
+    <div class="navbar-end">
+      <div v-if="!user" class="flex space-x-2">
+        <NuxtLink
+          to="/auth/signin"
+          class="btn btn-outline btn-sm hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]">
+          <span>Masuk</span>
+        </NuxtLink>
+        <NuxtLink
+          to="/auth/signup"
+          class="btn btn-neutral btn-sm hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]"
+          type="button">
+          <span>Daftar</span>
+        </NuxtLink>
+      </div>
+      <button
+        v-else
+        @click="logout"
+        class="btn btn-outline"
+        type="button">
+        <span>Keluar</span>
+      </button>
+    </div>
+  </nav>
+  <!-- <div class="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
     <div class="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll">
       <nav
         class="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
@@ -89,5 +163,5 @@ const logout = async () => {
         </div>
       </nav>
     </div>
-  </div>
+  </div> -->
 </template>
