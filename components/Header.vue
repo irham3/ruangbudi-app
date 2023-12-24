@@ -4,7 +4,7 @@ const supabase = useSupabaseClient();
 const { $toast: toast } = useNuxtApp()
 
 const profileImage = ref('/images/profile/')
-if(user){
+if(user.value) {
   const userMetadata = ref(user.value?.user_metadata)
   if (userMetadata.value!.gender == 1) {
     profileImage.value += 'boy.jpg';
@@ -120,12 +120,12 @@ const logout = async () => {
           </NuxtLink>
         </div>
         <details v-if="user" class="dropdown dropdown-end">
-          <summary class="btn btn-ghost btn-circle avatar">
+          <summary tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
             <div class="w-10 rounded-full">
               <img alt="Profile Image" :src="profileImage" />
             </div>
           </summary>
-          <ul class="mt-1 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+          <ul tabindex="0" class="mt-1 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
             <li><button onclick="logout_modal.showModal()">Logout</button></li>
           </ul>
         </details>
