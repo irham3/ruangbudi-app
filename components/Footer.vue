@@ -10,111 +10,76 @@ const currentYear = ref(currentDate.getFullYear())
         <div class="w-full">
           <p
             class="block mb-4 font-sans text-sm antialiased font-bold leading-normal uppercase opacity-50 text-blue-gray-900">
-            Company
+            Belajar Budaya
           </p>
           <ul class="space-y-1">
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
               <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                About Us
+                Daerah asal budaya
               </a>
             </li>
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
               <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Careers
+                Jenis Budaya
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-full">
+          <p
+            class="block mb-4 font-sans text-sm antialiased font-bold leading-normal uppercase opacity-50 text-blue-gray-900">
+            Belajar Bahasa Isyarat
+          </p>
+          <ul class="space-y-1">
+            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
+              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+                SIBI
+              </a>
+            </li>
+            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
+              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+                Buat Kalimat
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-full">
+          <p
+            class="block mb-4 font-sans text-sm antialiased font-bold leading-normal uppercase opacity-50 text-blue-gray-900">
+            Quiz & Games
+          </p>
+          <ul class="space-y-1">
+            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
+              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+                Quiz
+              </a>
+            </li>
+            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
+              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+                Games
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-full">
+          <p
+            class="block mb-4 font-sans text-sm antialiased font-bold leading-normal uppercase opacity-50 text-blue-gray-900">
+            Tentang Kami
+          </p>
+          <ul class="space-y-1">
+            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
+              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+                Ruang Budi
+              </a>
+            </li>
+            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
+              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+                Innovillage
               </a>
             </li>
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
               <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
                 Our Team
-              </a>
-            </li>
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Projects
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="w-full">
-          <p
-            class="block mb-4 font-sans text-sm antialiased font-bold leading-normal uppercase opacity-50 text-blue-gray-900">
-            Help Center
-          </p>
-          <ul class="space-y-1">
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Discord
-              </a>
-            </li>
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Twitter
-              </a>
-            </li>
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                GitHub
-              </a>
-            </li>
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Contact Us
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="w-full">
-          <p
-            class="block mb-4 font-sans text-sm antialiased font-bold leading-normal uppercase opacity-50 text-blue-gray-900">
-            Resources
-          </p>
-          <ul class="space-y-1">
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Blog
-              </a>
-            </li>
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Newsletter
-              </a>
-            </li>
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Free Products
-              </a>
-            </li>
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Affiliate Program
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="w-full">
-          <p
-            class="block mb-4 font-sans text-sm antialiased font-bold leading-normal uppercase opacity-50 text-blue-gray-900">
-            Products
-          </p>
-          <ul class="space-y-1">
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Templates
-              </a>
-            </li>
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                UI Kits
-              </a>
-            </li>
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Icons
-              </a>
-            </li>
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Mockups
               </a>
             </li>
           </ul>
@@ -125,8 +90,7 @@ const currentYear = ref(currentDate.getFullYear())
         <p
           class="block mb-4 font-sans text-sm antialiased font-normal leading-normal text-center text-blue-gray-900 md:mb-0">
           © {{ currentYear }}
-          <NuxtLink href="/">Ruang Budi</NuxtLink>. All
-          Rights Reserved.
+          <NuxtLink href="/">Ruang Budi</NuxtLink>. Made with ❤️️ by HearWeAre Team
         </p>
         <div class="flex gap-4 text-blue-gray-900 sm:justify-center">
           <a href="#"

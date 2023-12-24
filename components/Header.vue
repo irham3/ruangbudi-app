@@ -40,22 +40,33 @@ const logout = async () => {
                     Belajar Budaya
                   </NuxtLink>
                 </li>
-                <li><a>Submenu 2</a></li>
+                <li>
+                  <NuxtLink to="/">
+                    Buat Kerajinan
+                  </NuxtLink>
+                </li>
               </ul>
             </li>
-            <li><a>Item 3</a></li>
+            <li>
+              <NuxtLink to="/">
+                Kuis & Games
+              </NuxtLink>
+            </li>
           </ul>
         </div>
-        <NuxtLink to="/" class="btn btn-ghost text-xl">Ruang Budi</NuxtLink>
+        
+        <NuxtLink to="/" class="transition-transform hover:scale-110">
+          <img src="/images/logo.png" alt="Logo Ruang Budi">
+        </NuxtLink>
       </div>
       <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1">
-          <li>
-          <NuxtLink to="/">
-            Beranda
-          </NuxtLink>
-        </li>
-          <li>
+        <ul class="menu menu-horizontal px-1 font-sans text-base antialiased font-normal leading-relaxed">
+          <li class="">
+            <NuxtLink to="/">
+              Beranda
+            </NuxtLink>
+          </li>
+          <li class="">
             <details>
               <summary>Belajar</summary>
               <ul class="p-2 z-[1]">
@@ -64,11 +75,24 @@ const logout = async () => {
                     Belajar Budaya
                   </NuxtLink>
                 </li>
-                <li><a>Submenu 2</a></li>
+                <li>
+                  <NuxtLink to="/">
+                    Belajar Bahasa Isyarat
+                  </NuxtLink>
+                </li>
+                <li>
+                  <NuxtLink to="/">
+                    Buat Kerajinan
+                  </NuxtLink>
+                </li>
               </ul>
             </details>
           </li>
-          <li><a>Item 3</a></li>
+          <li>
+            <NuxtLink to="/">
+              Quiz & Games
+            </NuxtLink>
+          </li>
         </ul>
       </div>
       <div class="navbar-end">
