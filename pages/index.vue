@@ -4,8 +4,8 @@ definePageMeta({
   title: 'Beranda'
 })
 
-const user = useSupabaseUser()
-const userData = ref(user.value?.user_metadata)
+// const user = useSupabaseUser()
+// const userData = ref(user.value?.user_metadata)
 </script>
 
 <template>

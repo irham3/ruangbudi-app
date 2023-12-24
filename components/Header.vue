@@ -3,6 +3,16 @@ const user = useSupabaseUser()
 const supabase = useSupabaseClient();
 const { $toast: toast } = useNuxtApp()
 
+const profileImage = ref('/images/profile/')
+if(user){
+  const userMetadata = ref(user.value?.user_metadata)
+  if (userMetadata.value!.gender == 1) {
+    profileImage.value += 'boy.jpg';
+  } else {
+    profileImage.value += 'girl.jpg';
+  }
+}
+
 const logout = async () => {
   const { error } = await supabase.auth.signOut();
 
@@ -109,13 +119,16 @@ const logout = async () => {
             <span>Daftar</span>
           </NuxtLink>
         </div>
-        <button
-          v-else
-          onclick="logout_modal.showModal()"
-          class="btn btn-outline btn-sm hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]"
-          type="button">
-          <span>Keluar</span>
-        </button>
+        <details v-if="user" class="dropdown dropdown-end">
+          <summary class="btn btn-ghost btn-circle avatar">
+            <div class="w-10 rounded-full">
+              <img alt="Profile Image" :src="profileImage" />
+            </div>
+          </summary>
+          <ul class="mt-1 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+            <li><button onclick="logout_modal.showModal()">Logout</button></li>
+          </ul>
+        </details>
       </div>
     </nav>
 
