@@ -20,7 +20,9 @@ const signIn = async () => {
   )
 
   if (error) {
-    alert(error)
+    toast(error.message, {
+      type: toast.TYPE.ERROR,
+    });
     return
   }
   

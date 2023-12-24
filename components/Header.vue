@@ -29,8 +29,8 @@ const logout = async () => {
 </script>
 
 <template>
-  <div class="w-full mx-auto max-w-7xl">
-    <nav class="navbar bg-base-100">
+  <div class="w-full mx-auto sticky top-0 backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200">
+    <nav class="navbar px-36 animated">
       <div class="navbar-start">
         <div class="dropdown">
           <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
