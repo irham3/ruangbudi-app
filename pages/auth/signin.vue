@@ -21,6 +21,7 @@ async function signIn() {
   )
 
   if (error) {
+    isLoading.value = false
     toast(error.message, {
       type: toast.TYPE.ERROR,
     })
