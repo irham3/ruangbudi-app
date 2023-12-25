@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Daftar'
+  title: 'Daftar',
 })
 
 const supabase = useSupabaseClient()
@@ -12,7 +12,7 @@ const lastName = ref('')
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
-const gender = ref(0)
+const gender = ref('')
 
 const selectedClass = ref(0)
 const classOptions = ref([
@@ -27,11 +27,10 @@ const classOptions = ref([
   { text: '9 SMP', value: 9 },
   { text: '10 SMA', value: 10 },
   { text: '11 SMA', value: 11 },
-  { text: '12 SMA', value: 12 }
+  { text: '12 SMA', value: 12 },
 ])
 
-
-const signUp = async () => {
+async function signUp() {
   const { error } = await supabase.auth.signUp(
     {
       email: email.value,
@@ -43,38 +42,40 @@ const signUp = async () => {
           last_name: lastName.value,
           gender: gender.value,
           class: selectedClass.value,
-        }
-      }
-    }
+        },
+      },
+    },
   )
 
   if (error) {
-    alert(error)
+    toast(error.message, {
+      type: toast.TYPE.ERROR,
+    })
     return
   }
-  
-  await navigateTo('/auth/signin');
-  toast("Berhasil! Akunmu telah dibuat", {
+
+  await navigateTo('/auth/signin')
+  toast('Berhasil! Akunmu telah dibuat', {
     type: toast.TYPE.SUCCESS,
-  });
+  })
 }
 </script>
 
 <template>
-  <NuxtLayout name="auth" title="Daftar Akun">
-    <form @submit.prevent="signUp" class="w-full max-w-lg" method="post">
+  <NuxtLayout name="blank" title="Daftar Akun">
+    <form class="w-full max-w-lg" method="post" @submit.prevent="signUp">
       <div class="flex flex-wrap -mx-3 md:mb-4">
         <div class="w-full md:w-1/2 px-3">
           <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
             Nama Depan
           </label> -->
-          <TextInput v-model="firstName" id="grid-first-name" type="text" placeholder="Nama Depan" required/>
+          <TextInput id="grid-first-name" v-model="firstName" type="text" placeholder="Nama Depan" required />
         </div>
         <div class="w-full md:w-1/2 px-3">
           <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
             Nama Belakang
           </label> -->
-          <TextInput v-model="lastName" id="grid-last-name" type="text" placeholder="Nama Belakang" required/>
+          <TextInput id="grid-last-name" v-model="lastName" type="text" placeholder="Nama Belakang" required />
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 md:mb-4">
@@ -82,7 +83,7 @@ const signUp = async () => {
           <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
             Email
           </label> -->
-          <TextInput v-model="email" id="grid-email" type="email" placeholder="Email" required/>
+          <TextInput id="grid-email" v-model="email" type="email" placeholder="Email" required />
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 md:mb-4">
@@ -90,13 +91,13 @@ const signUp = async () => {
           <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
             Password
           </label> -->
-          <TextInput v-model="password" id="grid-password" type="password" placeholder="Password" required/>
+          <TextInput id="grid-password" v-model="password" type="password" placeholder="Password" required />
         </div>
         <div class="w-full md:w-1/2 px-3">
           <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-confirm-password">
             Konfirmasi Password
           </label> -->
-          <TextInput v-model="confirmPassword" id="grid-confirm-password" type="password" placeholder="Konfirmasi Password" required/>
+          <TextInput id="grid-confirm-password" v-model="confirmPassword" type="password" placeholder="Konfirmasi Password" required />
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 md:mb-4">
@@ -104,9 +105,23 @@ const signUp = async () => {
           <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
             Password
           </label> -->
-          <select v-model="selectedClass" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required>
-            <option value=0 selected disabled>-Pilih Kelas-</option>
-            <option v-for="option in classOptions" :value="option.value">
+          <select
+            v-model="selectedClass"
+            class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            required
+          >
+            <option
+              value="0"
+              selected
+              disabled
+            >
+              -Pilih Kelas-
+            </option>
+            <option
+              v-for="option in classOptions"
+              :key="option.value"
+              :value="option.value"
+            >
               {{ option.text }}
             </option>
           </select>
@@ -116,15 +131,26 @@ const signUp = async () => {
             Konfirmasi Password
           </label> -->
           <select v-model="gender" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required>
-            <option value=0 selected disabled>-Pilih Jenis Kelamin-</option>
-            <option value=1>Laki - laki</option>
-            <option value=2>Perempuan</option>
+            <option value="0" selected disabled>
+              -Pilih Jenis Kelamin-
+            </option>
+            <option value="l">
+              Laki - laki
+            </option>
+            <option value="p">
+              Perempuan
+            </option>
           </select>
         </div>
       </div>
-      <button class="w-full bg-blue-700 hover:bg-blue-900
+      <button
+        class="w-full bg-blue-700 hover:bg-blue-900
       rounded-lg shadow-xl font-medium text-white my-10
-      py-2.5 px-5 focus:outline-none" type="submit">Daftar</button>
+      py-2.5 px-5 focus:outline-none"
+        type="submit"
+      >
+        Daftar
+      </button>
     </form>
     <span>
       Sudah punya akun?

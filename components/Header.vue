@@ -1,42 +1,41 @@
 <script lang="ts" setup>
 const user = useSupabaseUser()
-const supabase = useSupabaseClient();
+const supabase = useSupabaseClient()
 const { $toast: toast } = useNuxtApp()
 
 const profileImage = ref('/images/profile/')
-if(user.value) {
+if (user.value) {
   const userMetadata = ref(user.value?.user_metadata)
-  if (userMetadata.value!.gender == 1) {
-    profileImage.value += 'boy.jpg';
-  } else {
-    profileImage.value += 'girl.jpg';
-  }
+  if (userMetadata.value!.gender === 'l')
+    profileImage.value += 'boy.jpg'
+  else
+    profileImage.value += 'girl.jpg'
 }
 
-const logout = async () => {
-  const { error } = await supabase.auth.signOut();
+async function logout() {
+  const { error } = await supabase.auth.signOut()
 
   if (error) {
-    console.error(error);
-    return;
+    console.error(error)
+    return
   }
 
-  await navigateTo('/');
-  toast("Anda telah keluar", {
-    type: toast.TYPE.INFO
-  });
-};
+  await navigateTo('/')
+  toast('Anda telah keluar', {
+    type: toast.TYPE.INFO,
+  })
+}
 </script>
 
 <template>
   <div class="w-full mx-auto sticky top-0 backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200">
-    <nav class="navbar px-36 animated">
+    <nav class="navbar px-36">
       <div class="navbar-start">
         <div class="dropdown">
           <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
           </div>
-          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[3] p-2 shadow bg-base-100 rounded-box w-52">
             <li>
               <NuxtLink to="/">
                 Beranda
@@ -44,7 +43,7 @@ const logout = async () => {
             </li>
             <li>
               <a>Belajar</a>
-              <ul class="p-2 z-[1]">
+              <ul class="p-2 z-[3]">
                 <li>
                   <NuxtLink to="/belajar-budaya">
                     Belajar Budaya
@@ -64,7 +63,6 @@ const logout = async () => {
             </li>
           </ul>
         </div>
-        
         <NuxtLink to="/" class="transition-transform hover:scale-110">
           <img src="/images/logo.png" alt="Logo Ruang Budi">
         </NuxtLink>
@@ -79,7 +77,7 @@ const logout = async () => {
           <li class="">
             <details>
               <summary>Belajar</summary>
-              <ul class="p-2 z-[1]">
+              <ul class="p-2 z-[3]">
                 <li>
                   <NuxtLink to="/belajar-budaya">
                     Belajar Budaya
@@ -109,24 +107,30 @@ const logout = async () => {
         <div v-if="!user" class="flex space-x-2">
           <NuxtLink
             to="/auth/signin"
-            class="btn btn-outline btn-sm hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]">
+            class="btn btn-outline btn-sm hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]"
+          >
             <span>Masuk</span>
           </NuxtLink>
           <NuxtLink
             to="/auth/signup"
             class="btn btn-neutral btn-sm hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]"
-            type="button">
+            type="button"
+          >
             <span>Daftar</span>
           </NuxtLink>
         </div>
         <details v-if="user" class="dropdown dropdown-end">
           <summary tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
             <div class="w-10 rounded-full">
-              <img alt="Profile Image" :src="profileImage" />
+              <img alt="Profile Image" :src="profileImage">
             </div>
           </summary>
-          <ul tabindex="0" class="mt-1 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-            <li><button onclick="logout_modal.showModal()">Logout</button></li>
+          <ul tabindex="0" class="mt-1 z-[3] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+            <li>
+              <button onclick="logout_modal.showModal()">
+                Logout
+              </button>
+            </li>
           </ul>
         </details>
       </div>
@@ -135,10 +139,16 @@ const logout = async () => {
     <!-- Logout Confirmation -->
     <dialog id="logout_modal" class="modal">
       <div class="modal-box">
-        <h3 class="font-bold text-lg mb-5">Kamu yakin ingin keluar?</h3>
+        <h3 class="font-bold text-lg mb-5">
+          Kamu yakin ingin keluar?
+        </h3>
         <form class="flex space-x-2 w-full justify-end" method="dialog">
-          <button @click="logout" class="btn btn-outline btn-sm">Ya</button>
-          <button class="btn btn-neutral btn-sm">Tidak</button>
+          <button class="btn btn-outline btn-sm" @click="logout">
+            Ya
+          </button>
+          <button class="btn btn-neutral btn-sm">
+            Tidak
+          </button>
         </form>
       </div>
       <form method="dialog" class="modal-backdrop">
