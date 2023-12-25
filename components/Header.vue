@@ -4,9 +4,10 @@ const supabase = useSupabaseClient()
 const { $toast: toast } = useNuxtApp()
 
 const profileImage = ref('/images/profile/')
+const studentMetadata = ref<StudentData>()
 if (user.value) {
-  const userMetadata = ref(user.value?.user_metadata)
-  if (userMetadata.value!.gender === 'l')
+  studentMetadata.value = user.value.user_metadata as StudentData
+  if (studentMetadata.value!.gender === 'l')
     profileImage.value += 'boy.jpg'
   else
     profileImage.value += 'girl.jpg'
@@ -16,7 +17,9 @@ async function logout() {
   const { error } = await supabase.auth.signOut()
 
   if (error) {
-    console.error(error)
+    toast(error.message, {
+      type: toast.TYPE.ERROR,
+    })
     return
   }
 
@@ -119,20 +122,31 @@ async function logout() {
             <span>Daftar</span>
           </NuxtLink>
         </div>
-        <details v-if="user" class="dropdown dropdown-end">
-          <summary tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+        <div v-if="user" class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
             <div class="w-10 rounded-full">
               <img alt="Profile Image" :src="profileImage">
             </div>
-          </summary>
-          <ul tabindex="0" class="mt-1 z-[3] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-            <li>
+          </div>
+
+          <ul tabindex="0" class="menu dropdown-content z-[1] p-2 shadow-lg bg-white ring-1 ring-black ring-opacity-5 w-32 mt-4 divide-y divide-slate-200">
+            <div class="flex flex-row">
+              <div class="flex flex-col items-start ml-4">
+                <div class="text-xl font-semibold ">
+                  {{ studentMetadata?.first_name }}
+                </div>
+                <div class="text-sm font-medium text-gray-400">
+                  Kelas {{ studentMetadata?.student_class! }} {{ getStudentLevel(studentMetadata?.student_class!) }}
+                </div>
+              </div>
+            </div>
+            <li class="mt-4">
               <button onclick="logout_modal.showModal()">
                 Logout
               </button>
             </li>
           </ul>
-        </details>
+        </div>
       </div>
     </nav>
 

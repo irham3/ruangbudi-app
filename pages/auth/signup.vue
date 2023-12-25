@@ -5,6 +5,7 @@ definePageMeta({
 
 const supabase = useSupabaseClient()
 const { $toast: toast } = useNuxtApp()
+const isLoading = ref(false)
 
 // Form Data
 const firstName = ref('')
@@ -13,9 +14,9 @@ const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
 const gender = ref('')
+const studentClass = ref(0)
 
-const selectedClass = ref(0)
-const classOptions = ref([
+const classOptions = [
   { text: '1 SD', value: 1 },
   { text: '2 SD', value: 2 },
   { text: '3 SD', value: 3 },
@@ -28,21 +29,25 @@ const classOptions = ref([
   { text: '10 SMA', value: 10 },
   { text: '11 SMA', value: 11 },
   { text: '12 SMA', value: 12 },
-])
+]
 
 async function signUp() {
+  isLoading.value = true
+
+  const studentMetadata: StudentData = {
+    first_name: firstName.value,
+    last_name: lastName.value,
+    gender: gender.value,
+    student_class: studentClass.value,
+  }
+
   const { error } = await supabase.auth.signUp(
     {
       email: email.value,
       password: password.value,
       options: {
         // emailRedirectTo: 'http://localhost:3000/auth/confirm',
-        data: {
-          first_name: firstName.value,
-          last_name: lastName.value,
-          gender: gender.value,
-          class: selectedClass.value,
-        },
+        data: studentMetadata,
       },
     },
   )
@@ -54,15 +59,16 @@ async function signUp() {
     return
   }
 
+  isLoading.value = false
   await navigateTo('/auth/signin')
-  toast('Berhasil! Akunmu telah dibuat', {
+  toast('Akunmu berhasil dibuat', {
     type: toast.TYPE.SUCCESS,
   })
 }
 </script>
 
 <template>
-  <NuxtLayout name="blank" title="Daftar Akun">
+  <NuxtLayout name="auth" title="Daftar Akun">
     <form class="w-full max-w-lg" method="post" @submit.prevent="signUp">
       <div class="flex flex-wrap -mx-3 md:mb-4">
         <div class="w-full md:w-1/2 px-3">
@@ -106,7 +112,7 @@ async function signUp() {
             Password
           </label> -->
           <select
-            v-model="selectedClass"
+            v-model="studentClass"
             class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             required
           >
@@ -131,7 +137,7 @@ async function signUp() {
             Konfirmasi Password
           </label> -->
           <select v-model="gender" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required>
-            <option value="0" selected disabled>
+            <option value="" selected disabled>
               -Pilih Jenis Kelamin-
             </option>
             <option value="l">
@@ -144,12 +150,13 @@ async function signUp() {
         </div>
       </div>
       <button
-        class="w-full bg-blue-700 hover:bg-blue-900
-      rounded-lg shadow-xl font-medium text-white my-10
-      py-2.5 px-5 focus:outline-none"
+        class="btn w-full bg-blue-700 hover:bg-blue-900
+      rounded-lg shadow-xl font-bold text-white my-10
+      py-2.5 px-5 focus:outline-none items-center"
         type="submit"
       >
         Daftar
+        <span v-if="isLoading" class="loading loading-spinner loading-xs" />
       </button>
     </form>
     <span>

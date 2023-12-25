@@ -8,7 +8,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     position: toast.POSITION.TOP_RIGHT,
     pauseOnHover: false,
     pauseOnFocusLoss: false,
-    autoClose: 2000,
+    autoClose: 3000,
   })
 
   return {

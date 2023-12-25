@@ -5,12 +5,14 @@ definePageMeta({
 
 const supabase = useSupabaseClient()
 const { $toast: toast } = useNuxtApp()
+const isLoading = ref(false)
 
 // Form Data
 const email = ref('')
 const password = ref('')
 
 async function signIn() {
+  isLoading.value = true
   const { error } = await supabase.auth.signInWithPassword(
     {
       email: email.value,
@@ -25,6 +27,7 @@ async function signIn() {
     return
   }
 
+  isLoading.value = false
   await navigateTo('/')
   toast('Berhasil masuk!', {
     type: toast.TYPE.SUCCESS,
@@ -34,7 +37,7 @@ async function signIn() {
 
 <template>
   <NuxtLayout
-    name="blank"
+    name="auth"
     title="Masuk"
   >
     <form
@@ -71,12 +74,13 @@ async function signIn() {
         </div>
       </div>
       <button
-        class="w-full bg-blue-700 hover:bg-blue-900
-      rounded-lg shadow-xl font-medium text-white my-10
+        class="btn w-full bg-blue-700 hover:bg-blue-900
+      rounded-lg shadow-xl font-bold text-white my-10
       py-2.5 px-5 focus:outline-none"
         type="submit"
       >
         Masuk
+        <span v-if="isLoading" class="loading loading-spinner loading-xs" />
       </button>
     </form>
     <span>
