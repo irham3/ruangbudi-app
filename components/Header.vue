@@ -31,7 +31,7 @@ async function logout() {
 </script>
 
 <template>
-  <div class="w-full mx-auto sticky top-0 backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200">
+  <div class="w-full mx-auto sticky top-0 backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200 z-10">
     <nav class="navbar px-36">
       <div class="navbar-start">
         <div class="dropdown">

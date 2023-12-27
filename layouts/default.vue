@@ -1,6 +1,6 @@
 <template>
   <Header />
-  <div class="md:container md:mx-auto">
+  <div class="flex flex-col">
     <slot />
   </div>
   <Footer />
