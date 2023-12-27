@@ -12,7 +12,7 @@ definePageMeta({
     <!-- Hero Section -->
     <section class="flex items-center h-screen -mt-14">
       <div class="absolute top-[42%] right-0 w-[230px] h-[450px] bg-contain bg-no-repeat bg-center z-[-1]" style="background-image: url('/images/background/wayang-bg.png');" />
-      <div class="bg-contain bg-no-repeat bg-center w-3/5 h-[60vh] bg-[url('/images/hero-left.png')]" />
+      <div class="bg-contain bg-no-repeat bg-center w-3/5 h-[60vh] bg-[url('/images/hero-left.png')] transition-transform hover:scale-110" />
       <div class="w-1/2 flex flex-col">
         <h1 class="text-[2.8rem] w-10/12 font-bold mb-4">
           Belajar Budaya dan Bahasa Isyarat dengan Menyenangkan!
@@ -49,28 +49,28 @@ definePageMeta({
       </div>
       <div class="flex gap-8">
         <div class="flex flex-col items-center">
-          <div style="background-image: url('/images/wayang.png');" class="w-40 h-48 bg-contain bg-center bg-no-repeat" />
+          <div style="background-image: url('/images/wayang.png');" class="w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" />
           <h3 class="text-xl font-bold mt-3">
             Belajar Budaya Indonesia
           </h3>
           <p>Kekayaan Budaya Indonesia sangat beragam dan menarik loh!</p>
         </div>
         <div class="flex flex-col items-center">
-          <div style="background-image: url('/images/belajar-bahasa-isyarat.png');" class="w-40 h-48 bg-contain bg-center bg-no-repeat" />
+          <div style="background-image: url('/images/belajar-bahasa-isyarat.png');" class="w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" />
           <h3 class="text-xl font-bold mt-3">
             Belajar Bahasa Isyarat
           </h3>
           <p>Belajar menyusun kalimat sederhana dengan menyenangkan. Adik-adik pasti suka!</p>
         </div>
         <div class="flex flex-col items-center">
-          <div style="background-image: url('/images/kerajinan.png');" class="w-40 h-48 bg-contain bg-center bg-no-repeat" />
+          <div style="background-image: url('/images/kerajinan.png');" class="w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" />
           <h3 class="text-xl font-bold mt-3">
             Belajar Membuat Kerajinan
           </h3>
           <p>Belajar menyusun kalimat sederhana dengan menyenangkan. Adik-adik pasti suka!</p>
         </div>
         <div class="flex flex-col items-center">
-          <div style="background-image: url('/images/kuis-games.png');" class="w-40 h-48 bg-contain bg-center bg-no-repeat" />
+          <div style="background-image: url('/images/kuis-games.png');" class="w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" />
           <h3 class="text-xl font-bold mt-3">
             Kuis dan Games
           </h3>
@@ -91,7 +91,7 @@ definePageMeta({
           RuangBudi membantu siswa/i SD SLB Negeri Sukapura Bandung untuk mempelajari budaya Indonesia sekaligus  meningkatkan kemampuan komunikasi siswa/i dengan pembelajaran yang seru dan menyenangkan
         </p>
       </div>
-      <div class="w-4/12 rounded-md border-8 border-white shadow-md">
+      <div class="w-4/12 rounded-md border-8 border-white shadow-lg transition-transform hover:scale-105">
         <div class="bg-[#CA855F] rounded-sm flex flex-col items-center">
           <div class="h-64 bg-no-repeat w-11/12 bg-center bg-contain" style="background-image: url('/images/illustration.png');" />
           <div class="bg-white w-full rounded-t-md flex flex-col gap-2 items-center py-6">
