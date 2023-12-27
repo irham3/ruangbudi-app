@@ -51,14 +51,14 @@
           </p>
           <ul class="space-y-1">
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+              <NuxtLink to="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
                 Youtube
-              </a>
+              </NuxtLink>
             </li>
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+              <NuxtLink to="https://www.instagram.com/ruang_budi/" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
                 Instagram
-              </a>
+              </NuxtLink>
             </li>
           </ul>
         </div>
