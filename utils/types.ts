@@ -5,3 +5,12 @@ export type StudentData = {
   gender: string
   student_class: number
 }
+
+export type Cultures = {
+  id: number
+  culture_name: string
+  city: string
+  province: string
+  culture_value: string
+  culture_description: string
+}
