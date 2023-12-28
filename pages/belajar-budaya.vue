@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Cultures } from '~/utils/types'
+import type { Culture } from '~/utils/types'
 
 definePageMeta({
   title: 'Belajar Budaya',
@@ -7,19 +7,12 @@ definePageMeta({
 
 // Test koneksi data ke db
 const client = useSupabaseClient()
-const imageUrl = 'https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/cultures/'
-const images = ref()
-
-const { data: cultures } = await useAsyncData('cultures', async () => {
-  const { data } = await client.from('v_cultures').select('*')
-  return data as Cultures[]
-})
-
+const cultures = ref<Culture[]>()
 // Load Image
 // https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/cultures/1/Baju_Tari_Jaipong.jpg
 
 async function getImages(culture_id: number) {
-  const { data, error } = await client
+  const { data } = await client
     .storage
     .from('images')
     .list(`cultures/${culture_id}`, {
@@ -27,14 +20,29 @@ async function getImages(culture_id: number) {
       offset: 0,
       sortBy: { column: 'name', order: 'asc' },
     })
-  images.value = data
+  return data
+}
+
+async function fetchCultures() {
+  const cdnUrl = 'https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/cultures'
+  const { data: tableCultures } = await client.from('v_cultures').select('*') as { data: Culture[] }
+
+  const fetchPromises = tableCultures.map(async (tableCulture) => {
+    const imageFiles = await getImages(tableCulture.id)
+
+    tableCulture.image_paths = imageFiles!.map((imageFile) => {
+      return `${cdnUrl}/${tableCulture.id}/${imageFile.name}`
+    })
+
+    return tableCulture
+  })
+
+  return Promise.all(fetchPromises)
 }
 
 onMounted(async () => {
-  await getImages(1)
+  cultures.value = await fetchCultures()
 })
-
-// console.log(cultures.value)
 </script>
 
 <template>
@@ -52,13 +60,23 @@ onMounted(async () => {
         <p>Provinsi: {{ culture.province }}</p>
         <p>Deskripsi: {{ culture.culture_description }}</p>
         <p>Value: {{ culture.culture_value }}</p>
+        <p>Image: </p>
+        <div class="flex flex-wrap gap-2">
+          <p v-if="culture.image_paths!.length === 0">
+            Belum ada gambar
+          </p>
+          <img
+            v-for="(path, index) in culture.image_paths"
+            :key="index"
+            :src="path"
+            fit="cover"
+            height="60px"
+            width="70px"
+          >
+        </div>
+
+        <!-- <NuxtImg v-for="(imagePath, index) in culture.image_paths" :key="index" :src="imagePath" /> -->
         <hr>
-      </li>
-      <li
-        v-for="image in images"
-        :key="image.bucket_id"
-      >
-        <p>image: {{ image.name }}</p>
       </li>
     </ul>
   </NuxtLayout>
