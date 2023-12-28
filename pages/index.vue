@@ -55,28 +55,29 @@ function playButtonSound() {
       </div>
       <div class="flex gap-8">
         <div class="flex flex-col items-center">
-          <div style="background-image: url('/images/wayang.png');" class="w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" />
+          <div style="background-image: url('/images/wayang.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Wayang" />
+
           <h3 class="text-xl font-bold mt-3">
             Belajar Budaya Indonesia
           </h3>
           <p>Kekayaan Budaya Indonesia sangat beragam dan menarik loh!</p>
         </div>
         <div class="flex flex-col items-center">
-          <div style="background-image: url('/images/belajar-bahasa-isyarat.png');" class="w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" />
+          <div style="background-image: url('/images/belajar-bahasa-isyarat.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Papan Tulis" />
           <h3 class="text-xl font-bold mt-3">
             Belajar Bahasa Isyarat
           </h3>
           <p>Belajar menyusun kalimat sederhana dengan menyenangkan. Adik-adik pasti suka!</p>
         </div>
         <div class="flex flex-col items-center">
-          <div style="background-image: url('/images/kerajinan.png');" class="w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" />
+          <div style="background-image: url('/images/kerajinan.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Kerajinan Tangan" />
           <h3 class="text-xl font-bold mt-3">
             Belajar Membuat Kerajinan
           </h3>
           <p>Belajar menyusun kalimat sederhana dengan menyenangkan. Adik-adik pasti suka!</p>
         </div>
         <div class="flex flex-col items-center">
-          <div style="background-image: url('/images/kuis-games.png');" class="w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" />
+          <div style="background-image: url('/images/kuis-games.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Mobil Mainan" />
           <h3 class="text-xl font-bold mt-3">
             Kuis dan Games
           </h3>
