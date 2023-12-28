@@ -61,69 +61,40 @@ onMounted(async () => {
       </li>
     </ul>
   </NuxtLayout> -->
-  
-  <div class="">
-    <div class="h-screen flex flex-col">
-      <header class="flex items-center justify-between px-[4rem] py-[1rem]">
-        <div class="">
-          <img src="/images/logo.png" alt="">
-        </div>
-        <nav class="flex items-center gap-9">
-          <a href="#" v-for="nav in navItem" :key="nav">{{ nav }}</a>
-        </nav>
-        <button>Masuk</button>
-      </header>
-      <div class="flex-1 flex flex-col items-center px-[2rem]">
-        <div class="w-11/12 flex-1 bg-contain bg-center bg-no-repeat" style="background-image: url('/images/indonesia.png');"></div>
+  <NuxtLayout>
+    <div class="pb-16">
+      <div class="h-[80vh] flex flex-col w-full items-center px-[2rem]">
+        <div class="w-11/12 flex-1 bg-contain bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
+          style="background-image: url('/images/indonesia.png');" />
       </div>
-    </div>
-    <div class="px-32">
-      <div class="flex justify-center mb-12">
-        <div class="flex gap-6 border border-stone-400 w-fit px-4 py-2.5 rounded-md items-center">
-          <div class="flex items-center gap-4">
-            <div class="flex gap-3 items-center">
-              <Icon name="pepicons-pop:pinpoint-filled" class=" text-stone-600" />
-              <input type="text" name="" id="" class="placeholder:text-stone-500" placeholder="Pulau Jawa">
+      <div class="px-32">
+        <div class="flex justify-center mb-12">
+          <div class="flex gap-6 border border-stone-400 w-fit px-4 py-2.5 rounded-md items-center">
+            <div class="flex items-center gap-4">
+              <div class="flex gap-3 items-center hover:scale-105 transition-all">
+                <Icon name="pepicons-pop:pinpoint-filled" class=" text-stone-600" />
+                <input type="text" name="" id="" class="placeholder:text-stone-500 border-transparent focus:border-transparent focus:ring-0 focus:outline-none" placeholder="Provinsi">
+              </div>
+              <div class="w-[1px] h-[32px] bg-stone-300"></div>
+              <div class="flex gap-3 items-center hover:scale-105 transition-all">
+                <Icon name="mdi:leaf" class="rotate-180 text-stone-600" />
+                <input type="text" name="" id="" class="placeholder:text-stone-500 border-transparent focus:border-transparent focus:ring-0 focus:outline-none" placeholder="Kota/Kabupaten">
+              </div>
             </div>
-            <div class="w-[1px] h-[32px] bg-stone-300"></div>
-            <div class="flex gap-3 items-center">
-              <Icon name="mdi:leaf" class="rotate-180 text-stone-600" />
-              <input type="text" name="" id="" class="placeholder:text-stone-500" placeholder="Jawa Barat">
-            </div>
+            <button class="px-6 py-1 bg-[#CA855F] rounded-sm text-white font-semibold transition-transform hover:scale-105">Telusuri</button>
           </div>
-          <button class="px-6 py-1 bg-[#CA855F] rounded-sm text-white font-semibold">Telusuri</button>
         </div>
-      </div>
-      <div class="grid grid-cols-2 gap-x-10 gap-y-8">
-        <div class="flex items-center gap-3" v-for="i in 5">
-          <div class="w-[14rem] h-[7rem] bg-contain rounded-md bg-no-repeat" style="background-image: url('/images/aceh-jalur-rempah.png');"></div>
-          <div class="">
-            <h4 class="text-xl font-semibold">Keragaman Budaya di Pulau Sumatera</h4>
-            <p>Kenali berbagai macam kebudayaan Indonesia di Pulau Sumatra!</p>
+        <div class="grid grid-cols-2 gap-x-10 gap-y-8">
+          <div class="flex items-center gap-3 transition-all hover:shadow-lg hover:bg-slate-50 hover:scale-105 rounded-md" v-for="i in 5">
+            <div class="w-[14rem] h-[7rem] bg-contain rounded-md bg-no-repeat"
+              style="background-image: url('/images/aceh-jalur-rempah.png');"></div>
+            <div class="">
+              <h4 class="text-xl font-semibold">Keragaman Budaya di Pulau Sumatera</h4>
+              <p>Kenali berbagai macam kebudayaan Indonesia di Pulau Sumatra!</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  
-    <footer class="px-36 flex flex-col gap-52 relative py-16">
-      <div class="absolute w-[230px] h-[450px] left-0 top-16" style="background-image: url('/images/background/wayang-bg-2.png');"></div>
-      <div class="absolute w-[230px] h-[450px] right-0 top-16" style="background-image: url('/images/background/wayang-bg.png');"></div>
-
-      <div class="flex justify-between">
-        <div class="flex flex-col gap-1" v-for="i in 5">
-          <h4 class="font-semibold">Belajar Budaya</h4>
-          <a href="" class="text-stone-400">Jawa Barat</a>
-          <a href="" class="text-stone-400">Jawa Barat</a>
-          <a href="" class="text-stone-400">Jawa Barat</a>
-        </div>
-      </div>
-      <div class="flex flex-col items-center">
-        <div class="">
-          <img src="/images/logo.png" alt="">
-        </div>
-        <p>Innovillage 2023 - Ruang Budi - Universitas Telkom</p>
-      </div>
-    </footer>
-  </div>
-
+  </NuxtLayout>
 </template>
