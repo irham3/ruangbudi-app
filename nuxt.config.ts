@@ -1,10 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/supabase', 'nuxt-icon'],
-  
+  modules: [
+    '@nuxtjs/supabase',
+    'nuxt-icon',
+    '@vueuse/sound/nuxt',
+  ],
   css: [
-    '~/assets/css/main.css'
+    '~/assets/css/main.css',
   ],
   postcss: {
     plugins: {
@@ -18,11 +21,15 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/auth/signin',
       callback: '/auth/confirm',
-      exclude: ['/','/auth/signup'],
+      exclude: ['/', '/auth/signup'],
     },
     clientOptions: {
-      
-    }
-  },
 
+    },
+  },
+  sound: {
+    sounds: {
+      scan: true,
+    },
+  },
 })
