@@ -1,10 +1,16 @@
 <script lang="ts" setup>
+import { useSound } from '@vueuse/sound'
+
 definePageMeta({
   title: 'Beranda',
 })
 
 // const user = useSupabaseUser()
 // const userData = ref(user.value?.user_metadata)
+const { play } = useSound('sounds/button-onclick.mp3')
+function playButtonSound() {
+  play()
+}
 </script>
 
 <template>
@@ -20,7 +26,7 @@ definePageMeta({
         <p class="w-10/12 mb-4">
           Kamu dapat belajar banyak hal melalui RuangBudi dengan cara yang seru dan menyenangkan terutama tentang budaya dan bahasa isyarat
         </p>
-        <button class="btn max-w-44 text-center bg-orange-800 text-white hover:bg-orange-900">
+        <button class="btn max-w-44 text-center bg-orange-800 text-white hover:bg-orange-900" @click="playButtonSound">
           Yuk Belajar Sekarang!
         </button>
       </div>
@@ -105,7 +111,7 @@ definePageMeta({
               <div class="w-1 h-1 bg-black rounded-full" />
               <p>Isyarat</p>
             </div>
-            <button class="btn max-w-44 text-center bg-orange-800 text-white hover:bg-orange-900 px-4 py-2 rounded-md flex gap-2">
+            <button class="btn max-w-44 text-center bg-orange-800 text-white hover:bg-orange-900 px-4 py-2 rounded-md flex gap-2" @click="playButtonSound">
               <Icon name="material-symbols-light:play-arrow-rounded" class="text-2xl" />
               Tonton Videonya
             </button>

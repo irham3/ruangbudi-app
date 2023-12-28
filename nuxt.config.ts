@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/supabase',
     'nuxt-icon',
+    '@vueuse/sound/nuxt',
   ],
   css: [
     '~/assets/css/main.css',
@@ -26,5 +27,9 @@ export default defineNuxtConfig({
 
     },
   },
-
+  sound: {
+    sounds: {
+      scan: true,
+    },
+  },
 })
