@@ -74,26 +74,6 @@ onMounted(async () => {
           </div>
         </div>
         <div class="grid grid-cols-2 gap-x-10 gap-y-8 px-8">
-          <!-- <NuxtLink
-            v-for="culture in cultures"
-            :key="culture.id"
-            :to="`belajar-budaya/${culture.culture_slug}`"
-            class="flex items-center gap-3 cursor-pointer transition-all hover:shadow-lg hover:bg-slate-50 hover:scale-105 rounded-md"
-          >
-            <div
-              class="w-[14rem] h-[7rem] bg-cover rounded-md bg-no-repeat"
-              style="background-image: url('/images/aceh-jalur-rempah.png');"
-            />
-            <div class="">
-              <h4 class="text-xl font-semibold">
-                {{ culture.culture_name }}
-              </h4>
-              <p class="line-clamp-1">
-                {{ culture.culture_description }}
-              </p>
-            </div>
-          </NuxtLink> -->
-
           <NuxtLink
             v-for="culture in cultures"
             :key="culture.id"
@@ -124,6 +104,25 @@ onMounted(async () => {
               </div>
             </div>
           </NuxtLink>
+          <!-- <NuxtLink
+            v-for="culture in cultures"
+            :key="culture.id"
+            :to="`belajar-budaya/${culture.culture_slug}`"
+            class="flex items-center gap-3 cursor-pointer transition-all hover:shadow-lg hover:bg-slate-50 hover:scale-105 rounded-md"
+          >
+            <div
+              class="w-[14rem] h-[7rem] bg-cover rounded-md bg-no-repeat"
+              style="background-image: url('/images/aceh-jalur-rempah.png');"
+            />
+            <div class="">
+              <h4 class="text-xl font-semibold">
+                {{ culture.culture_name }}
+              </h4>
+              <p class="line-clamp-1">
+                {{ culture.culture_description }}
+              </p>
+            </div>
+          </NuxtLink> -->
         </div>
       </div>
     </div>
