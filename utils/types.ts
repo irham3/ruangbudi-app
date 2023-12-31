@@ -11,8 +11,8 @@ export type Culture = {
   culture_name: string
   culture_slug: string
   image_paths: string[] | null
-  city: string
-  province: string
+  city_name: string
+  province_name: string
   culture_value: string
   culture_description: string
 }
