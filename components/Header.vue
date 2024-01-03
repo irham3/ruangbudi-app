@@ -32,7 +32,7 @@ async function logout() {
 
 <template>
   <div class="w-full mx-auto sticky top-0 backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200 z-10">
-    <nav class="navbar px-36">
+    <nav class="navbar sm:px-0 lg:px-36">
       <div class="navbar-start">
         <div class="dropdown">
           <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
