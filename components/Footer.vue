@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+const date = new Date()
+const currentYear = date.getFullYear()
 </script>
 
 <template>
@@ -91,7 +93,7 @@
         <div class="mb-4">
           <img src="/images/logo.png" class="transition-transform hover:scale-110" alt="">
         </div>
-        <p>Innovillage 2023 - Ruang Budi - HearWeAre Team</p>
+        <p>Innovillage {{ currentYear }} - Ruang Budi - HearWeAre Team</p>
       </div>
     </div>
     <div class="absolute w-[230px] h-[450px] left-0 -top-7" style="background-image: url('/images/background/wayang-bg-2.png');" />
