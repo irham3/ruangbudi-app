@@ -32,7 +32,7 @@ function playButtonSound() {
           </button>
         </div>
       </section>
-
+  
       <!-- Feature Section -->
       <section
         class="flex flex-col sm:h-screen gap-16 items-center px-20 text-center py-20 relative"
@@ -47,7 +47,7 @@ function playButtonSound() {
           class="absolute bottom-0 -right-16 w-[15%] h-[29%] bg-no-repeat bg-contain"
           style="background-image: url('/images/background/buku2.png');"
         />
-
+  
         <div class="">
           <h2 class="text-4xl font-bold mb-3">
             Di RuangBudi, Kita Belajar Apa Aja Ya?
@@ -57,7 +57,7 @@ function playButtonSound() {
         <div class="sm:flex-row flex flex-col gap-8">
           <div class="flex flex-col items-center">
             <div style="background-image: url('/images/wayang.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Wayang" />
-
+  
             <h3 class="text-xl font-bold mt-3">
               Belajar Budaya Indonesia
             </h3>
@@ -86,11 +86,11 @@ function playButtonSound() {
           </div>
         </div>
       </section>
-
+  
       <!-- About Section -->
       <section class="flex flex-col sm:flex-row items-center justify-center -mt-16 sm:gap-28 gap-6 h-screen sm:px-40 px-2 relative">
         <div class="absolute top-4 left-0 w-[13rem] h-[16rem] bg-contain bg-no-repeat" style="background-image: url('/images/background/beok.png');" />
-
+  
         <div class="sm:w-2/5 w-full text-center sm:text-start">
           <h2 class="text-4xl mb-5 font-bold">
             Tentang RuangBudi
@@ -113,7 +113,7 @@ function playButtonSound() {
                 <div class="w-1 h-1 bg-black rounded-full" />
                 <p>Isyarat</p>
               </div>
-              <button class="btn max-w-44 text-center bg-orange-800 text-white hover:bg-orange-900 px-4 py-2 rounded-md flex gap-2" onclick="video_modal.showModal()" @click="playButtonSound">
+              <button class="btn max-w-44 text-center bg-orange-800 text-white hover:bg-orange-900 px-4 py-2 rounded-md flex gap-2" @click="playButtonSound">
                 <Icon name="material-symbols-light:play-arrow-rounded" class="text-2xl" />
                 Tonton Videonya
               </button>
@@ -122,13 +122,5 @@ function playButtonSound() {
         </div>
       </section>
     </div>
-
-    <dialog id="video_modal" class="modal flex justify-center">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/kqk1k_ISx_8?si=0RE0WFmtCOmwnRu_&rel=0" title="Video Ruang Budi" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
-
-      <form method="dialog" class="modal-backdrop">
-        <button>close</button>
-      </form>
-    </dialog>
   </NuxtLayout>
 </template>
