@@ -18,3 +18,8 @@ export type Culture = {
   culture_description: string
   image_filenames: string[]
 }
+
+export type Slide = {
+  image: string
+  description: string
+}
