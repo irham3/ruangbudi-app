@@ -54,7 +54,7 @@ onMounted(async () => {
           <NuxtLink
             v-for="culture in cultures"
             :key="culture.id"
-            :to="`belajar-budaya/${culture.culture_slug}`"
+            :to="culture.culture_slug"
             class="max-w-sm w-full lg:max-w-full lg:flex cursor-pointer transition-all hover:shadow-md hover:bg-slate-50 hover:scale-105 rounded-md"
           >
             <CultureCard :culture="culture" />
