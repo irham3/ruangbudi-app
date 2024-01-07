@@ -8,6 +8,7 @@ export type StudentData = {
 
 export type Culture = {
   id: number
+  category_name: string
   culture_name: string
   culture_slug: string
   city_id: number
