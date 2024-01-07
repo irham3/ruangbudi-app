@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Culture } from '~/utils/types'
+import CultureCard from '~/components/CultureCard.vue'
 
 definePageMeta({
   title: 'Belajar Budaya',
@@ -8,36 +8,13 @@ definePageMeta({
 // Test koneksi data ke db
 const client = useSupabaseClient()
 const cultures = ref<Culture[]>()
+
 // Load Image
 // https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/cultures/1/Baju_Tari_Jaipong.jpg
 
-async function getImages(culture_id: number) {
-  const { data } = await client
-    .storage
-    .from('images')
-    .list(`cultures/${culture_id}`, {
-      limit: 100,
-      offset: 0,
-      sortBy: { column: 'name', order: 'asc' },
-    })
-  return data
-}
-
 async function fetchCultures() {
-  const cdnUrl = 'https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/cultures'
   const { data: tableCultures } = await client.from('v_cultures').select('*') as { data: Culture[] }
-
-  const fetchPromises = tableCultures.map(async (tableCulture) => {
-    const imageFiles = await getImages(tableCulture.id)
-
-    tableCulture.image_paths = imageFiles!.map((imageFile) => {
-      return `${cdnUrl}/${tableCulture.id}/${imageFile.name}`
-    })
-
-    return tableCulture
-  })
-
-  return Promise.all(fetchPromises)
+  return Promise.all(tableCultures)
 }
 
 onMounted(async () => {
@@ -80,29 +57,7 @@ onMounted(async () => {
             :to="`belajar-budaya/${culture.culture_slug}`"
             class="max-w-sm w-full lg:max-w-full lg:flex cursor-pointer transition-all hover:shadow-md hover:bg-slate-50 hover:scale-105 rounded-md"
           >
-            <div
-              class="h-52 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-              :style="{ backgroundImage: `url(${culture.image_paths![0]})` }"
-              title="Gambar Budaya"
-            />
-            <div class="max-w-sm w-full lg:max-w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-              <div class="mb-8">
-                <div class="text-gray-900 font-bold text-xl mb-2">
-                  {{ culture.culture_name }}
-                </div>
-                <p class="text-gray-700 text-base line-clamp-2">
-                  {{ culture.culture_description }}
-                </p>
-              </div>
-              <div class="flex gap-4">
-                <div class="badge badge-accent">
-                  {{ culture.province_name }}
-                </div>
-                <div v-if="culture.city_name" class="badge badge-neutral">
-                  {{ culture.city_name }}
-                </div>
-              </div>
-            </div>
+            <CultureCard :culture="culture" />
           </NuxtLink>
           <!-- <NuxtLink
             v-for="culture in cultures"

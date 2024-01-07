@@ -10,9 +10,11 @@ export type Culture = {
   id: number
   culture_name: string
   culture_slug: string
-  image_paths: string[] | null
+  city_id: number
   city_name: string
+  province_id: number
   province_name: string
   culture_value: string
   culture_description: string
+  image_filenames: string[]
 }
