@@ -49,7 +49,6 @@ definePageMeta({
       {{ cultureDetail?.culture_name }}
     </h1>
     <ul>
-      <li><b>Provinsi asal budaya: </b>{{ cultureDetail?.province_name }}</li>
       <li><b>Kota asal budaya: </b> {{ cultureDetail?.city_name ?? '' }}</li>
       <li><b>Deskripsi budaya: </b> {{ cultureDetail?.culture_description }}</li>
       <li><b>Nilai budaya: </b> {{ cultureDetail?.culture_value }}</li>

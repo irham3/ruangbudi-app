@@ -7,32 +7,27 @@ definePageMeta({
 
 const client = useSupabaseClient()
 const cultures = ref<Culture[]>()
-const router = useRouter()
-const route = useRoute()
 
 const cities = ref<City[]>()
 const categories = ref<CultureCategory[]>()
 
-const categoryQuery = route.query.province?.toString().toLowerCase()
-const cityQuery = route.query.city?.toString().toLowerCase()
-
-const provinceName = ref(categoryQuery || '')
-const cityName = ref(cityQuery || '')
+const selectedCategoryId = ref<number>(0)
+const selectedCityId = ref<number>(0)
 
 // Load Image
 // https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/cultures/1/Baju_Tari_Jaipong.jpg
 
-async function fetchCultures(province?: string, city?: string) {
+async function fetchCultures(category_id: number, city_id: number) {
   let query = client.from('v_cultures').select('*')
 
-  if (province && city) {
-    query = query.eq('category_name', province).eq('city_name', city)
+  if (category_id !== 0 && city_id !== 0) {
+    query = query.eq('category_id', category_id).eq('city_id', city_id)
   }
-  else if (province || city) {
-    if (province)
-      query = query.eq('category_name', province)
-    if (city)
-      query = query.eq('city_name', city)
+  else if (category_id !== 0 || city_id !== 0) {
+    if (category_id !== 0)
+      query = query.eq('category_id', category_id)
+    if (city_id !== 0)
+      query = query.eq('city_id', city_id)
   }
 
   const { data: tableCultures } = await query as { data: Culture[] }
@@ -50,50 +45,44 @@ async function fetchCities() {
 async function fetchCategories() {
   const { data: cities } = await client
     .from('culture_categories')
-    .select('id, category_name')
-    .neq('id', 1) as { data: CultureCategory[] }
+    .select('id, category_name') as { data: CultureCategory[] }
   return Promise.all(cities)
 }
 
 onMounted(async () => {
+  cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
   cities.value = await fetchCities()
   categories.value = await fetchCategories()
 
-  if ((typeof categoryQuery === 'undefined' || categoryQuery === '') && (typeof cityQuery === 'undefined' || cityQuery === '')) {
-    cultures.value = await fetchCultures()
-  }
+  // if ((typeof categoryQuery === 'undefined' || categoryQuery === '') && (typeof cityQuery === 'undefined' || cityQuery === '')) {
+  // }
 
-  else if ((typeof categoryQuery === 'undefined' || categoryQuery === '') || (typeof cityQuery === 'undefined' || cityQuery === '')) {
-    if (provinceName.value.length !== 0)
-      cultures.value = await fetchCultures(provinceName.value, undefined)
+  // else if ((typeof categoryQuery === 'undefined' || categoryQuery === '') || (typeof cityQuery === 'undefined' || cityQuery === '')) {
+  //   if (selectedCategoryId.value.length !== 0)
+  //     cultures.value = await fetchCultures(selectedCategoryId.value, undefined)
 
-    if (cityName.value.length !== 0 && cultures.value?.some(culture => culture.city_name.toLowerCase() === cityName.value))
-      cultures.value = cultures.value?.filter(item => item.city_name.toLowerCase() === cityName.value)
+  //   if (selectedCityId.value.length !== 0 && cultures.value?.some(culture => culture.city_name.toLowerCase() === selectedCityId.value))
+  //     cultures.value = cultures.value?.filter(item => item.city_name.toLowerCase() === selectedCityId.value)
 
-    else if (cityName.value.length !== 0)
-      cultures.value = await fetchCultures(undefined, cityName.value)
-  }
+  //   else if (selectedCityId.value.length !== 0)
+  //     cultures.value = await fetchCultures(undefined, selectedCityId.value)
+  // }
 })
 
 async function search() {
-  router.push({
-    query: {
-      province: provinceName.value,
-      city: cityName.value,
-    },
-  })
+  cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
 
-  if (categoryQuery!.length !== 0) {
-    cultures.value = cultures.value?.filter(item => item.category_name.toLowerCase()
-      .includes(categoryQuery!))
-  }
-  else if (cityQuery!.length !== 0) {
-    cultures.value = cultures.value?.filter(item => item.city_name.toLowerCase()
-      .includes(cityQuery!))
-  }
-  else {
-    cultures.value = await fetchCultures()
-  }
+  // const allCityCondition = selectedCityId.value !== 0 && selectedCityId.value !== 1
+  // const allCategoryCondition = selectedCategoryId.value !== 0 && selectedCategoryId.value !== 1
+
+  // if (allCityCondition && allCategoryCondition)
+  //   cultures.value = await fetchCultures()
+  // else if (!allCityCondition && !allCategoryCondition)
+  //   cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
+  // else if (allCityCondition)
+  //   cultures.value = await fetchCultures(selectedCategoryId.value!, undefined)
+  // else if (allCategoryCondition)
+  //   cultures.value = await fetchCultures(undefined, selectedCityId.value!)
 }
 </script>
 
@@ -112,9 +101,12 @@ async function search() {
             <div class="flex items-center gap-4">
               <div class="flex gap-3 items-center hover:scale-105 transition-all">
                 <Icon name="icon-park-outline:city" class="rotate-180 text-stone-600" />
-                <select v-model="cityName" type="text" class="placeholder:text-stone-500 sm:text-base text-sm w-full sm:w-fit border-transparent focus:border-transparent focus:ring-0 focus:outline-none">
-                  <option value="" selected disabled>
+                <select v-model="selectedCityId" type="number" class="placeholder:text-stone-500 sm:text-base text-sm w-full sm:w-fit border-transparent focus:border-transparent focus:ring-0 focus:outline-none">
+                  <option :value="0" selected disabled>
                     -Pilih Kota-
+                  </option>
+                  <option :value="0">
+                    Semua Kota
                   </option>
                   <option
                     v-for="city in cities" :key="city.id"
@@ -127,9 +119,12 @@ async function search() {
               <div class="w-[1px] h-[32px] bg-stone-300" />
               <div class="flex gap-3 items-center hover:scale-105 transition-all">
                 <Icon name="material-symbols:category" class=" text-stone-600" />
-                <select v-model="cityName" type="text" class="placeholder:text-stone-500 sm:text-base text-sm w-full sm:w-fit border-transparent focus:border-transparent focus:ring-0 focus:outline-none">
-                  <option value="" selected disabled>
+                <select v-model="selectedCategoryId" type="text" class="placeholder:text-stone-500 sm:text-base text-sm w-full sm:w-fit border-transparent focus:border-transparent focus:ring-0 focus:outline-none">
+                  <option :value="0" selected disabled>
                     -Pilih Kategori-
+                  </option>
+                  <option :value="0">
+                    Semua Kategori
                   </option>
                   <option
                     v-for="category in categories" :key="category.id"
