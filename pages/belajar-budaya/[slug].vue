@@ -55,6 +55,10 @@ definePageMeta({
       <li><b>Nilai budaya: </b> {{ cultureDetail?.culture_value }}</li>
     </ul>
 
+    <div class="card w-96 h-64 bg-base-100 shadow-xl">
+      <figure><iframe class="w-full h-64" src="https://www.youtube.com/embed/kqk1k_ISx_8?si=0RE0WFmtCOmwnRu_&rel=0" title="Video Ruang Budi" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen /></figure>
+    </div>
+
     <!-- <div class="w-[46rem] h-[30rem] bg-contain bg-center bg-no-repeat" style="background-image: url('/images/budaya_jawa-barat.png');" />
       <div class="w-[46rem] h-[30rem] bg-contain bg-center bg-no-repeat" style="background-image: url('/images/budaya_jawa-timur.png');" /> -->
   </div>

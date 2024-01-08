@@ -6,21 +6,28 @@ export type StudentData = {
   student_class: number
 }
 
+export type Slide = {
+  image: string
+  description: string
+}
+
 export type Culture = {
   id: number
   category_name: string
   culture_name: string
   culture_slug: string
-  city_id: number
   city_name: string
-  province_id: number
-  province_name: string
   culture_value: string
   culture_description: string
   image_filenames: string[]
 }
 
-export type Slide = {
-  image: string
-  description: string
+export type City = {
+  id: number
+  city_name: string
+}
+
+export type CultureCategory = {
+  id: number
+  category_name: string
 }

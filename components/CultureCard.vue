@@ -14,7 +14,7 @@ const cdnUrl = 'https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/publi
       v-if="culture.image_filenames.length !== 0"
       class="h-52 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
       :style="{ backgroundImage: `url(${cdnUrl}/${culture.id}/${culture.image_filenames[0]})` }"
-      title="Gambar Budaya"
+      :title="culture.culture_name"
     />
     <div class="max-w-sm w-full lg:max-w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
       <div class="mb-8">
@@ -27,7 +27,7 @@ const cdnUrl = 'https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/publi
       </div>
       <div class="flex gap-2">
         <div class="badge badge-accent">
-          {{ culture.province_name }}
+          {{ culture.category_name }}
         </div>
         <div v-if="culture.city_name" class="badge badge-neutral">
           {{ culture.city_name }}

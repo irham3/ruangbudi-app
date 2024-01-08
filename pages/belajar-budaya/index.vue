@@ -5,21 +5,96 @@ definePageMeta({
   title: 'Belajar Budaya',
 })
 
-// Test koneksi data ke db
 const client = useSupabaseClient()
 const cultures = ref<Culture[]>()
+const router = useRouter()
+const route = useRoute()
+
+const cities = ref<City[]>()
+const categories = ref<CultureCategory[]>()
+
+const categoryQuery = route.query.province?.toString().toLowerCase()
+const cityQuery = route.query.city?.toString().toLowerCase()
+
+const provinceName = ref(categoryQuery || '')
+const cityName = ref(cityQuery || '')
 
 // Load Image
 // https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/cultures/1/Baju_Tari_Jaipong.jpg
 
-async function fetchCultures() {
-  const { data: tableCultures } = await client.from('v_cultures').select('*') as { data: Culture[] }
+async function fetchCultures(province?: string, city?: string) {
+  let query = client.from('v_cultures').select('*')
+
+  if (province && city) {
+    query = query.eq('category_name', province).eq('city_name', city)
+  }
+  else if (province || city) {
+    if (province)
+      query = query.eq('category_name', province)
+    if (city)
+      query = query.eq('city_name', city)
+  }
+
+  const { data: tableCultures } = await query as { data: Culture[] }
   return Promise.all(tableCultures)
 }
 
+async function fetchCities() {
+  const { data: cities } = await client
+    .from('cities')
+    .select('id, city_name')
+    .neq('id', 1) as { data: City[] }
+  return Promise.all(cities)
+}
+
+async function fetchCategories() {
+  const { data: cities } = await client
+    .from('culture_categories')
+    .select('id, category_name')
+    .neq('id', 1) as { data: CultureCategory[] }
+  return Promise.all(cities)
+}
+
 onMounted(async () => {
-  cultures.value = await fetchCultures()
+  cities.value = await fetchCities()
+  categories.value = await fetchCategories()
+
+  if ((typeof categoryQuery === 'undefined' || categoryQuery === '') && (typeof cityQuery === 'undefined' || cityQuery === '')) {
+    cultures.value = await fetchCultures()
+  }
+
+  else if ((typeof categoryQuery === 'undefined' || categoryQuery === '') || (typeof cityQuery === 'undefined' || cityQuery === '')) {
+    if (provinceName.value.length !== 0)
+      cultures.value = await fetchCultures(provinceName.value, undefined)
+
+    if (cityName.value.length !== 0 && cultures.value?.some(culture => culture.city_name.toLowerCase() === cityName.value))
+      cultures.value = cultures.value?.filter(item => item.city_name.toLowerCase() === cityName.value)
+
+    else if (cityName.value.length !== 0)
+      cultures.value = await fetchCultures(undefined, cityName.value)
+  }
 })
+
+async function search() {
+  router.push({
+    query: {
+      province: provinceName.value,
+      city: cityName.value,
+    },
+  })
+
+  if (categoryQuery!.length !== 0) {
+    cultures.value = cultures.value?.filter(item => item.category_name.toLowerCase()
+      .includes(categoryQuery!))
+  }
+  else if (cityQuery!.length !== 0) {
+    cultures.value = cultures.value?.filter(item => item.city_name.toLowerCase()
+      .includes(cityQuery!))
+  }
+  else {
+    cultures.value = await fetchCultures()
+  }
+}
 </script>
 
 <template>
@@ -36,16 +111,36 @@ onMounted(async () => {
           <div class="flex gap-6 border border-stone-400 sm:w-fit w-full px-4 py-2.5 rounded-md items-center">
             <div class="flex items-center gap-4">
               <div class="flex gap-3 items-center hover:scale-105 transition-all">
-                <Icon name="pepicons-pop:pinpoint-filled" class=" text-stone-600" />
-                <input id="" type="text" name="" class="placeholder:text-stone-500 sm:text-base text-sm w-full sm:w-fit border-transparent focus:border-transparent focus:ring-0 focus:outline-none" placeholder="Provinsi">
+                <Icon name="icon-park-outline:city" class="rotate-180 text-stone-600" />
+                <select v-model="cityName" type="text" class="placeholder:text-stone-500 sm:text-base text-sm w-full sm:w-fit border-transparent focus:border-transparent focus:ring-0 focus:outline-none">
+                  <option value="" selected disabled>
+                    -Pilih Kota-
+                  </option>
+                  <option
+                    v-for="city in cities" :key="city.id"
+                    :value="city.id"
+                  >
+                    {{ city.city_name }}
+                  </option>
+                </select>
               </div>
               <div class="w-[1px] h-[32px] bg-stone-300" />
               <div class="flex gap-3 items-center hover:scale-105 transition-all">
-                <Icon name="mdi:leaf" class="rotate-180 text-stone-600" />
-                <input id="" type="text" name="" class="placeholder:text-stone-500 sm:text-base text-sm w-full sm:w-fit border-transparent focus:border-transparent focus:ring-0 focus:outline-none" placeholder="Kota/Kabupaten">
+                <Icon name="material-symbols:category" class=" text-stone-600" />
+                <select v-model="cityName" type="text" class="placeholder:text-stone-500 sm:text-base text-sm w-full sm:w-fit border-transparent focus:border-transparent focus:ring-0 focus:outline-none">
+                  <option value="" selected disabled>
+                    -Pilih Kategori-
+                  </option>
+                  <option
+                    v-for="category in categories" :key="category.id"
+                    :value="category.id"
+                  >
+                    {{ category.category_name }}
+                  </option>
+                </select>
               </div>
             </div>
-            <button class="px-6 py-1 bg-[#CA855F] rounded-sm text-white font-semibold sm:text-base text-sm transition-transform hover:scale-105">
+            <button class="px-6 py-1 bg-[#CA855F] rounded-sm text-white font-semibold sm:text-base text-sm transition-transform hover:scale-105" @click="search">
               Telusuri
             </button>
           </div>
@@ -54,7 +149,7 @@ onMounted(async () => {
           <NuxtLink
             v-for="culture in cultures"
             :key="culture.id"
-            :to="culture.culture_slug"
+            :to="`belajar-budaya/${culture.culture_slug}`"
             class="max-w-sm w-full lg:max-w-full lg:flex cursor-pointer transition-all hover:shadow-md hover:bg-slate-50 hover:scale-105 rounded-md"
           >
             <CultureCard :culture="culture" />
