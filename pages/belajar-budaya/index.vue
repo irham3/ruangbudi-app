@@ -53,36 +53,10 @@ onMounted(async () => {
   cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
   cities.value = await fetchCities()
   categories.value = await fetchCategories()
-
-  // if ((typeof categoryQuery === 'undefined' || categoryQuery === '') && (typeof cityQuery === 'undefined' || cityQuery === '')) {
-  // }
-
-  // else if ((typeof categoryQuery === 'undefined' || categoryQuery === '') || (typeof cityQuery === 'undefined' || cityQuery === '')) {
-  //   if (selectedCategoryId.value.length !== 0)
-  //     cultures.value = await fetchCultures(selectedCategoryId.value, undefined)
-
-  //   if (selectedCityId.value.length !== 0 && cultures.value?.some(culture => culture.city_name.toLowerCase() === selectedCityId.value))
-  //     cultures.value = cultures.value?.filter(item => item.city_name.toLowerCase() === selectedCityId.value)
-
-  //   else if (selectedCityId.value.length !== 0)
-  //     cultures.value = await fetchCultures(undefined, selectedCityId.value)
-  // }
 })
 
 async function search() {
   cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
-
-  // const allCityCondition = selectedCityId.value !== 0 && selectedCityId.value !== 1
-  // const allCategoryCondition = selectedCategoryId.value !== 0 && selectedCategoryId.value !== 1
-
-  // if (allCityCondition && allCategoryCondition)
-  //   cultures.value = await fetchCultures()
-  // else if (!allCityCondition && !allCategoryCondition)
-  //   cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
-  // else if (allCityCondition)
-  //   cultures.value = await fetchCultures(selectedCategoryId.value!, undefined)
-  // else if (allCategoryCondition)
-  //   cultures.value = await fetchCultures(undefined, selectedCityId.value!)
 }
 </script>
 

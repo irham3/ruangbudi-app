@@ -1,5 +1,5 @@
 /* eslint-disable ts/consistent-type-definitions */
-export type StudentData = {
+export type Student = {
   first_name: string
   last_name: string
   gender: string
@@ -32,4 +32,12 @@ export type City = {
 export type CultureCategory = {
   id: number
   category_name: string
+}
+
+export type CultureScore = {
+  value: CultureScore
+  student_id: number
+  culture_id: number
+  student_score: number
+  student_evaluation: number
 }
