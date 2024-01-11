@@ -34,7 +34,7 @@ const classOptions = [
 async function signUp() {
   isLoading.value = true
 
-  const studentMetadata: StudentData = {
+  const studentMetadata: Student = {
     first_name: firstName.value,
     last_name: lastName.value,
     gender: gender.value,

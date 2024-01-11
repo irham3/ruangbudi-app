@@ -1,12 +1,15 @@
 <script lang="ts" setup>
-const user = useSupabaseUser()
+import type { Student } from '~/utils/types'
+
 const supabase = useSupabaseClient()
 const { $toast: toast } = useNuxtApp()
-
 const profileImage = ref('/images/profile/')
-const studentMetadata = ref<StudentData>()
+
+const user = useSupabaseUser()
+const studentMetadata = ref<Student>()
 if (user.value) {
-  studentMetadata.value = user.value.user_metadata as StudentData
+  studentMetadata.value = user.value.user_metadata as Student
+
   if (studentMetadata.value!.gender === 'l')
     profileImage.value += 'boy.jpg'
   else
@@ -87,7 +90,7 @@ async function logout() {
                   </NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/">
+                  <NuxtLink to="/belajar-isyarat">
                     Belajar Bahasa Isyarat
                   </NuxtLink>
                 </li>

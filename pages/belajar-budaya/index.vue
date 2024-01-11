@@ -5,21 +5,59 @@ definePageMeta({
   title: 'Belajar Budaya',
 })
 
-// Test koneksi data ke db
 const client = useSupabaseClient()
 const cultures = ref<Culture[]>()
+
+const cities = ref<City[]>()
+const categories = ref<CultureCategory[]>()
+
+const selectedCategoryId = ref<number>(0)
+const selectedCityId = ref<number>(0)
 
 // Load Image
 // https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/cultures/1/Baju_Tari_Jaipong.jpg
 
-async function fetchCultures() {
-  const { data: tableCultures } = await client.from('v_cultures').select('*') as { data: Culture[] }
+async function fetchCultures(category_id: number, city_id: number) {
+  let query = client.from('v_cultures').select('*')
+
+  if (category_id !== 0 && city_id !== 0) {
+    query = query.eq('category_id', category_id).eq('city_id', city_id)
+  }
+  else if (category_id !== 0 || city_id !== 0) {
+    if (category_id !== 0)
+      query = query.eq('category_id', category_id)
+    if (city_id !== 0)
+      query = query.eq('city_id', city_id)
+  }
+
+  const { data: tableCultures } = await query as { data: Culture[] }
   return Promise.all(tableCultures)
 }
 
+async function fetchCities() {
+  const { data: cities } = await client
+    .from('cities')
+    .select('id, city_name')
+    .neq('id', 1) as { data: City[] }
+  return Promise.all(cities)
+}
+
+async function fetchCategories() {
+  const { data: cities } = await client
+    .from('culture_categories')
+    .select('id, category_name') as { data: CultureCategory[] }
+  return Promise.all(cities)
+}
+
 onMounted(async () => {
-  cultures.value = await fetchCultures()
+  cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
+  cities.value = await fetchCities()
+  categories.value = await fetchCategories()
 })
+
+async function search() {
+  cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
+}
 </script>
 
 <template>
@@ -36,16 +74,42 @@ onMounted(async () => {
           <div class="flex gap-6 border border-stone-400 sm:w-fit w-full px-4 py-2.5 rounded-md items-center">
             <div class="flex items-center gap-4">
               <div class="flex gap-3 items-center hover:scale-105 transition-all">
-                <Icon name="pepicons-pop:pinpoint-filled" class=" text-stone-600" />
-                <input id="" type="text" name="" class="placeholder:text-stone-500 sm:text-base text-sm w-full sm:w-fit border-transparent focus:border-transparent focus:ring-0 focus:outline-none" placeholder="Provinsi">
+                <Icon name="icon-park-outline:city" class="rotate-180 text-stone-600" />
+                <select v-model="selectedCityId" type="number" class="placeholder:text-stone-500 sm:text-base text-sm w-full sm:w-fit border-transparent focus:border-transparent focus:ring-0 focus:outline-none">
+                  <option :value="0" selected disabled>
+                    -Pilih Kota-
+                  </option>
+                  <option :value="0">
+                    Semua Kota
+                  </option>
+                  <option
+                    v-for="city in cities" :key="city.id"
+                    :value="city.id"
+                  >
+                    {{ city.city_name }}
+                  </option>
+                </select>
               </div>
               <div class="w-[1px] h-[32px] bg-stone-300" />
               <div class="flex gap-3 items-center hover:scale-105 transition-all">
-                <Icon name="mdi:leaf" class="rotate-180 text-stone-600" />
-                <input id="" type="text" name="" class="placeholder:text-stone-500 sm:text-base text-sm w-full sm:w-fit border-transparent focus:border-transparent focus:ring-0 focus:outline-none" placeholder="Kota/Kabupaten">
+                <Icon name="material-symbols:category" class=" text-stone-600" />
+                <select v-model="selectedCategoryId" type="text" class="placeholder:text-stone-500 sm:text-base text-sm w-full sm:w-fit border-transparent focus:border-transparent focus:ring-0 focus:outline-none">
+                  <option :value="0" selected disabled>
+                    -Pilih Kategori-
+                  </option>
+                  <option :value="0">
+                    Semua Kategori
+                  </option>
+                  <option
+                    v-for="category in categories" :key="category.id"
+                    :value="category.id"
+                  >
+                    {{ category.category_name }}
+                  </option>
+                </select>
               </div>
             </div>
-            <button class="px-6 py-1 bg-[#CA855F] rounded-sm text-white font-semibold sm:text-base text-sm transition-transform hover:scale-105">
+            <button class="px-6 py-1 bg-[#CA855F] rounded-sm text-white font-semibold sm:text-base text-sm transition-transform hover:scale-105" @click="search">
               Telusuri
             </button>
           </div>
