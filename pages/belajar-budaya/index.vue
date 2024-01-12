@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import CultureCard from '~/components/CultureCard.vue'
+import type { City, CultureCategory } from '~/utils/types'
 
 definePageMeta({
   title: 'Belajar Budaya',
