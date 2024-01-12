@@ -1,25 +1,24 @@
 <script lang="ts" setup>
+/* __placeholder__ */
+import type { StudyVideo } from '~/utils/types'
+
 definePageMeta({
   title: 'Belajar Budaya',
 })
 
-const supabaseClient = useSupabaseClient()
+const client = useSupabaseClient()
+
+const studyVideos = ref<StudyVideo[]>()
 
 async function fetchCardData() {
-  const { data, error } = await supabaseClient
-    .storage
-    .from('images')
-    .list('video-thumbnails', {
-      limit: 1,
-      offset: 0,
-      sortBy: { column: 'name', order: 'asc' },
-      search: 'menyusun-kalimat',
-    })
+  const { data } = await client
+    .from('v_videos')
+    .select('*') as { data: StudyVideo[] }
   return Promise.all(data)
 }
 
-onMounted(() => {
-
+onMounted(async () => {
+  studyVideos.value = await fetchCardData()
 })
 </script>
 
@@ -37,9 +36,10 @@ onMounted(() => {
         </h3>
         <div class="flex gap-4">
           <StudyCard
-            to="belajar-isyarat/menyusun-kalimat"
-            title="Menyusun Kalimat"
-            img-src="/images/menyusun-kalimat.jpg"
+            v-for="(studyVideo, index) in studyVideos" :key="index"
+            :to="studyVideo.slug"
+            :title="studyVideo.title"
+            :img-filename="`${studyVideo.slug}.png`"
           />
         </div>
       </section>

@@ -42,7 +42,7 @@ export type CultureScore = {
   student_evaluation: number
 }
 
-export type Video = {
+export type StudyVideo = {
   video_id: number
   category_id: number
   category_name: string
