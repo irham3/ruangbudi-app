@@ -61,37 +61,54 @@ definePageMeta({
       <div class="flex justify-end w-full">
         <!-- <p class="text-stone-600 text-sm bg-white px-2">Kota asal budaya: <b class="text-lg">{{ cultureDetail?.city_name }}</b></p> -->
       </div>
-      <div class="absolute z-[-1] w-[20rem] h-[40rem] bg-contain bg-no-repeat top-[-5rem] left-0" style="background-image: url('/images/background/batik.png');" />
-      <div class="absolute z-[-1] w-[20rem] h-[40rem] bg-contain bg-no-repeat top-[-5rem] right-0 bg-right" style="background-image: url('/images/background/batik-2.png');" />
-      <div class="absolute w-[20rem] h-[20rem] bg-contain bg-no-repeat bottom-0 left-0" style="background-image: url('/images/background/komodo.png');" > </div>
+      <div class="absolute z-[-1] w-[20rem] h-[40rem] bg-contain bg-no-repeat top-[-5rem] left-0"
+        style="background-image: url('/images/background/batik.png');" />
+      <div class="absolute z-[-1] w-[20rem] h-[40rem] bg-contain bg-no-repeat top-[-5rem] right-0 bg-right"
+        style="background-image: url('/images/background/batik-2.png');" />
+      <div class="absolute w-[20rem] h-[20rem] bg-contain bg-no-repeat bottom-0 left-0"
+        style="background-image: url('/images/background/komodo.png');"> </div>
 
-      <div class="w-full items-center flex flex-col">
-
-        <div class="group w-2/3 transition ease-in-out hover:translate-y-[-4px]">
-          <div class="flex items-center justify-between translate-y-5 px-6">
-            <h2 class="text-3xl font-bold bg-white px-2">Desktripsi</h2>
-            <!-- <p class="text-stone-600 text-sm bg-white px-2">Kota asal budaya: <b class="text-lg">{{ cultureDetail?.city_name }}</b></p> -->
+      <div class="flex px-36 gap-12 items-center">
+        <div class="items-center flex flex-col w-fit">
+          <div class="group transition ease-in-out hover:translate-y-[-4px]">
+            <div class="flex items-center justify-between translate-y-5 px-6">
+              <h2 class="text-3xl font-bold bg-white px-2">Desktripsi</h2>
+              <!-- <p class="text-stone-600 text-sm bg-white px-2">Kota asal budaya: <b class="text-lg">{{ cultureDetail?.city_name }}</b></p> -->
+            </div>
+            <div
+              class="group-hover:border-slate-400 group-hover:shadow-xl border px-6 py-2 text-justify flex gap-2 flex-col pb-3 rounded-md pt-7 relative overflow-hidden z-[-2]">
+              <p class="z-[1]">{{ cultureDetail?.culture_description }}</p>
+              <div
+                class="absolute bottom-[-13rem] rotate-[-14deg] right-[-5rem] w-[40rem] translate-x-[7rem] translate-y-[3rem] group-hover:translate-x-0 group-hover:translate-y-0 transition-transform ease-in-out duration-1000 h-56 bg-gradient-to-t from-orange-300 to-transparent z-[-1]">
+              </div>
+            </div>
           </div>
-          <div class="group-hover:border-slate-400 group-hover:shadow-xl border px-6 py-2 text-justify flex gap-2 flex-col pb-3 rounded-md pt-7 relative overflow-hidden z-[-2]">
-            <p class="z-[1]">{{ cultureDetail?.culture_description }}</p>
-            <div class="absolute bottom-[-13rem] rotate-[-14deg] right-[-5rem] w-[40rem] translate-x-[7rem] translate-y-[3rem] group-hover:translate-x-0 group-hover:translate-y-0 transition-transform ease-in-out duration-1000 h-56 bg-gradient-to-t from-orange-300 to-transparent z-[-1]"></div>
+          <div class="group transition ease-in-out hover:translate-y-[-4px]">
+            <div class="flex items-center justify-between translate-y-5 px-6">
+              <h2 class="text-3xl font-bold bg-white px-2">Nilai Budaya</h2>
+              <!-- <p class="text-stone-600 text-sm bg-white px-2">Kota asal budaya: <b class="text-lg">{{ cultureDetail?.city_name }}</b></p> -->
+            </div>
+            <div
+              class="group-hover:border-slate-400 group-hover:shadow-xl border px-6 py-2 text-justify flex gap-2 flex-col pb-3 rounded-md pt-7 relative overflow-hidden z-[-2]">
+              <p class="z-[1]">{{ cultureDetail?.culture_value }}</p>
+              <div
+                class="absolute bottom-[-13rem] rotate-[-14deg] right-[-5rem] w-[40rem] translate-x-[7rem] translate-y-[3rem] group-hover:translate-x-0 group-hover:translate-y-0 transition-transform ease-in-out duration-1000 h-56 bg-gradient-to-t from-orange-300 to-transparent z-[-1]">
+              </div>
+            </div>
           </div>
         </div>
-        <div class="group w-2/3 transition ease-in-out hover:translate-y-[-4px]">
-          <div class="flex items-center justify-between translate-y-5 px-6">
-            <h2 class="text-3xl font-bold bg-white px-2">Nilai Budaya</h2>
-            <!-- <p class="text-stone-600 text-sm bg-white px-2">Kota asal budaya: <b class="text-lg">{{ cultureDetail?.city_name }}</b></p> -->
-          </div>
-          <div class="group-hover:border-slate-400 group-hover:shadow-xl border px-6 py-2 text-justify flex gap-2 flex-col pb-3 rounded-md pt-7 relative overflow-hidden z-[-2]">
-            <p class="z-[1]">{{ cultureDetail?.culture_value }}</p>
-            <div class="absolute bottom-[-13rem] rotate-[-14deg] right-[-5rem] w-[40rem] translate-x-[7rem] translate-y-[3rem] group-hover:translate-x-0 group-hover:translate-y-0 transition-transform ease-in-out duration-1000 h-56 bg-gradient-to-t from-orange-300 to-transparent z-[-1]"></div>
-          </div>
+
+        <div class="card w-3/4 h-64 bg-base-100 shadow-xl">
+          <figure>
+            <iframe class="w-full h-64" src="https://www.youtube.com/embed/kqk1k_ISx_8?si=0RE0WFmtCOmwnRu_&rel=0"
+              title="Video Ruang Budi" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </figure>
         </div>
       </div>
 
-      <div class="card w-96 h-64 bg-base-100 shadow-xl">
-        <figure><iframe class="w-full h-64" src="https://www.youtube.com/embed/kqk1k_ISx_8?si=0RE0WFmtCOmwnRu_&rel=0" title="Video Ruang Budi" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen /></figure>
-      </div>
 
       <div v-if="user">
         <div class="text-4xl font-semibold">
@@ -102,6 +119,6 @@ definePageMeta({
           <li><b>Evaluasi: </b> {{ cultureScore?.student_evaluation ?? 'belum ada evaluasi' }}</li>
         </ul>
       </div>
-   </div>
+    </div>
   </NuxtLayout>
 </template>
