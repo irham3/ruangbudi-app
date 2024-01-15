@@ -90,7 +90,7 @@ async function logout() {
                   </NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/video-belajar/#bahasa-isyarat">
+                  <NuxtLink to="/video-belajar#bahasa-isyarat">
                     Belajar Bahasa Isyarat
                   </NuxtLink>
                 </li>

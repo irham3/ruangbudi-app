@@ -7,12 +7,11 @@ definePageMeta({
 })
 
 const client = useSupabaseClient()
-
 const studyVideos = ref<StudyVideo[]>()
 
 async function fetchCardData() {
   const { data } = await client
-    .from('v_videos')
+    .from('videos')
     .select('*') as { data: StudyVideo[] }
   return Promise.all(data)
 }
@@ -36,8 +35,8 @@ onMounted(async () => {
         </h3>
         <div class="flex gap-4">
           <StudyCard
-            v-for="(studyVideo, index) in studyVideos" :key="index"
-            :to="studyVideo.slug"
+            v-for="(studyVideo, index) in studyVideos?.filter(item => item.category_id === 1)" :key="index"
+            :to="`video-belajar/${studyVideo.slug}`"
             :title="studyVideo.title"
             :img-filename="`${studyVideo.slug}.png`"
           />

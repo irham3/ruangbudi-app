@@ -14,17 +14,28 @@ const slides = ref<Slide[]>([])
 const cdnUrl = 'https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/cultures'
 
 async function fetchCultureDetail(slug: string) {
-  const { data: culture } = await client
+  const { data } = await client
     .from('v_cultures')
     .select('*')
     .eq('culture_slug', slug)
     .limit(1)
     .single() as { data: Culture }
-  return culture
+  return data
+}
+
+async function fetchCultureScore(culture_id: number) {
+  const { data } = await client
+    .from('culture_scores')
+    .select('culture_id, student_score, student_evaluation')
+    .eq('culture_id', culture_id)
+    .limit(1)
+    .single() as { data: CultureScore }
+
+  return data
 }
 
 onMounted(async () => {
-  cultureDetail.value = (await fetchCultureDetail(slug))
+  cultureDetail.value = await fetchCultureDetail(slug)
   cultureDetail.value.image_filenames.forEach((image_filename, index) => {
     slides.value.push({
       image: `${cdnUrl}/${cultureDetail.value!.id}/${image_filename}`,
@@ -36,14 +47,7 @@ onMounted(async () => {
   // User Data
   if (user.value) {
     studentMetadata.value = user.value.user_metadata as Student
-    const { data } = await client
-      .from('culture_scores')
-      .select('culture_id, student_score, student_evaluation')
-      .eq('culture_id', cultureDetail.value?.id)
-      .limit(1)
-      .single() as unknown as { data: CultureScore }
-
-    cultureScore.value = data
+    cultureScore.value = await fetchCultureScore(cultureDetail.value.id)
   }
 })
 

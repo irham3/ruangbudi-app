@@ -43,9 +43,13 @@ export type CultureScore = {
 }
 
 export type StudyVideo = {
-  video_id: number
+  id: number
   category_id: number
-  category_name: string
   title: string
   slug: string
+}
+
+export type StudyVideoDetail = {
+  title: string
+  youtube_id: string
 }
