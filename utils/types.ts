@@ -35,8 +35,6 @@ export type CultureCategory = {
 }
 
 export type CultureScore = {
-  value: CultureScore
-  student_id: number
   culture_id: number
   student_score: number
   student_evaluation: number
@@ -50,6 +48,13 @@ export type StudyVideo = {
 }
 
 export type StudyVideoDetail = {
+  id: number
   title: string
   youtube_id: string
+}
+
+export type VideoDetailScore = {
+  video_detail_id: number
+  student_score: number
+  student_evaluation: number
 }

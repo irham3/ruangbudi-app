@@ -95,7 +95,7 @@ async function logout() {
                   </NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/">
+                  <NuxtLink to="/video-belajar#membuat-kerajinan">
                     Buat Kerajinan
                   </NuxtLink>
                 </li>
