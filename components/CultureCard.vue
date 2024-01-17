@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useSound } from '@vueuse/sound'
 import type { Culture } from '~/utils/types'
 
 defineProps<{
@@ -6,10 +7,14 @@ defineProps<{
 }>()
 
 const cdnUrl = 'https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/cultures'
+const { play } = useSound('sounds/button-onclick.mp3')
+function playButtonSound() {
+  play()
+}
 </script>
 
 <template>
-  <div class="w-full lg:max-w-full lg:flex shadow-lg">
+  <div class="w-full lg:max-w-full lg:flex shadow-lg" @click="playButtonSound">
     <div
       v-if="culture.image_filenames.length !== 0"
       class="h-52 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"

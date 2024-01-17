@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useSound } from '@vueuse/sound'
+
 const props = defineProps<{
   to: string
   title: string
@@ -7,6 +9,11 @@ const props = defineProps<{
 
 const client = useSupabaseClient()
 const imageUrl = ref<string>()
+
+const { play } = useSound('sounds/button-onclick.mp3')
+function playButtonSound() {
+  play()
+}
 
 onMounted(async () => {
   const { data: { publicUrl } } = client
@@ -23,22 +30,26 @@ onMounted(async () => {
 </script>
 
 <template>
-  <NuxtLink
+  <div
     class="relative flex cursor-pointer max-w-[16rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 hover:shadow-md hover:shadow-amber-900 focus:ring- shadow-lg transform active:scale-90 transition-transform"
-    :to="to"
+    @click="playButtonSound"
   >
-    <div class="relative w-full overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
-      <img
-        :src="imageUrl"
-        :alt="title"
-      >
-    </div>
-    <div class="p-4">
-      <div class="flex items-center justify-between w-full">
-        <h5 class="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-          {{ title }}
-        </h5>
+    <NuxtLink
+      :to="to"
+    >
+      <div class="relative w-full overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">
+        <img
+          :src="imageUrl"
+          :alt="title"
+        >
       </div>
-    </div>
-  </NuxtLink>
+      <div class="p-4">
+        <div class="flex items-center justify-between w-full">
+          <h5 class="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+            {{ title }}
+          </h5>
+        </div>
+      </div>
+    </NuxtLink>
+  </div>
 </template>

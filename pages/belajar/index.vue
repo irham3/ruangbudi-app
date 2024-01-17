@@ -70,7 +70,7 @@ onMounted(async () => {
         <div class="flex gap-4">
           <StudyCard
             v-for="(studyVideo, index) in studyVideos" :key="index"
-            :to="`video-belajar/${studyVideo.slug}`"
+            :to="`belajar/isyarat/${studyVideo.slug}`"
             :title="studyVideo.title"
             :img-filename="`${studyVideo.slug}.png`"
           />

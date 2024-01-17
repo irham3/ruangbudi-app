@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useSound } from '@vueuse/sound'
 import CultureCard from '~/components/CultureCard.vue'
 import type { City, CultureCategory } from '~/utils/types'
 
@@ -50,15 +51,18 @@ async function fetchCategories() {
   return Promise.all(cities)
 }
 
+const { play } = useSound('sounds/button-onclick.mp3')
+
+async function search() {
+  play()
+  cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
+}
+
 onMounted(async () => {
   cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
   cities.value = await fetchCities()
   categories.value = await fetchCategories()
 })
-
-async function search() {
-  cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
-}
 </script>
 
 <template>

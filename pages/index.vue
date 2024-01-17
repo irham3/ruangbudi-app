@@ -10,6 +10,7 @@ definePageMeta({
 const { play } = useSound('sounds/button-onclick.mp3')
 function playButtonSound() {
   play()
+  navigateTo('/belajar')
 }
 </script>
 
