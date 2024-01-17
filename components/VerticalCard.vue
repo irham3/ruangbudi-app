@@ -4,7 +4,7 @@ import { useSound } from '@vueuse/sound'
 const props = defineProps<{
   to: string
   title: string
-  imgFilename: string
+  imgPath: string
 }>()
 
 const client = useSupabaseClient()
@@ -19,7 +19,7 @@ onMounted(async () => {
   const { data: { publicUrl } } = client
     .storage
     .from('images')
-    .getPublicUrl(`video/${props.imgFilename}`)
+    .getPublicUrl(props.imgPath)
   imageUrl.value = publicUrl
 
   const { status } = await useFetch(imageUrl.value)

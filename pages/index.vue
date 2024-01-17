@@ -10,6 +10,10 @@ definePageMeta({
 const { play } = useSound('sounds/button-onclick.mp3')
 function playButtonSound() {
   play()
+}
+
+function navigateToBelajar() {
+  play()
   navigateTo('/belajar')
 }
 </script>
@@ -28,7 +32,7 @@ function playButtonSound() {
           <p class="w-10/12 mb-4">
             Kamu dapat belajar banyak hal melalui RuangBudi dengan cara yang seru dan menyenangkan terutama tentang budaya dan bahasa isyarat
           </p>
-          <button class="btn max-w-44 text-center bg-orange-800 text-white hover:bg-orange-900" @click="playButtonSound">
+          <button class="btn max-w-44 text-center bg-orange-800 text-white hover:bg-orange-900" @click="navigateToBelajar">
             Yuk Belajar Sekarang!
           </button>
         </div>

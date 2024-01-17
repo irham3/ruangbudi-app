@@ -40,20 +40,20 @@ export type CultureScore = {
   student_evaluation: number
 }
 
-export type StudyVideo = {
+export type SignLanguage = {
   id: number
   category_id: number
   title: string
   slug: string
 }
 
-export type StudyVideoDetail = {
+export type SignLanguageDetail = {
   id: number
   title: string
   youtube_id: string
 }
 
-export type VideoDetailScore = {
+export type SignLanguageDetailScore = {
   video_detail_id: number
   student_score: number
   student_evaluation: number

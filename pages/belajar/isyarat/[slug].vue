@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { StudyVideoDetail, VideoDetailScore } from '~/utils/types'
+import type { SignLanguageDetail, SignLanguageDetailScore } from '~/utils/types'
 
 definePageMeta({
   title: 'Belajar Isyarat',
@@ -7,16 +7,16 @@ definePageMeta({
 
 const route = useRoute()
 const client = useSupabaseClient()
-const videoDetails = ref<StudyVideoDetail[]>()
+const videoDetails = ref<SignLanguageDetail[]>()
 const user = useSupabaseUser()
 const studentMetadata = ref<Student>()
-const videoDetailScore = ref<VideoDetailScore>()
+const videoDetailScore = ref<SignLanguageDetailScore>()
 
 async function fetchVideos(slug: string) {
   const { data } = await client
-    .from('v_video_details')
+    .from('v_signlanguage_details')
     .select('id, title, youtube_id')
-    .eq('slug', slug) as { data: StudyVideoDetail[] }
+    .eq('slug', slug) as { data: SignLanguageDetail[] }
 
   return data
 }
@@ -27,7 +27,7 @@ async function fetchScore(videoDetailId: number) {
     .select('video_detail_id, student_score, student_evaluation')
     .eq('video_detail_id', videoDetailId)
     .limit(1)
-    .single() as { data: VideoDetailScore }
+    .single() as { data: SignLanguageDetailScore }
 
   return data
 }

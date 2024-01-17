@@ -1,23 +1,23 @@
 <script lang="ts" setup>
-import type { StudyVideo } from '~/utils/types'
+import type { SignLanguage } from '~/utils/types'
 
 definePageMeta({
   title: 'Belajar Bahasa Isyarat',
 })
 
 const client = useSupabaseClient()
-const studyVideos = ref<StudyVideo[]>()
+const signLanguages = ref<SignLanguage[]>()
 
-async function fetchCardData() {
+async function fetchSignLanguages() {
   const { data } = await client
-    .from('videos')
+    .from('signLanguages')
     .select('*')
-    .eq('item_category_id', 1) as { data: StudyVideo[] }
+    .eq('category_id', 1) as { data: SignLanguage[] }
   return Promise.all(data)
 }
 
 onMounted(async () => {
-  studyVideos.value = await fetchCardData()
+  signLanguages.value = await fetchSignLanguages()
 })
 </script>
 
@@ -29,18 +29,18 @@ onMounted(async () => {
       </h1>
 
       <div class="flex gap-4">
-        <VideoCard
-          v-for="(studyVideo, index) in studyVideos" :key="index"
-          :to="`video-belajar/${studyVideo.slug}`"
+        <VerticalCard
+          v-for="(studyVideo, index) in signLanguages" :key="index"
+          :to="`isyarat/${studyVideo.slug}`"
           :title="studyVideo.title"
-          :img-filename="`${studyVideo.slug}.png`"
+          :img-path="`video/${studyVideo.slug}.png`"
         />
 
-        <VideoCard
-          v-for="(studyVideo, index) in studyVideos" :key="index * 2"
-          :to="`video-belajar/${studyVideo.slug}`"
+        <VerticalCard
+          v-for="(studyVideo, index) in signLanguages" :key="index * 2"
+          :to="`isyarat/${studyVideo.slug}`"
           :title="studyVideo.title"
-          :img-filename="`${studyVideo.slug}.png`"
+          :img-path="`video/${studyVideo.slug}.png`"
         />
       </div>
     </div>

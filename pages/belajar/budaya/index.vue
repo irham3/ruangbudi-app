@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useSound } from '@vueuse/sound'
-import CultureCard from '~/components/CultureCard.vue'
+import HorizontalCard from '~/components/HorizontalCard.vue'
 import type { City, CultureCategory } from '~/utils/types'
 
 definePageMeta({
@@ -114,7 +114,7 @@ onMounted(async () => {
                 </select>
               </div>
             </div>
-            <button class="px-6 py-1 bg-[#CA855F] rounded-sm text-white font-semibold sm:text-base text-sm transition-transform hover:scale-105" @click="search">
+            <button class="px-6 py-1 bg-[#aa6c4a] rounded-sm text-white font-semibold sm:text-base text-sm transition-transform hover:scale-105" @click="search">
               Telusuri
             </button>
           </div>
@@ -126,7 +126,7 @@ onMounted(async () => {
             :to="`/belajar/budaya/${culture.culture_slug}`"
             class="max-w-sm w-full lg:max-w-full lg:flex cursor-pointer transition-all hover:shadow-md hover:bg-slate-50 hover:scale-105 rounded-md"
           >
-            <CultureCard :culture="culture" />
+            <HorizontalCard :culture="culture" />
           </NuxtLink>
         </div>
       </div>
