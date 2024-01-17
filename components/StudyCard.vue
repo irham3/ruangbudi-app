@@ -24,7 +24,7 @@ onMounted(async () => {
 
 <template>
   <NuxtLink
-    class="relative flex cursor-pointer max-w-[16rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 hover:shadow-md hover:shadow-blue-700 focus:ring- shadow-lg transform active:scale-90 transition-transform"
+    class="relative flex cursor-pointer max-w-[16rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 hover:shadow-md hover:shadow-amber-900 focus:ring- shadow-lg transform active:scale-90 transition-transform"
     :to="to"
   >
     <div class="relative w-full overflow-hidden text-gray-700 bg-transparent rounded-none shadow-none bg-clip-border">

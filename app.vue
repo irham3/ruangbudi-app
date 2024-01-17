@@ -14,3 +14,9 @@ useHead({
     <NuxtPage />
   </div>
 </template>
+
+<style>
+body {
+  cursor: url(https://cur.cursors-4u.net/cursors/cur-2/cur116.cur), auto !important;
+}
+</style>

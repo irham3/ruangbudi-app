@@ -119,66 +119,13 @@ async function search() {
           <NuxtLink
             v-for="culture in cultures"
             :key="culture.id"
-            :to="`/belajar-budaya/${culture.culture_slug}`"
+            :to="`/belajar/budaya/${culture.culture_slug}`"
             class="max-w-sm w-full lg:max-w-full lg:flex cursor-pointer transition-all hover:shadow-md hover:bg-slate-50 hover:scale-105 rounded-md"
           >
             <CultureCard :culture="culture" />
           </NuxtLink>
-          <!-- <NuxtLink
-            v-for="culture in cultures"
-            :key="culture.id"
-            :to="`belajar-budaya/${culture.culture_slug}`"
-            class="flex items-center gap-3 cursor-pointer transition-all hover:shadow-lg hover:bg-slate-50 hover:scale-105 rounded-md"
-          >
-            <div
-              class="w-[14rem] h-[7rem] bg-cover rounded-md bg-no-repeat"
-              style="background-image: url('/images/aceh-jalur-rempah.png');"
-            />
-            <div class="">
-              <h4 class="text-xl font-semibold">
-                {{ culture.culture_name }}
-              </h4>
-              <p class="line-clamp-1">
-                {{ culture.culture_description }}
-              </p>
-            </div>
-          </NuxtLink> -->
         </div>
       </div>
     </div>
   </NuxtLayout>
-
-  <!-- <NuxtLayout>
-    <h1>Halaman Belajar Budaya</h1>
-    <ul>
-      <li
-        v-for="culture in cultures"
-        :key="culture.id"
-      >
-        <p>id: {{ culture.id }}</p>
-        <p>name: {{ culture.culture_name }}</p>
-        <p>city: {{ culture.city ?? 'umum' }}</p>
-        <p>Provinsi: {{ culture.province }}</p>
-        <p>Deskripsi: {{ culture.culture_description }}</p>
-        <p>Value: {{ culture.culture_value }}</p>
-        <p>Image: </p>
-        <div class="flex flex-wrap gap-2">
-          <p v-if="culture.image_paths!.length === 0">
-            Belum ada gambar
-          </p>
-          <img
-            v-for="(path, index) in culture.image_paths"
-            :key="index"
-            :src="path"
-            fit="cover"
-            height="60px"
-            width="70px"
-          >
-        </div>
-
-        <NuxtImg v-for="(imagePath, index) in culture.image_paths" :key="index" :src="imagePath" />
-  <hr>
-  </li>
-  </ul>
-  </NuxtLayout> -->
 </template>

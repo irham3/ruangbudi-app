@@ -41,30 +41,20 @@ async function logout() {
           <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
           </div>
-          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[3] p-2 shadow bg-base-100 rounded-box w-52">
+          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[3] p-2 shadow bg-base-100 rounded-box w-52 font-semibold">
             <li>
-              <NuxtLink to="/">
+              <NuxtLink to="/" class="font-bold">
                 Beranda
               </NuxtLink>
             </li>
             <li>
-              <a>Belajar</a>
-              <ul class="p-2 z-[3]">
-                <li>
-                  <NuxtLink to="/belajar-budaya">
-                    Belajar Budaya
-                  </NuxtLink>
-                </li>
-                <li>
-                  <NuxtLink to="/">
-                    Buat Kerajinan
-                  </NuxtLink>
-                </li>
-              </ul>
+              <NuxtLink to="/belajar">
+                Belajar
+              </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/">
-                Kuis & Games
+              <NuxtLink to="/quiz-games">
+                Quiz & Games
               </NuxtLink>
             </li>
           </ul>
@@ -74,36 +64,19 @@ async function logout() {
         </NuxtLink>
       </div>
       <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1 font-sans text-base antialiased font-normal leading-relaxed">
-          <li class="">
-            <NuxtLink to="/">
+        <ul class="menu menu-horizontal px-1 font-sans text-base antialiased font-semibold leading-relaxed ">
+          <li>
+            <NuxtLink to="/" >
               Beranda
             </NuxtLink>
           </li>
-          <li class="">
-            <details>
-              <summary>Belajar</summary>
-              <ul class="p-2 z-[3]">
-                <li>
-                  <NuxtLink to="/belajar-budaya">
-                    Belajar Budaya
-                  </NuxtLink>
-                </li>
-                <li>
-                  <NuxtLink to="/video-belajar#bahasa-isyarat">
-                    Belajar Bahasa Isyarat
-                  </NuxtLink>
-                </li>
-                <li>
-                  <NuxtLink to="/video-belajar#membuat-kerajinan">
-                    Buat Kerajinan
-                  </NuxtLink>
-                </li>
-              </ul>
-            </details>
+          <li>
+            <NuxtLink to="/belajar">
+              Belajar
+            </NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/">
+            <NuxtLink to="/quiz-games">
               Quiz & Games
             </NuxtLink>
           </li>
