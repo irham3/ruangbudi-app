@@ -56,7 +56,42 @@ async function getVideoData(youtube_id: string) {
   }
 }
 
-function startRecording() {
+async function startRecording() {
+  stream = await navigator.mediaDevices.getUserMedia({
+    video: true,
+    audio: true,
+  })
+
+  mediaRecorder = new MediaRecorder(stream, {
+    mimeType: 'video/webm',
+  })
+
+  videoLive.value!.srcObject = stream
+
+  if (!MediaRecorder.isTypeSupported('video/webm')) {
+    toast('video/webm is not supported', {
+      type: toast.TYPE.WARNING,
+    })
+  }
+
+  mediaRecorder = new MediaRecorder(stream, {
+    mimeType: 'video/webm',
+  })
+
+  mediaRecorder.addEventListener('dataavailable', (event) => {
+    videoRecorded.value!.src = URL.createObjectURL(event.data)
+
+    // Convert Blob to ArrayBuffer
+    if (mediaRecorder!.state === 'inactive' && videoRecorded.value && videoRecorded.value.src) {
+      fetch(videoRecorded.value.src)
+        .then(response => response.blob())
+        .then(blob => blob.arrayBuffer())
+        .then((arrayBuffer) => {
+          videoUploaded.value = arrayBuffer
+        })
+    }
+  })
+
   mediaRecorder!.start()
   isRecording.value = true
 }
@@ -64,6 +99,10 @@ function startRecording() {
 function stopRecording() {
   mediaRecorder!.stop()
   isRecording.value = false
+
+  stream!
+    .getTracks()
+    .forEach(track => track.stop())
 }
 
 async function uploadVideo() {
@@ -95,40 +134,6 @@ onMounted(async () => {
   if (user.value) {
     studentMetadata.value = user.value.user_metadata as Student
     videoDetailScore.value = await fetchScore(videoDetailId.value!)
-
-    stream = await navigator.mediaDevices.getUserMedia({
-      video: true,
-      audio: true,
-    })
-    mediaRecorder = new MediaRecorder(stream, {
-      mimeType: 'video/webm',
-    })
-
-    videoLive.value!.srcObject = stream
-
-    if (!MediaRecorder.isTypeSupported('video/webm')) {
-      toast('video/webm is not supported', {
-        type: toast.TYPE.WARNING,
-      })
-    }
-
-    mediaRecorder = new MediaRecorder(stream, {
-      mimeType: 'video/webm',
-    })
-
-    mediaRecorder.addEventListener('dataavailable', (event) => {
-      videoRecorded.value!.src = URL.createObjectURL(event.data)
-
-      // Convert Blob to ArrayBuffer
-      if (mediaRecorder!.state === 'inactive' && videoRecorded.value && videoRecorded.value.src) {
-        fetch(videoRecorded.value.src)
-          .then(response => response.blob())
-          .then(blob => blob.arrayBuffer())
-          .then((arrayBuffer) => {
-            videoUploaded.value = arrayBuffer
-          })
-      }
-    })
   }
 })
 </script>

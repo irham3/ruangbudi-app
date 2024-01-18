@@ -95,7 +95,7 @@ onMounted(async () => {
           </h3>
           <NuxtLink
             class="text-amber-900 font-semibold transition-transform hover:scale-105"
-            to="belajar/kerajinan font-semibold"
+            to="belajar/kerajinan"
           >
             Lihat Semua &rarr;
           </NuxtLink>
