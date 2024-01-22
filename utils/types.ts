@@ -19,9 +19,23 @@ export type Culture = {
   culture_slug: string
   city_id: number
   city_name: string
+  culture_description: string
+  image_filenames: string[]
+}
+
+export type CultureDetail = {
+  id: number
+  category_id: number
+  category_name: string
+  culture_name: string
+  culture_slug: string
+  city_id: number
+  city_name: string
   culture_value: string
   culture_description: string
   image_filenames: string[]
+  preview_yt_id: string
+  signlanguage_yt_id: string
 }
 
 export type City = {

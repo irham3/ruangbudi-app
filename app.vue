@@ -17,6 +17,10 @@ useHead({
 
 <style>
 body {
-  cursor: url(https://cur.cursors-4u.net/cursors/cur-2/cur116.cur), auto !important;
+  cursor: url(https://cdn.custom-cursor.com/db/8310/32/material-chocolate-bar-cursor.png), default !important;
+}
+
+select:hover, img:hover, a:hover, button:hover {
+  cursor: url(https://cdn.custom-cursor.com/db/8309/32/material-chocolate-bar-pointer.png), pointer !important
 }
 </style>

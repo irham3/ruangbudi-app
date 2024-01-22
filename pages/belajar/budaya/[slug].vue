@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { CultureScore, Slide, Student } from '~/utils/types'
+import type { CultureDetail, CultureScore, Slide, Student } from '~/utils/types'
 
 const route = useRoute()
 const slug = route.params.slug as string
@@ -9,7 +9,7 @@ const user = useSupabaseUser()
 const studentMetadata = ref<Student>()
 const cultureScore = ref<CultureScore>()
 
-const cultureDetail = ref<Culture>()
+const cultureDetail = ref<CultureDetail>()
 const slides = ref<Slide[]>([])
 const cdnUrl = 'https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/cultures'
 
@@ -19,7 +19,7 @@ async function fetchCultureDetail(slug: string) {
     .select('*')
     .eq('culture_slug', slug)
     .limit(1)
-    .single() as { data: Culture }
+    .single() as { data: CultureDetail }
   return data
 }
 
@@ -59,11 +59,18 @@ definePageMeta({
 <template>
   <NuxtLayout>
     <div class="px-32 flex flex-col items-center gap-10 py-16 relative">
-      <p class="text-4xl font-semibold">
+      <p class="text-4xl font-bold">
         {{ cultureDetail?.culture_name }}
       </p>
 
-      <ImageCarousel :slides="slides" :asal-budaya="cultureDetail?.city_name!" />
+      <ImageCarousel
+        :slides="slides"
+        :preview-yt-video-id="cultureDetail?.preview_yt_id"
+      />
+
+      <p v-if="cultureDetail?.city_name" class="text-nowrap text-xl float-right">
+        Asal Budaya: <b>{{ cultureDetail?.city_name! }}</b>
+      </p>
       <div class="flex justify-end w-full">
         <!-- <p class="text-stone-600 text-sm bg-white px-2">Kota asal budaya: <b class="text-lg">{{ cultureDetail?.city_name }}</b></p> -->
       </div>
@@ -120,11 +127,11 @@ definePageMeta({
           </div>
         </div>
 
-        <div class="card w-3/4 h-64 bg-base-100 shadow-xl">
+        <div v-if="cultureDetail?.signlanguage_yt_id" class="card w-3/4 h-64 bg-base-100 shadow-xl">
           <figure>
             <iframe
-              class="w-full h-64" src="https://www.youtube.com/embed/kqk1k_ISx_8?si=0RE0WFmtCOmwnRu_&rel=0"
-              title="Video Ruang Budi" frameborder="0"
+              class="w-full h-64" :src="`https://www.youtube.com/embed/${cultureDetail?.signlanguage_yt_id}`"
+              title="Penjelasan versi bahasa isyarat" frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
             />
