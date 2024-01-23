@@ -10,9 +10,8 @@ const signLanguages = ref<SignLanguage[]>()
 
 async function fetchSignLanguages() {
   const { data } = await client
-    .from('signLanguages')
-    .select('*')
-    .eq('category_id', 1) as { data: SignLanguage[] }
+    .from('signlanguages')
+    .select('*') as { data: SignLanguage[] }
   return Promise.all(data)
 }
 
@@ -24,20 +23,13 @@ onMounted(async () => {
 <template>
   <NuxtLayout>
     <div class="container flex flex-col px-36 py-8">
-      <h1 class="text-4xl font-bold self-center mb-6">
+      <h1 class="text-4xl text-amber-900 font-bold self-center mb-6">
         Belajar Bahasa Isyarat
       </h1>
 
-      <div class="flex gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-x-10 gap-y-8 px-8">
         <VerticalCard
           v-for="(studyVideo, index) in signLanguages" :key="index"
-          :to="`isyarat/${studyVideo.slug}`"
-          :title="studyVideo.title"
-          :img-path="`video/${studyVideo.slug}.png`"
-        />
-
-        <VerticalCard
-          v-for="(studyVideo, index) in signLanguages" :key="index * 2"
           :to="`isyarat/${studyVideo.slug}`"
           :title="studyVideo.title"
           :img-path="`video/${studyVideo.slug}.png`"

@@ -25,6 +25,7 @@ const props = defineProps<{
         </div>
       </div>
       <div
+        v-if="previewYtVideoId"
         :id="`slide${props.slides.length + 1}`" :key="props.slides.length"
         class="carousel-item relative w-full"
       >

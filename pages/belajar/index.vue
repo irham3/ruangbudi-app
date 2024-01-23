@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import VerticalCard from '~/components/VerticalCard.vue'
-import type { Culture, SignLanguage } from '~/utils/types'
+import type { Craft, Culture, SignLanguage } from '~/utils/types'
 
 definePageMeta({
   title: 'Belajar Budaya',
@@ -9,6 +9,7 @@ definePageMeta({
 const client = useSupabaseClient()
 const studyVideos = ref<SignLanguage[]>()
 const cultures = ref<Culture[]>()
+const crafts = ref<Craft[]>()
 
 async function fetchSignLanguages() {
   const { data } = await client
@@ -25,9 +26,18 @@ async function fetchCultures() {
   return Promise.all(tableCultures)
 }
 
+async function fetchCrafts() {
+  const { data } = await client
+    .from('v_crafts')
+    .select('slug, title, id')
+    .limit(3) as { data: Craft[] }
+  return Promise.all(data)
+}
+
 onMounted(async () => {
   studyVideos.value = await fetchSignLanguages()
   cultures.value = await fetchCultures()
+  crafts.value = await fetchCrafts()
 })
 </script>
 
@@ -102,10 +112,10 @@ onMounted(async () => {
         </div>
         <div class="flex gap-4">
           <VerticalCard
-            v-for="(studyVideo, index) in studyVideos?.filter(item => item.category_id === 2)" :key="index"
-            :to="`video-belajar/${studyVideo.slug}`"
-            :title="studyVideo.title"
-            :img-path="`video/${studyVideo.slug}.png`"
+            v-for="(craft, index) in crafts" :key="index"
+            :to="`belajar/kerajinan/${craft.slug}`"
+            :title="craft.title"
+            :img-path="`crafts/${craft.id}.png`"
           />
         </div>
       </section>

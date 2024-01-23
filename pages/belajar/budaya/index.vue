@@ -67,7 +67,10 @@ onMounted(async () => {
 
 <template>
   <NuxtLayout>
-    <div class="pb-16">
+    <div class="flex flex-col py-14">
+      <h1 class="text-4xl text-amber-900 font-bold self-center mb-6">
+        Belajar Budaya
+      </h1>
       <div class="h-[35vh] sm:h-[80vh] flex flex-col w-full items-center px-[2rem]">
         <div
           class="w-11/12 flex-1 bg-contain bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
@@ -75,6 +78,7 @@ onMounted(async () => {
         />
       </div>
       <div class="sm:px-32 px-4">
+        <!-- Filter Section -->
         <div class="flex justify-center mb-12">
           <div class="flex gap-6 border border-stone-400 sm:w-fit w-full px-4 py-2.5 rounded-md items-center">
             <div class="flex items-center gap-4">
@@ -119,6 +123,8 @@ onMounted(async () => {
             </button>
           </div>
         </div>
+
+        <!-- Culture Card List -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8 px-8">
           <NuxtLink
             v-for="culture in cultures"

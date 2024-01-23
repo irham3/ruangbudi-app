@@ -21,7 +21,7 @@ function playButtonSound() {
       :style="{ backgroundImage: `url(${cdnUrl}/${culture.id}/${culture.image_filenames[0]})` }"
       :title="culture.culture_name"
     />
-    <div class="max-w-sm w-full lg:max-w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+    <div class="max-w-sm w-full lg:max-w-full border-r border-b border-l border-amber-700 lg:border-l-0 lg:border-t lg:border-amber-700 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
       <div class="mb-8">
         <div class="text-gray-900 font-bold text-xl mb-2">
           {{ culture.culture_name }}

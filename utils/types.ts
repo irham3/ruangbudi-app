@@ -72,3 +72,17 @@ export type SignLanguageDetailScore = {
   student_score: number
   student_evaluation: number
 }
+
+export type Craft = {
+  id: number
+  slug: string
+  title: string
+}
+
+export type CraftDetail = {
+  id: number
+  slug: string
+  title: string
+  description: string
+  youtube_id: string
+}
