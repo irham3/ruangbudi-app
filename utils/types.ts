@@ -19,9 +19,23 @@ export type Culture = {
   culture_slug: string
   city_id: number
   city_name: string
+  culture_description: string
+  image_filenames: string[]
+}
+
+export type CultureDetail = {
+  id: number
+  category_id: number
+  category_name: string
+  culture_name: string
+  culture_slug: string
+  city_id: number
+  city_name: string
   culture_value: string
   culture_description: string
   image_filenames: string[]
+  preview_yt_id: string
+  signlanguage_yt_id: string
 }
 
 export type City = {
@@ -40,21 +54,35 @@ export type CultureScore = {
   student_evaluation: number
 }
 
-export type StudyVideo = {
+export type SignLanguage = {
   id: number
   category_id: number
   title: string
   slug: string
 }
 
-export type StudyVideoDetail = {
+export type SignLanguageDetail = {
   id: number
   title: string
   youtube_id: string
 }
 
-export type VideoDetailScore = {
+export type SignLanguageDetailScore = {
   video_detail_id: number
   student_score: number
   student_evaluation: number
+}
+
+export type Craft = {
+  id: number
+  slug: string
+  title: string
+}
+
+export type CraftDetail = {
+  id: number
+  slug: string
+  title: string
+  description: string
+  youtube_id: string
 }

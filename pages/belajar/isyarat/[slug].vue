@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { StudyVideoDetail, VideoDetailScore } from '~/utils/types'
+import type { SignLanguageDetail, SignLanguageDetailScore } from '~/utils/types'
 
 definePageMeta({
   title: 'Belajar Isyarat',
@@ -7,46 +7,134 @@ definePageMeta({
 
 const route = useRoute()
 const client = useSupabaseClient()
-const videoDetails = ref<StudyVideoDetail[]>()
 const user = useSupabaseUser()
+const { $toast: toast } = useNuxtApp()
+
+const videoDetails = ref<SignLanguageDetail[]>()
+const videoDetailId = ref<number>()
+
+// Student Score
 const studentMetadata = ref<Student>()
-const videoDetailScore = ref<VideoDetailScore>()
+const videoDetailScore = ref<SignLanguageDetailScore>()
+
+// Student Video Recording
+const videoLive = ref<HTMLVideoElement | null>(null)
+const videoRecorded = ref<HTMLVideoElement>()
+let stream: MediaStream | null = null
+let mediaRecorder: MediaRecorder | null = null
+const isRecording = ref(false)
+const videoUploaded = ref<ArrayBuffer>()
 
 async function fetchVideos(slug: string) {
   const { data } = await client
-    .from('v_video_details')
+    .from('v_signlanguage_details')
     .select('id, title, youtube_id')
-    .eq('slug', slug) as { data: StudyVideoDetail[] }
+    .eq('slug', slug) as { data: SignLanguageDetail[] }
 
   return data
 }
 
 async function fetchScore(videoDetailId: number) {
   const { data } = await client
-    .from('video_detail_scores')
+    .from('signlanguage_detail_scores')
     .select('video_detail_id, student_score, student_evaluation')
     .eq('video_detail_id', videoDetailId)
     .limit(1)
-    .single() as { data: VideoDetailScore }
+    .single() as { data: SignLanguageDetailScore }
 
   return data
 }
 
 async function getVideoData(youtube_id: string) {
   await navigateTo(`#${youtube_id}`)
+  videoDetailId.value = videoDetails.value!.find(item => item.youtube_id === youtube_id)!.id!
 
   // User Data
   if (user.value) {
-    const videoDetailId = videoDetails.value!.find(item => item.youtube_id === route.hash.substring(1))!.id!
-
     studentMetadata.value = user.value.user_metadata as Student
-    videoDetailScore.value = await fetchScore(videoDetailId)
+    videoDetailScore.value = await fetchScore(videoDetailId.value)
   }
 }
 
+async function startRecording() {
+  stream = await navigator.mediaDevices.getUserMedia({
+    video: true,
+    audio: true,
+  })
+
+  mediaRecorder = new MediaRecorder(stream, {
+    mimeType: 'video/webm',
+  })
+
+  videoLive.value!.srcObject = stream
+
+  if (!MediaRecorder.isTypeSupported('video/webm')) {
+    toast('video/webm is not supported', {
+      type: toast.TYPE.WARNING,
+    })
+  }
+
+  mediaRecorder = new MediaRecorder(stream, {
+    mimeType: 'video/webm',
+  })
+
+  mediaRecorder.addEventListener('dataavailable', (event) => {
+    videoRecorded.value!.src = URL.createObjectURL(event.data)
+
+    // Convert Blob to ArrayBuffer
+    if (mediaRecorder!.state === 'inactive' && videoRecorded.value && videoRecorded.value.src) {
+      fetch(videoRecorded.value.src)
+        .then(response => response.blob())
+        .then(blob => blob.arrayBuffer())
+        .then((arrayBuffer) => {
+          videoUploaded.value = arrayBuffer
+        })
+    }
+  })
+
+  mediaRecorder!.start()
+  isRecording.value = true
+}
+
+function stopRecording() {
+  mediaRecorder!.stop()
+  isRecording.value = false
+
+  stream!
+    .getTracks()
+    .forEach(track => track.stop())
+}
+
+async function uploadVideo() {
+  const { error } = await client
+    .storage
+    .from('videos')
+    .upload(`sign-languages/${route.hash.substring(1)}/${user.value?.id}.webm`, videoUploaded.value!, {
+      cacheControl: '3600',
+      upsert: true,
+    })
+
+  if (error) {
+    toast(error.message, {
+      type: toast.TYPE.ERROR,
+    })
+
+    return
+  }
+
+  toast(`Video-mu berhasil diupload`, {
+    type: toast.TYPE.SUCCESS,
+  })
+}
 onMounted(async () => {
   const slug = route.params.slug as string
   videoDetails.value = await fetchVideos(slug)
+
+  // User logged in
+  if (user.value) {
+    studentMetadata.value = user.value.user_metadata as Student
+    videoDetailScore.value = await fetchScore(videoDetailId.value!)
+  }
 })
 </script>
 
@@ -89,6 +177,30 @@ onMounted(async () => {
               <li><b>Nilai: </b> {{ videoDetailScore?.student_score ?? 'belum ada nilai' }}</li>
               <li><b>Evaluasi: </b> {{ videoDetailScore?.student_evaluation ?? 'belum ada evaluasi' }}</li>
             </ul>
+
+            <div class="mt-6">
+              <div class="flex gap-2 mb-4">
+                <button class="btn btn-sm btn-neutral" @click="startRecording">
+                  Start
+                </button>
+
+                <button class="btn btn-sm btn-error" :disabled="!isRecording" @click="stopRecording">
+                  Stop
+                </button>
+
+                <button class="btn btn-sm btn-primary" :disabled="!videoUploaded" @click="uploadVideo">
+                  Upload
+                </button>
+              </div>
+
+              <div>
+                <video ref="videoLive" autoplay muted playsinline />
+              </div>
+
+              <div>
+                <video v-show="videoUploaded" ref="videoRecorded" controls playsinline />
+              </div>
+            </div>
           </div>
         </div>
         <div v-else>

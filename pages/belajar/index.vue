@@ -1,23 +1,43 @@
 <script lang="ts" setup>
-import StudyCard from '~/components/StudyCard.vue'
-import type { Culture, StudyVideo } from '~/utils/types'
+import VerticalCard from '~/components/VerticalCard.vue'
+import type { Craft, Culture, SignLanguage } from '~/utils/types'
 
 definePageMeta({
   title: 'Belajar Budaya',
 })
 
 const client = useSupabaseClient()
-const studyVideos = ref<StudyVideo[]>()
+const studyVideos = ref<SignLanguage[]>()
+const cultures = ref<Culture[]>()
+const crafts = ref<Craft[]>()
+
 async function fetchSignLanguages() {
   const { data } = await client
-    .from('videos')
+    .from('signlanguages')
+    .select('*') as { data: SignLanguage[] }
+  return Promise.all(data)
+}
+
+async function fetchCultures() {
+  const { data: tableCultures } = await client
+    .from('v_cultures')
     .select('*')
-    .eq('category_id', 1) as { data: StudyVideo[] }
+    .limit(3) as { data: Culture[] }
+  return Promise.all(tableCultures)
+}
+
+async function fetchCrafts() {
+  const { data } = await client
+    .from('v_crafts')
+    .select('slug, title, id')
+    .limit(3) as { data: Craft[] }
   return Promise.all(data)
 }
 
 onMounted(async () => {
   studyVideos.value = await fetchSignLanguages()
+  cultures.value = await fetchCultures()
+  crafts.value = await fetchCrafts()
 })
 </script>
 
@@ -35,21 +55,21 @@ onMounted(async () => {
       <section id="bahasa-isyarat" class="mb-6">
         <div class="flex justify-between">
           <h3 class="text-2xl font-semibold mb-4">
-            Mengenal Budaya Indonesia
+            Mengenal <span class="text-amber-800">Budaya Indonesia</span>
           </h3>
           <NuxtLink
-            class="text-amber-900 font-semibold"
+            class="text-amber-900 font-semibold transition-transform hover:scale-105"
             to="belajar/budaya"
           >
             Lihat Semua &rarr;
           </NuxtLink>
         </div>
         <div class="flex gap-4">
-          <StudyCard
-            v-for="(studyVideo, index) in studyVideos" :key="index"
-            :to="`video-belajar/${studyVideo.slug}`"
-            :title="studyVideo.title"
-            :img-filename="`${studyVideo.slug}.png`"
+          <VerticalCard
+            v-for="(culture, index) in cultures" :key="index"
+            :to="`belajar/budaya/${culture.culture_slug}`"
+            :title="culture.culture_name"
+            :img-path="`cultures/${culture.id}/${culture.image_filenames[0]}`"
           />
         </div>
       </section>
@@ -58,21 +78,21 @@ onMounted(async () => {
       <section id="bahasa-isyarat" class="my-6">
         <div class="flex justify-between">
           <h3 class="text-2xl font-semibold mb-4">
-            Meningkatkan Kemampuan Bahasa Isyarat
+            Meningkatkan Kemampuan <span class="text-amber-800">Bahasa Isyarat</span>
           </h3>
           <NuxtLink
-            class="text-amber-900 font-semibold"
+            class="text-amber-900 font-semibold transition-transform hover:scale-105"
             to="belajar/isyarat"
           >
             Lihat Semua &rarr;
           </NuxtLink>
         </div>
         <div class="flex gap-4">
-          <StudyCard
+          <VerticalCard
             v-for="(studyVideo, index) in studyVideos" :key="index"
             :to="`belajar/isyarat/${studyVideo.slug}`"
             :title="studyVideo.title"
-            :img-filename="`${studyVideo.slug}.png`"
+            :img-path="`video/${studyVideo.slug}.png`"
           />
         </div>
       </section>
@@ -81,21 +101,21 @@ onMounted(async () => {
       <section id="membuat-kerajinan" class="my-6">
         <div class="flex justify-between">
           <h3 class="text-2xl font-semibold mb-4">
-            Mengasah Keterampilan dengan Membuat Kerajinan
+            Mengasah Keterampilan dengan <span class="text-amber-800">Membuat Kerajinan</span>
           </h3>
           <NuxtLink
-            class="text-amber-900"
-            to="belajar/kerajinan font-semibold"
+            class="text-amber-900 font-semibold transition-transform hover:scale-105"
+            to="belajar/kerajinan"
           >
             Lihat Semua &rarr;
           </NuxtLink>
         </div>
         <div class="flex gap-4">
-          <StudyCard
-            v-for="(studyVideo, index) in studyVideos?.filter(item => item.category_id === 2)" :key="index"
-            :to="`video-belajar/${studyVideo.slug}`"
-            :title="studyVideo.title"
-            :img-filename="`${studyVideo.slug}.png`"
+          <VerticalCard
+            v-for="(craft, index) in crafts" :key="index"
+            :to="`belajar/kerajinan/${craft.slug}`"
+            :title="craft.title"
+            :img-path="`crafts/${craft.id}.png`"
           />
         </div>
       </section>

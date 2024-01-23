@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useSound } from '@vueuse/sound'
-import CultureCard from '~/components/CultureCard.vue'
+import HorizontalCard from '~/components/HorizontalCard.vue'
 import type { City, CultureCategory } from '~/utils/types'
 
 definePageMeta({
@@ -67,7 +67,10 @@ onMounted(async () => {
 
 <template>
   <NuxtLayout>
-    <div class="pb-16">
+    <div class="flex flex-col py-14">
+      <h1 class="text-4xl text-amber-900 font-bold self-center mb-6">
+        Belajar Budaya
+      </h1>
       <div class="h-[35vh] sm:h-[80vh] flex flex-col w-full items-center px-[2rem]">
         <div
           class="w-11/12 flex-1 bg-contain bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
@@ -75,6 +78,7 @@ onMounted(async () => {
         />
       </div>
       <div class="sm:px-32 px-4">
+        <!-- Filter Section -->
         <div class="flex justify-center mb-12">
           <div class="flex gap-6 border border-stone-400 sm:w-fit w-full px-4 py-2.5 rounded-md items-center">
             <div class="flex items-center gap-4">
@@ -114,11 +118,13 @@ onMounted(async () => {
                 </select>
               </div>
             </div>
-            <button class="px-6 py-1 bg-[#CA855F] rounded-sm text-white font-semibold sm:text-base text-sm transition-transform hover:scale-105" @click="search">
+            <button class="px-6 py-1 bg-[#aa6c4a] rounded-sm text-white font-semibold sm:text-base text-sm transition-transform hover:scale-105" @click="search">
               Telusuri
             </button>
           </div>
         </div>
+
+        <!-- Culture Card List -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8 px-8">
           <NuxtLink
             v-for="culture in cultures"
@@ -126,7 +132,7 @@ onMounted(async () => {
             :to="`/belajar/budaya/${culture.culture_slug}`"
             class="max-w-sm w-full lg:max-w-full lg:flex cursor-pointer transition-all hover:shadow-md hover:bg-slate-50 hover:scale-105 rounded-md"
           >
-            <CultureCard :culture="culture" />
+            <HorizontalCard :culture="culture" />
           </NuxtLink>
         </div>
       </div>
