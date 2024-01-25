@@ -136,71 +136,82 @@ onMounted(async () => {
     videoDetailScore.value = await fetchScore(videoDetailId.value!)
   }
 })
+
+enum Navigasi {
+  KirimVideo,
+  PenilaianGuru,
+}
+
+const navigasi = ref<Navigasi>(Navigasi.KirimVideo)
+
 </script>
 
 <template>
   <NuxtLayout>
-    <div class="container flex flex-row px-36 py-8 rtl:mr-3">
-      <aside class="flex flex-col w-64 h-screen px-4 py-2 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-200 dark:border-gray-300">
-        <div class="flex flex-col justify-between flex-1 mt-6">
-          <nav>
-            <ul class="steps steps-vertical">
-              <li v-for="(videoDetail, index) in videoDetails" :key="index" class="step step-primary">
-                <button
-                  class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-800 max-w-48 mt-4"
-                  @click="getVideoData(videoDetail.youtube_id)"
-                >
-                  <span class="mx-4 font-medium line-clamp-2">{{ videoDetail.title }}</span>
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </aside>
-
-      <div class="ml-4">
+    <div class="flex flex-row justify-between px-20 py-8 gap-6 rtl:mr-3 w-full">
+      <div class="ml-4 w-full">
         <div v-if="$route.hash.substring(1).length !== 0">
           <!-- Video Selected -->
-          <div class="text-xl font-bold">
-            {{ videoDetails?.find(item => item.youtube_id === $route.hash.substring(1))?.title }}
-          </div>
-          <iframe
-            width="420" height="315"
-            :src="`https://www.youtube.com/embed/${$route.hash.substring(1)}`"
-          />
 
-          <div v-if="user">
-            <div class="text-4xl font-semibold">
-              Nilai siswa
+          <iframe class="aspect-video w-full rounded-xl"
+            :src="`https://www.youtube.com/embed/${$route.hash.substring(1)}`" />
+
+          <div v-if="user" class="space-y-4 mt-4">
+            <div class="bg-[#CA855F1A] px-4 py-2 rounded-xl">
+              <h4 class="font-semibold">Belajar Membuat Kalimat Sederhana Yuk!</h4>
+              <p>Bagaimana membuat kalimat sederhana sesuai dengan kaidah SPOK?</p>
             </div>
-            <ul>
-              <li><b>Nilai: </b> {{ videoDetailScore?.student_score ?? 'belum ada nilai' }}</li>
-              <li><b>Evaluasi: </b> {{ videoDetailScore?.student_evaluation ?? 'belum ada evaluasi' }}</li>
-            </ul>
 
-            <div class="mt-6">
-              <div class="flex gap-2 mb-4">
-                <button class="btn btn-sm btn-neutral" @click="startRecording">
-                  Start
-                </button>
-
-                <button class="btn btn-sm btn-error" :disabled="!isRecording" @click="stopRecording">
-                  Stop
-                </button>
-
-                <button class="btn btn-sm btn-primary" :disabled="!videoUploaded" @click="uploadVideo">
-                  Upload
-                </button>
+            <div class="w-full flex border-y divide-x">
+              <div class="w-full text-center py-3 border-b-stone-500" @click="navigasi = Navigasi.KirimVideo" :class="{'border-b-2 font-semibold': navigasi == Navigasi.KirimVideo}">
+                Kirim video belajar kamu ya!
               </div>
-
-              <div>
-                <video ref="videoLive" autoplay muted playsinline />
-              </div>
-
-              <div>
-                <video v-show="videoUploaded" ref="videoRecorded" controls playsinline />
+              <div class="w-full text-center py-3 border-b-stone-500" @click="navigasi = Navigasi.PenilaianGuru" :class="{'border-b-2 font-semibold': navigasi == Navigasi.PenilaianGuru}">
+                Penilaian oleh Guru
               </div>
             </div>
+
+            <div class="w-full flex" v-show="navigasi == Navigasi.KirimVideo">
+              <div class="w-full px-4 py-2 border rounded-md">
+                <div class="flex gap-2 mb-4">
+                  <button class="btn btn-sm btn-neutral" @click="startRecording">
+                    Start
+                  </button>
+
+                  <button class="btn btn-sm btn-error" :disabled="!isRecording" @click="stopRecording">
+                    Stop
+                  </button>
+
+                  <button class="btn btn-sm btn-primary" :disabled="!videoUploaded" @click="uploadVideo">
+                    Upload
+                  </button>
+                </div>
+
+                <div>
+                  <video ref="videoLive" autoplay muted playsinline />
+                </div>
+
+                <div>
+                  <video v-show="videoUploaded" ref="videoRecorded" controls playsinline />
+                </div>
+
+              </div>
+              <div class="w-full">
+
+              </div>
+            </div>
+            <div class="w-full flex" v-show="navigasi == Navigasi.PenilaianGuru">
+              <div class="w-full">
+              </div>
+              <div class="w-full px-4 py-2 border rounded-md">
+                <p><b>Nilai: </b> {{ videoDetailScore?.student_score ?? 'belum ada nilai' }}</p>
+                <p><b>Evaluasi</b></p>
+                <p>{{ videoDetailScore?.student_evaluation ?? 'belum ada evaluasi' }}</p>
+
+              </div>
+            </div>
+
+
           </div>
         </div>
         <div v-else>
@@ -210,6 +221,25 @@ onMounted(async () => {
           </h1>
         </div>
       </div>
+      <aside
+        class="flex flex-col rounded-xl w-5/12 h-screen px-4 py-4 overflow-y-auto bg-[#DAAA8F66] border-r rtl:border-r-0 rtl:border-l dark:bg-[#DAAA8F66] dark:border-gray-300">
+        <div class="flex flex-col flex-1 w-full">
+          <div class="text-lg font-bold">
+            {{ videoDetails?.find(item => item.youtube_id === $route.hash.substring(1))?.title }}
+          </div>
+          <nav class="w-full">
+            <ul class="steps steps-vertical w-full">
+              <li v-for="(videoDetail, index) in videoDetails" :key="index" class="step step-primary w-full">
+                <button
+                  class="flex items-center px-4 py-2 w-full text-gray-700 bg-gray-100 rounded-md dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-800 mt-4"
+                  @click="getVideoData(videoDetail.youtube_id)">
+                  <span class="mx-4 font-medium line-clamp-2">{{ videoDetail.title }}</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
     </div>
   </NuxtLayout>
 </template>
