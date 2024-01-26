@@ -75,14 +75,28 @@ function fetchVideoUploadedUrl(videoPath: string) {
 
 async function uploadVideo(submittedVideo: ArrayBuffer, videoPath: string) {
   isUploading.value = true
+  // Delete video if exist
+  const { error: deleteError } = await supabase
+    .storage
+    .from('videos')
+    .remove([videoPath])
+
+  if (deleteError) {
+    toast(deleteError.message, {
+      type: toast.TYPE.ERROR,
+    })
+
+    isUploading.value = false
+    return
+  }
+
+  // Upload new recorded video
   const { error } = await supabase
     .storage
     .from('videos')
     .upload(videoPath, submittedVideo, {
-      cacheControl: '3600',
       upsert: true,
     })
-
   if (error) {
     toast(error.message, {
       type: toast.TYPE.ERROR,
@@ -93,6 +107,7 @@ async function uploadVideo(submittedVideo: ArrayBuffer, videoPath: string) {
   }
 
   isUploading.value = false
+  uploadedVideoUrl.value = tempRecordedVideoUrl.value!
   videoUploaded.value!.src = tempRecordedVideoUrl.value!
   toast(`Video-mu berhasil diupload`, {
     type: toast.TYPE.SUCCESS,
@@ -105,7 +120,13 @@ async function getUserData(videoDetailId: number, userData: User) {
   videoDetailScore.value = await fetchScore(videoDetailId)
 
   uploadedVideoUrl.value = fetchVideoUploadedUrl(videoPath.value)
-  videoUploaded.value!.src = uploadedVideoUrl.value
+
+  // Video exists
+  const { status } = await useFetch(uploadedVideoUrl.value)
+  if (status.value !== 'error')
+    videoUploaded.value!.src = uploadedVideoUrl.value
+  else
+    uploadedVideoUrl.value = undefined
 }
 
 async function getVideoData(youtube_id: string) {
@@ -174,20 +195,17 @@ function stopRecording() {
 
 onMounted(async () => {
   const slug = route.params.slug as string
+  const youtubeId = route.hash.substring(1)
+
   title.value = await fetchTitle(slug)
   videoDetails.value = await fetchVideos(slug)
+  const firstYtVideoId = videoDetails.value![0].youtube_id
 
-  // User logged in
-  if (user.value)
-    getUserData(videoDetailId.value!, user.value)
+  if (youtubeId.length !== 0)
+    await getVideoData(youtubeId)
+  else
+    await getVideoData(firstYtVideoId)
 })
-
-// onUnmounted(() => {
-//   if (tempRecordedVideoUrl.value)
-//     URL.revokeObjectURL(tempRecordedVideoUrl.value)
-
-//   tempRecordedVideoUrl.value = undefined
-// })
 
 enum Navigasi {
   KirimVideo,
@@ -202,7 +220,7 @@ const navigasi = ref<Navigasi>(Navigasi.KirimVideo)
     <div class="flex flex-row justify-between px-20 py-8 gap-6 rtl:mr-3 w-full">
       <div class="ml-4 w-full">
         <div v-if="$route.hash.substring(1).length !== 0">
-          <!-- Video Selected -->
+          <!-- Video was selected -->
           <iframe
             class="aspect-video w-full rounded-xl"
             :src="`https://www.youtube.com/embed/${$route.hash.substring(1)}`"
@@ -228,37 +246,37 @@ const navigasi = ref<Navigasi>(Navigasi.KirimVideo)
               <div class="w-full px-4 py-2 border rounded-md">
                 <div class="flex justify-center gap-2 mb-4">
                   <button :disabled="isRecording" class="btn btn-sm btn-neutral" @click="startRecording">
-                    {{ tempRecordedVideoUrl ? 'Rekam Lagi' : 'Mulai Merekam' }}
+                    {{ tempRecordedVideoUrl ? 'Rekam Ulang' : 'Mulai Merekam' }}
                   </button>
 
                   <button class="btn btn-sm btn-error" :disabled="!isRecording" @click="stopRecording">
                     Berhenti Merekam
                   </button>
-
-                  <button class="btn btn-sm btn-primary" :disabled="!tempRecordedVideoUrl || isRecording" @click="uploadVideo(submittedVideo!, videoPath!)">
-                    Kumpulkan Video
-                    <span v-if="isUploading" class="loading loading-spinner loading-xs" />
-                  </button>
                 </div>
                 <div class="flex flex-col items-center">
                   <!-- When Recording -->
                   <div v-show="isRecording" class="mt-2">
-                    <div class="font-semibold text-base sm:text-lg xl:text-3xl">
+                    <div class="flex gap-2 font-semibold text-base sm:text-lg xl:text-2xl text-red-800">
                       Sedang Merekam...
+                      <Stopwatch v-if="isRecording" />
                     </div>
                     <video ref="videoLive" autoplay muted playsinline />
                   </div>
 
                   <!-- After Recording -->
-                  <div v-show="!isRecording && tempRecordedVideoUrl && videoUploaded?.src !== tempRecordedVideoUrl" class="mt-2">
-                    <div class="font-semibold text-base sm:text-lg xl:text-3xl">
+                  <div v-show="!isRecording && tempRecordedVideoUrl && videoUploaded?.src !== tempRecordedVideoUrl">
+                    <div class="flex justify-between font-semibold text-base sm:text-lg xl:text-3xl">
                       Hasil Rekaman Kamu
+                      <button class="btn btn-sm bg-amber-700 text-slate-200 hover:bg-amber-800" :disabled="!tempRecordedVideoUrl || isRecording" @click="uploadVideo(submittedVideo!, videoPath!)">
+                        Kumpulkan Video
+                        <span v-if="isUploading" class="loading loading-spinner loading-xs" />
+                      </button>
                     </div>
                     <video ref="videoRecorded" controls playsinline />
                   </div>
 
                   <!-- Uploaded Video -->
-                  <div v-show="!isRecording && uploadedVideoUrl" class="mt-2">
+                  <div v-show="!isRecording && uploadedVideoUrl" class="mt-4">
                     <div class="font-semibold text-base sm:text-lg xl:text-3xl mb-2">
                       Video yang sudah kamu kumpulkan
                     </div>
@@ -277,11 +295,12 @@ const navigasi = ref<Navigasi>(Navigasi.KirimVideo)
             </div>
           </div>
         </div>
+
         <div v-else>
           <!-- Video is not selected yet -->
-          <h1 class="mb-4 text-4xl font-bold">
-            Belum ada video yang dipilih
-          </h1>
+          <div class="mb-4 text-4xl font-bold">
+            Belum ada video pembelajaran yang tersedia
+          </div>
         </div>
       </div>
       <aside
@@ -295,7 +314,8 @@ const navigasi = ref<Navigasi>(Navigasi.KirimVideo)
             <ul class="steps steps-vertical w-full">
               <li v-for="(videoDetail, index) in videoDetails" :key="index" class="step step-primary w-full">
                 <button
-                  class="flex items-center px-4 py-2 w-full text-gray-700 bg-gray-100 rounded-md dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-800 mt-4"
+                  :class="videoDetails!.findIndex(obj => obj.id === videoDetailId) === index ? 'bg-gray-800' : 'bg-gray-500'"
+                  class="flex items-center px-4 py-2 w-full rounded-md text-gray-200 hover:bg-gray-800 mt-4"
                   @click="getVideoData(videoDetail.youtube_id)"
                 >
                   <span class="mx-4 font-medium line-clamp-2">{{ videoDetail.title }}</span>
