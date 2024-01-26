@@ -86,3 +86,10 @@ export type CraftDetail = {
   description: string
   youtube_id: string
 }
+
+export type Quiz = {
+  id: number
+  title: string
+  slug: string
+  type: string
+}
