@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useSound } from '@vueuse/sound'
+  import { useSound } from '@vueuse/sound'
 
 const props = defineProps<{
   to: string
@@ -31,7 +31,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="relative flex cursor-pointer max-w-[16rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 hover:shadow-md hover:shadow-amber-900 focus:ring- shadow-lg transform active:scale-90 transition-transform"
+    class="relative flex cursor-pointer max-w-[16rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 hover:shadow-md hover:shadow-amber-900 shadow-lg transform active:scale-90 transition-transform"
     @click="playButtonSound"
   >
     <NuxtLink
@@ -41,6 +41,7 @@ onMounted(async () => {
         <img
           :src="imageUrl"
           :alt="title"
+          class="w-full aspect-video object-cover"
         >
       </div>
       <div class="p-4">
