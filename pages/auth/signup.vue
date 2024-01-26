@@ -73,45 +73,27 @@ async function signUp() {
     <form class="w-full max-w-lg" method="post" @submit.prevent="signUp">
       <div class="flex flex-wrap -mx-3 md:mb-4">
         <div class="w-full md:w-1/2 px-3">
-          <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-            Nama Depan
-          </label> -->
           <TextInput id="grid-first-name" v-model="firstName" type="text" placeholder="Nama Depan" required />
         </div>
         <div class="w-full md:w-1/2 px-3">
-          <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-            Nama Belakang
-          </label> -->
           <TextInput id="grid-last-name" v-model="lastName" type="text" placeholder="Nama Belakang" required />
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 md:mb-4">
         <div class="w-full px-3">
-          <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
-            Email
-          </label> -->
           <TextInput id="grid-email" v-model="email" type="email" placeholder="Email" required />
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 md:mb-4">
         <div class="w-full md:w-1/2 px-3">
-          <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-            Password
-          </label> -->
           <TextInput id="grid-password" v-model="password" type="password" placeholder="Password" required />
         </div>
         <div class="w-full md:w-1/2 px-3">
-          <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-confirm-password">
-            Konfirmasi Password
-          </label> -->
           <TextInput id="grid-confirm-password" v-model="confirmPassword" type="password" placeholder="Konfirmasi Password" required />
         </div>
       </div>
       <div class="flex flex-wrap -mx-3 md:mb-4">
         <div class="w-full md:w-1/2 px-3">
-          <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-            Password
-          </label> -->
           <select
             v-model="studentClass"
             class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -134,9 +116,6 @@ async function signUp() {
           </select>
         </div>
         <div class="w-full md:w-1/2 px-3">
-          <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-confirm-password">
-            Konfirmasi Password
-          </label> -->
           <select v-model="gender" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required>
             <option value="" selected disabled>
               -Pilih Jenis Kelamin-
@@ -151,7 +130,7 @@ async function signUp() {
         </div>
       </div>
       <button
-        class="btn w-full bg-blue-700 hover:bg-blue-900
+        class="btn w-full bg-amber-700 hover:bg-amber-900
       rounded-lg shadow-xl font-bold text-white my-10
       py-2.5 px-5 focus:outline-none items-center"
         type="submit"
@@ -162,7 +141,7 @@ async function signUp() {
     </form>
     <span>
       Sudah punya akun?
-      <NuxtLink to="/auth/signin" class="text-blue-800 font-bold">Masuk</NuxtLink>
+      <NuxtLink to="/auth/signin" class="text-amber-800 font-bold">Masuk</NuxtLink>
     </span>
   </NuxtLayout>
 </template>
