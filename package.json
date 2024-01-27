@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.1",
+    "@vueuse/nuxt": "^10.7.2",
     "@vueuse/sound": "^2.0.1",
     "pinia": "^2.1.7",
     "primevue": "^3.45.0",
