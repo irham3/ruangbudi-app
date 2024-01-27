@@ -14,7 +14,7 @@ const props = defineProps<{
         v-for="(slide, index) in props.slides" :id="`slide${index + 1}`" :key="index"
         class="carousel-item relative w-full"
       >
-        <img :src="slide.image" class="w-full h-[32rem] image-full object-cover">
+        <img :src="slide.image" class="rounded-md w-full aspect-video lg:h-[32rem] image-full object-cover">
 
         <div
           v-if="previewYtVideoId"
