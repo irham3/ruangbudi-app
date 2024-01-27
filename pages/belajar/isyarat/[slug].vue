@@ -217,7 +217,7 @@ const navigasi = ref<Navigasi>(Navigasi.KirimVideo)
 
 <template>
   <NuxtLayout>
-    <div class="flex flex-row justify-between px-20 py-8 gap-6 rtl:mr-3 w-full">
+    <div class="flex flex-col-reverse lg:flex-row items-center lg:items-start justify-between px-5 lg:px-20 py-8 gap-6 rtl:mr-3 w-full">
       <div class="ml-4 w-full">
         <div v-if="$route.hash.substring(1).length !== 0">
           <!-- Video was selected -->
@@ -304,7 +304,7 @@ const navigasi = ref<Navigasi>(Navigasi.KirimVideo)
         </div>
       </div>
       <aside
-        class="flex flex-col rounded-xl w-5/12 h-screen px-4 py-4 overflow-y-auto bg-[#DAAA8F66] border-r rtl:border-r-0 rtl:border-l dark:bg-[#DAAA8F66] dark:border-gray-300"
+        class="flex flex-col rounded-xl lg:w-5/12 lg:h-screen px-4 py-4 overflow-y-auto bg-[#DAAA8F66] border-r rtl:border-r-0 rtl:border-l dark:bg-[#DAAA8F66] dark:border-gray-300"
       >
         <div class="flex flex-col flex-1 w-full">
           <div class="text-2xl font-bold">
