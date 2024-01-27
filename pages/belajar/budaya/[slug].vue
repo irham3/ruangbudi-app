@@ -59,14 +59,13 @@ definePageMeta({
 <template>
   <NuxtLayout>
     <div class="px-32 flex flex-col items-center gap-10 py-16 relative">
-      <p class="text-4xl font-bold">
-        {{ cultureDetail?.culture_name }}
-      </p>
-
       <ImageCarousel
         :slides="slides"
         :preview-yt-video-id="cultureDetail?.preview_yt_id"
       />
+      <div class="text-4xl font-bold text-amber-800">
+        {{ cultureDetail?.culture_name }}
+      </div>
 
       <p v-if="cultureDetail?.city_name" class="text-nowrap text-xl float-right">
         Asal Budaya: <b>{{ cultureDetail?.city_name! }}</b>

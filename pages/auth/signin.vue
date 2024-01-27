@@ -48,9 +48,6 @@ async function signIn() {
     >
       <div class="flex flex-wrap -mx-3 md:mb-4">
         <div class="w-full px-3">
-          <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
-            Email
-          </label> -->
           <TextInput
             id="grid-email"
             v-model="email"
@@ -62,9 +59,6 @@ async function signIn() {
       </div>
       <div class="flex flex-wrap -mx-3 md:mb-4">
         <div class="w-full px-3">
-          <!-- <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-            Password
-          </label> -->
           <TextInput
             id="grid-password"
             v-model="password"
@@ -75,7 +69,7 @@ async function signIn() {
         </div>
       </div>
       <button
-        class="btn w-full bg-blue-700 hover:bg-blue-900
+        class="btn w-full bg-amber-700 hover:bg-amber-900
       rounded-lg shadow-xl font-bold text-white my-10
       py-2.5 px-5 focus:outline-none"
         type="submit"
@@ -88,7 +82,7 @@ async function signIn() {
       Belum punya akun?
       <NuxtLink
         to="/auth/signup"
-        class="text-blue-800 font-bold"
+        class="text-amber-800 font-bold"
       > Daftar
       </NuxtLink>
     </span>
