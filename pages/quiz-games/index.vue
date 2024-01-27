@@ -5,20 +5,20 @@ definePageMeta({
   title: 'Belajar Membuat Kerajinan',
 })
 
-const client = useSupabaseClient()
 const quizes = ref<Quiz[]>()
 
 async function fetchQuizes() {
-  const { data } = await client
-    // .schema('quiz')
+  const supabase = useSupabaseClient()
+  const { data } = await supabase
+    .schema('quiz' as never)
     .from('quizes')
     .select('*') as { data: Quiz[] }
+
   return Promise.all(data)
 }
 
 onMounted(async () => {
   quizes.value = await fetchQuizes()
-  // console.log(quizes.value)
 })
 </script>
 
@@ -32,9 +32,9 @@ onMounted(async () => {
       <div class="grid grid-cols-1 sm:grid-cols-4 gap-x-10 gap-y-8 px-8">
         <VerticalCard
           v-for="(quiz, index) in quizes" :key="index"
-          :to="`kerajinan/${quiz.slug}`"
+          :to="`quiz-games/${quiz.slug}`"
           :title="quiz.title"
-          :img-path="`quizes/category/${quiz.id}.png`"
+          :img-path="`quizes/category/${quiz.slug}.png`"
         />
       </div>
     </div>
