@@ -5,14 +5,13 @@
 <template>
   <NuxtLayout
     name="quiz"
-    title="Skor Tertinggi"
   >
     <!-- List of users and their scores -->
     <div class="flex flex-col gap-4">
-      <!-- <h1 class="text-3xl font-bold text-center">
+      <h1 class="text-3xl font-bold text-center">
         Skor Tertinggi
       </h1>
-      <ul v-if="$fetchState.pending">
+      <!-- <ul v-if="$fetchState.pending">
         <li>Loading...</li>
       </ul>
       <ul v-else-if="$fetchState.error">

@@ -93,3 +93,9 @@ export type Quiz = {
   slug: string
   type: string
 }
+
+export type QuizChoice = {
+  id: number
+  text: string
+  isCorrect: boolean
+}
