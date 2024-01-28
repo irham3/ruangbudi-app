@@ -236,8 +236,8 @@ const isMobile = computed(() => width.value < 640) // check if mobile
             </h4>
           </div>
           <div v-if="user" class="space-y-4 mt-4">
-            <div class="space-y-4" v-if="isMobile">
-              <button class="btn" onclick="kirimVideo.showModal()">Kirim video belajar kamu ya!</button>
+            <div class="space-y-4 flex justify-center items-center gap-3" v-if="isMobile">
+              <button class="btn" onclick="kirimVideo.showModal()">Kirim video</button>
               <dialog id="kirimVideo" class="modal">
                 <div class="modal-box">
                   <form method="dialog">
@@ -288,7 +288,7 @@ const isMobile = computed(() => width.value < 640) // check if mobile
                 </div>
               </dialog>
 
-              <button class="btn" onclick="penilaianGuru.showModal()">Penilaian oleh guru</button>
+              <button class="btn !mt-0" onclick="penilaianGuru.showModal()">Nilai siswa</button>
               <dialog id="penilaianGuru" class="modal">
                 <div class="modal-box">
                   <form method="dialog">
