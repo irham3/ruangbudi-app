@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     'nuxt-primevue',
     'vue3-carousel-nuxt',
     '@vueuse/nuxt',
+    'nuxt-aos',
   ],
   css: [
     '~/assets/css/main.css',
