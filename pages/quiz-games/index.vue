@@ -1,18 +1,18 @@
 <script lang="ts" setup>
-import type { Quiz } from '~/utils/types'
+import type { QuizCategory } from '~/utils/types'
 
 definePageMeta({
   title: 'Belajar Membuat Kerajinan',
 })
 
-const quizes = ref<Quiz[]>()
+const quizes = ref<QuizCategory[]>()
 
 async function fetchQuizes() {
   const supabase = useSupabaseClient()
   const { data } = await supabase
     .schema('quiz' as never)
     .from('quizes')
-    .select('*') as { data: Quiz[] }
+    .select('*') as { data: QuizCategory[] }
 
   return Promise.all(data)
 }

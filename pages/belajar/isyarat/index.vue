@@ -22,24 +22,24 @@ onMounted(async () => {
 
 <template>
   <NuxtLayout>
-    <img 
-      src="/images/background/batik-2.png" 
-      alt="" 
+    <img
+      src="/images/background/batik-2.png"
+      alt=""
       class="w-[10rem] absolute right-0 top-[12%] -z-10"
     >
-    <img 
-      src="/images/background/batik.png" 
-      alt="" 
+    <img
+      src="/images/background/batik.png"
+      alt=""
       class="w-[10rem] absolute left-0 top-[12%] -z-10"
     >
-    <!-- <img 
-      src="/images/background/komodo.png" 
-      alt="" 
+    <!-- <img
+      src="/images/background/komodo.png"
+      alt=""
       class="w-[15rem] absolute left-0 top-[200%] -z-10"
     >
-    <img 
-      src="/images/background/wayang-bg.png" 
-      alt="" 
+    <img
+      src="/images/background/wayang-bg.png"
+      alt=""
       class="w-[15rem] absolute right-0 top-[200%] -z-10"
     > -->
     <div class="container flex flex-col px-10 md:px-36 py-8">
