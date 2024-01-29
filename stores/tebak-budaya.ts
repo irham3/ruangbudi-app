@@ -1,4 +1,4 @@
-import type { Quiz, QuizUser } from '~/utils/types'
+import type { Quiz, QuizLeaderboard, QuizUser } from '~/utils/types'
 
 export const useTebakBudayaStore = defineStore('tebakBudaya', {
   state: (): QuizUser => ({
@@ -8,6 +8,7 @@ export const useTebakBudayaStore = defineStore('tebakBudaya', {
     currentQuestionIndex: 0,
     completedQuiz: 0,
     isSubmitted: false,
+    leaderboard: [],
   }),
 
   getters: {
@@ -25,7 +26,7 @@ export const useTebakBudayaStore = defineStore('tebakBudaya', {
   },
 
   actions: {
-    async fetch() {
+    async fetchQuizzes() {
       const { data: supaData } = await useSupabaseClient()
         .schema('quiz' as never)
         .from('v_tebak_budaya')
@@ -40,13 +41,31 @@ export const useTebakBudayaStore = defineStore('tebakBudaya', {
       )
     },
 
+    async fetchLeaderboard() {
+      const { data: supaData } = await useSupabaseClient()
+        .schema('quiz' as never)
+        .from('v_tebak_budaya_leaderboard')
+        .select('student_name, score') as { data: QuizLeaderboard[] }
+
+      supaData.map(sd =>
+        this.leaderboard.push({
+          student_name: sd.student_name,
+          score: sd.score,
+        }),
+      )
+    },
+
     setStudentUUID(studentUUID: string) {
       this.studentUUID = studentUUID
     },
 
     selectChoice(selectedChoiceId: number) {
-      if (!this.quizzes[this.currentQuestionIndex].isChecked)
-        this.quizzes[this.currentQuestionIndex].selectedChoiceId = selectedChoiceId
+      if (!this.quizzes[this.currentQuestionIndex].isChecked) {
+        if (this.quizzes[this.currentQuestionIndex].selectedChoiceId === selectedChoiceId)
+          this.quizzes[this.currentQuestionIndex].selectedChoiceId = 0
+        else
+          this.quizzes[this.currentQuestionIndex].selectedChoiceId = selectedChoiceId
+      }
     },
 
     checkChoice() {

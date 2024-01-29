@@ -116,4 +116,10 @@ export type QuizUser = {
   currentQuestionIndex: number
   completedQuiz: number
   isSubmitted: boolean
+  leaderboard: QuizLeaderboard[]
+}
+
+export type QuizLeaderboard = {
+  student_name: string
+  score: number
 }

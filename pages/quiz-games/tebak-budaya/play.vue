@@ -60,7 +60,7 @@ const user = useSupabaseUser()
 const tebakBudaya = useTebakBudayaStore()
 const { $toast: toast } = useNuxtApp()
 
-await callOnce(tebakBudaya.fetch)
+await callOnce(tebakBudaya.fetchQuizzes)
 tebakBudaya.setStudentUUID(user.value!.id)
 
 const {
