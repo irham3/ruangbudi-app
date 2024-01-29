@@ -58,7 +58,7 @@ definePageMeta({
 
 <template>
   <NuxtLayout>
-    <div class="px-32 flex flex-col items-center gap-10 py-16 relative">
+    <div class="px-5 lg:px-32 flex flex-col items-center gap-5 lg:gap-10 py-16 relative">
       <ImageCarousel
         :slides="slides"
         :preview-yt-video-id="cultureDetail?.preview_yt_id"
@@ -74,19 +74,19 @@ definePageMeta({
         <!-- <p class="text-stone-600 text-sm bg-white px-2">Kota asal budaya: <b class="text-lg">{{ cultureDetail?.city_name }}</b></p> -->
       </div>
       <div
-        class="absolute z-[-1] w-[20rem] h-[40rem] bg-contain bg-no-repeat top-[-5rem] left-0"
+        class="absolute z-[-1] w-[8rem] lg:w-[20rem] h-[40rem] bg-contain bg-no-repeat lg:top-[-5rem] left-0"
         style="background-image: url('/images/background/batik.png');"
       />
       <div
-        class="absolute z-[-1] w-[20rem] h-[40rem] bg-contain bg-no-repeat top-[-5rem] right-0 bg-right"
+        class="absolute z-[-1] w-[8rem] lg:w-[20rem] h-[40rem] bg-contain bg-no-repeat top-[-3rem] lg:top-[-5rem] right-0 bg-right"
         style="background-image: url('/images/background/batik-2.png');"
       />
       <div
-        class="absolute w-[20rem] h-[20rem] bg-contain bg-no-repeat bottom-0 left-0"
+        class="absolute w-[10rem] lg:w-[20rem] h-[20rem] bg-contain bg-no-repeat bottom-0 left-0"
         style="background-image: url('/images/background/komodo.png');"
       />
 
-      <div class="flex px-36 gap-12 items-center">
+      <div class="flex px-2 lg:px-36 gap-12 items-center">
         <div class="items-center flex flex-col w-fit">
           <div class="group transition ease-in-out hover:translate-y-[-4px]">
             <div class="flex items-center justify-between translate-y-5 px-6">
@@ -126,10 +126,10 @@ definePageMeta({
           </div>
         </div>
 
-        <div v-if="cultureDetail?.signlanguage_yt_id" class="card w-3/4 h-64 bg-base-100 shadow-xl">
+        <div class="card w-3/4 h-64 bg-base-100 shadow-xl">
           <figure>
             <iframe
-              class="w-full h-64" :src="`https://www.youtube.com/embed/${cultureDetail?.signlanguage_yt_id}`"
+              class="w-full h-64" :src="`https://www.youtube.com/embed/${cultureDetail?.signlanguage_yt_id ?? 'kqk1k_ISx_8'}`"
               title="Penjelasan versi bahasa isyarat" frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
