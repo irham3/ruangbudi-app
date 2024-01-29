@@ -111,7 +111,9 @@ export type Quiz = {
 
 export type QuizUser = {
   quizzes: Quiz[]
-  userUUID: string
+  studentUUID: string
   score: number
   currentQuestionIndex: number
+  completedQuiz: number
+  isSubmitted: boolean
 }

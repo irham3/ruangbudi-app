@@ -3,21 +3,14 @@ import type { Quiz, QuizUser } from '~/utils/types'
 export const useTebakBudayaStore = defineStore('tebakBudaya', {
   state: (): QuizUser => ({
     quizzes: [],
-    userUUID: '',
+    studentUUID: '',
     score: 0,
     currentQuestionIndex: 0,
+    completedQuiz: 0,
+    isSubmitted: false,
   }),
 
   getters: {
-    // getQuizByIndex: (state) => {
-    //   const quizzes = state.quizzes
-    //   return (currentQuestionIndex: number) => quizzes[currentQuestionIndex] as Quiz
-    // },
-
-    // getQuestion() {
-    //   return () => this.quizzes[this.currentQuestionIndex].question_text
-    // },
-
     getSelectedChoiceId() {
       return () => this.quizzes[this.currentQuestionIndex].selectedChoiceId
     },
@@ -47,20 +40,19 @@ export const useTebakBudayaStore = defineStore('tebakBudaya', {
       )
     },
 
-    setUserUUID(userUUID: string) {
-      this.userUUID = userUUID
+    setStudentUUID(studentUUID: string) {
+      this.studentUUID = studentUUID
     },
 
     selectChoice(selectedChoiceId: number) {
-      // Save user's choice
-      this.quizzes[this.currentQuestionIndex].selectedChoiceId = selectedChoiceId
+      if (!this.quizzes[this.currentQuestionIndex].isChecked)
+        this.quizzes[this.currentQuestionIndex].selectedChoiceId = selectedChoiceId
     },
 
     checkChoice() {
+      this.completedQuiz++
       this.quizzes[this.currentQuestionIndex].isChecked = true
       this.addScore(100, this.getSelectedChoiceId())
-      // correctChoiceId.value = questions[currentQuestionIndex.value].choices.find(choice => choice.is_right === true)?.id
-      // score.value += (correctChoiceId.value === selectedChoiceId.value) ? 100 : 0
     },
 
     addScore(currentScore: number, selectedChoiceId: number) {
@@ -75,6 +67,20 @@ export const useTebakBudayaStore = defineStore('tebakBudaya', {
     prevQuestion() {
       if (this.currentQuestionIndex !== 0)
         this.currentQuestionIndex--
+    },
+
+    async submit() {
+      // const { error } = await useSupabaseClient()
+      //   .schema('quiz' as never)
+      //   .from('quiz_scores')
+      //   .insert({
+      //     quiz_id: 1,
+      //     student_id: this.studentUUID,
+      //     score: this.score,
+      //   } as never)
+
+      // if (!error)
+      this.isSubmitted = true
     },
   },
 })

@@ -56,17 +56,30 @@
 //   // console.log(selectedChoiceId.value)
 // })
 
+const user = useSupabaseUser()
 const tebakBudaya = useTebakBudayaStore()
+const { $toast: toast } = useNuxtApp()
+
 await callOnce(tebakBudaya.fetch)
+tebakBudaya.setStudentUUID(user.value!.id)
 
 const {
+  quizzes,
   currentQuestionIndex,
   score,
-  quizzes,
+  completedQuiz,
   getSelectedChoiceId,
   getRightChoiceId,
   getIsChecked,
+  isSubmitted,
 } = storeToRefs(tebakBudaya)
+
+watch(isSubmitted, () => {
+  navigateTo('/quiz-games/tebak-budaya')
+  toast('Selamat, kamu telah menyelesaikan quiz tebak budaya', {
+    type: toast.TYPE.SUCCESS,
+  })
+})
 </script>
 
 <template>
@@ -80,15 +93,16 @@ const {
     </template>
     <div>
       <button
-        class="flex gap-1 font-semibold transition-transform hover:scale-105 mb-3"
+        class="flex gap-1 font-semibold transition-transform hover:scale-105 "
         onclick="stop_modal.showModal()"
       >
         <Icon name="mdi:keyboard-backspace" class="text-2xl" />
         Kembali ke menu
       </button>
+      <progress class="progress progress-info w-full" :value="completedQuiz" :max="quizzes.length" />
       <div class="flex justify-between mb-4">
-        <div class="text-base">
-          Soal {{ quizzes.length }}
+        <div class="flex flex-col text-base">
+          Soal {{ currentQuestionIndex + 1 }}
         </div>
         <div>
           <b>Skor:</b> {{ score }}
@@ -114,9 +128,10 @@ const {
       </div>
       <!-- Question Control Flow Section -->
       <div class="flex justify-between mt-8">
-        <button class="btn btn-sm" @click="tebakBudaya.nextQuestion">
+        <button v-if="!getIsChecked() && currentQuestionIndex !== quizzes.length - 1" class="btn btn-sm" @click="tebakBudaya.nextQuestion">
           Lewati
         </button>
+        <div v-else />
         <div class="flex justify-end gap-2">
           <button
             v-if="currentQuestionIndex !== 0"
@@ -125,7 +140,15 @@ const {
             <Icon name="material-symbols:arrow-left-alt" />
             Kembali
           </button>
-          <button :disabled="!getSelectedChoiceId()" class="btn btn-sm btn-neutral">
+          <button
+            v-if="currentQuestionIndex === quizzes.length - 1 && getIsChecked()"
+            class="btn btn-sm bg-amber-700 hover:bg-amber-800 text-white"
+            :disabled="completedQuiz !== quizzes.length"
+            @click="tebakBudaya.submit()"
+          >
+            Kumpulkan
+          </button>
+          <button v-else :disabled="!getSelectedChoiceId()" class="btn btn-sm btn-neutral">
             <div v-if="!getIsChecked()" @click="tebakBudaya.checkChoice()">
               Cek Jawaban
               <Icon name="material-symbols:search-rounded" class="text-xl" />
