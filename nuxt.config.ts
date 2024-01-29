@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@vueuse/sound/nuxt',
     'nuxt-primevue',
     'vue3-carousel-nuxt',
+    "@pinia/nuxt"
   ],
   css: [
     '~/assets/css/main.css',
