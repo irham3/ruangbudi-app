@@ -27,6 +27,7 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.1",
     "@supabase/supabase-js": "^2.39.1",
     "@vueuse/sound": "^2.0.1",
     "pinia": "^2.1.7",

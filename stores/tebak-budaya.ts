@@ -1,3 +1,4 @@
+import { defineStore } from 'pinia'
 import type { Quiz, QuizLeaderboard, QuizUser } from '~/utils/types'
 
 export const useTebakBudayaStore = defineStore('tebakBudaya', {
@@ -32,13 +33,7 @@ export const useTebakBudayaStore = defineStore('tebakBudaya', {
         .from('v_tebak_budaya')
         .select('*') as { data: Quiz[] }
 
-      supaData.map(sd =>
-        this.quizzes.push({
-          ...sd,
-          selectedChoiceId: 0,
-          isChecked: false,
-        }),
-      )
+      this.quizzes = supaData
     },
 
     async fetchLeaderboard() {
@@ -47,12 +42,7 @@ export const useTebakBudayaStore = defineStore('tebakBudaya', {
         .from('v_tebak_budaya_leaderboard')
         .select('student_name, score') as { data: QuizLeaderboard[] }
 
-      supaData.map(sd =>
-        this.leaderboard.push({
-          student_name: sd.student_name,
-          score: sd.score,
-        }),
-      )
+      this.leaderboard = supaData
     },
 
     setStudentUUID(studentUUID: string) {

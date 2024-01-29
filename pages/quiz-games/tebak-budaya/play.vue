@@ -1,66 +1,9 @@
 <script lang="ts" setup>
-// const currentQuestionIndex = ref(0)
-// const score = ref(0)
-// const isChecked = ref<boolean>(false)
-// const selectedChoiceId = ref<number>()
-// const correctChoiceId = ref<number>()
-
-// const questions = reactive([
-//   {
-//     question: 'Dari mana ',
-//     choices: [
-//       { id: 1, text: '1', is_right: false },
-//       { id: 2, text: '2', is_right: false },
-//       { id: 3, text: '3', is_right: false },
-//       { id: 4, text: '4', is_right: true },
-//     ],
-//   },
-//   {
-//     question: 'What is the capital of France?',
-//     choices: [
-//       { id: 1, text: 'London', is_right: false },
-//       { id: 2, text: 'Berlin', is_right: false },
-//       { id: 3, text: 'Paris', is_right: true },
-//       { id: 4, text: 'Madrid', is_right: false },
-//     ],
-//   },
-//   // Add more questions here
-// ])
-
-// function checkChoice() {
-//   isChecked.value = true
-
-//   correctChoiceId.value = questions[currentQuestionIndex.value].choices.find(choice => choice.is_right === true)?.id
-//   score.value += (correctChoiceId.value === selectedChoiceId.value) ? 100 : 0
-// }
-
-// function nextQuestion() {
-//   // checkAnswer(currentQuestionIndex.value)
-//   // score.value += isSelected[currentQuestionIndex.value] ? 1 : 0
-//   if (currentQuestionIndex.value !== questions.length - 1)
-//     currentQuestionIndex.value++
-// }
-
-// function prevQuestion() {
-//   // checkAnswer(currentQuestionIndex.value)
-//   // score.value += isSelected[currentQuestionIndex.value] ? 1 : 0
-//   currentQuestionIndex.value--
-// }
-
-// function selectChoice(choiceId: number) {
-//   if (!isChecked.value)
-//     selectedChoiceId.value = choiceId
-// }
-
-// onMounted(() => {
-//   // console.log(selectedChoiceId.value)
-// })
-
 const user = useSupabaseUser()
 const tebakBudaya = useTebakBudayaStore()
 const { $toast: toast } = useNuxtApp()
 
-await callOnce(tebakBudaya.fetchQuizzes)
+await useAsyncData('tebakBudaya', () => tebakBudaya.fetchQuizzes())
 tebakBudaya.setStudentUUID(user.value!.id)
 
 const {
@@ -75,11 +18,17 @@ const {
 } = storeToRefs(tebakBudaya)
 
 watch(isSubmitted, () => {
+  tebakBudaya.$reset()
   navigateTo('/quiz-games/tebak-budaya')
   toast('Selamat, kamu telah menyelesaikan quiz tebak budaya', {
     type: toast.TYPE.SUCCESS,
   })
 })
+
+function exitQuiz() {
+  tebakBudaya.$reset()
+  navigateTo('/quiz-games/tebak-budaya')
+}
 </script>
 
 <template>
@@ -91,7 +40,7 @@ watch(isSubmitted, () => {
         Quiz Tebak Budaya
       </div>
     </template>
-    <div>
+    <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-7xl bg-white shadow-lg rounded px-8 pt-6 pb-8">
       <button
         class="flex gap-1 font-semibold transition-transform hover:scale-105 "
         onclick="stop_modal.showModal()"
@@ -108,13 +57,20 @@ watch(isSubmitted, () => {
           <b>Skor:</b> {{ score }}
         </div>
       </div>
-      <p class="text-xl font-bold mb-4">
-        {{ quizzes[currentQuestionIndex].question_text }}
-      </p>
 
-      <!-- Choices Section -->
-      <div class="flex flex-col gap-2">
-        <div class="grid grid-cols-2 gap-4">
+      <div class="flex justify-between items-center">
+        <!-- Question Section -->
+        <div>
+          <div class="text-2xl font-bold mb-2">
+            {{ quizzes[currentQuestionIndex].question_text }}
+          </div>
+          <img
+            class="max-h-72"
+            :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/quizes/tebak-budaya/${quizzes[currentQuestionIndex].question_img_filename}`"
+          >
+        </div>
+        <div class="grid grid-cols-2 grid-rows-2 gap-2 w-fit">
+          <!-- Choices Section -->
           <ChoiceButton
             v-for="choice in quizzes[currentQuestionIndex].choices"
             :key="choice.id"
@@ -172,7 +128,7 @@ watch(isSubmitted, () => {
           Progres kamu tidak tersimpan loh...
         </div>
         <form class="flex space-x-2 w-full justify-end" method="dialog">
-          <button class="btn btn-outline btn-sm" @click="navigateTo('/quiz-games/tebak-budaya')">
+          <button class="btn btn-outline btn-sm" @click="exitQuiz">
             Ya
           </button>
           <button class="btn btn-neutral btn-sm">
