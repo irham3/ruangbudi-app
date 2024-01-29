@@ -45,7 +45,9 @@ onMounted(async () => {
                   {{ index + 1 }}
                 </div>
               </th>
-              <td>{{ item.student_name }}</td>
+              <td class="max-w-48 truncate">
+                {{ item.student_name }}
+              </td>
               <td>{{ item.score }}</td>
             </tr>
           </tbody>

@@ -51,13 +51,20 @@ watch(isSubmitted, () => {
           <b>Skor:</b> {{ score }}
         </div>
       </div>
-      <p class="text-xl font-bold mb-4">
-        {{ quizzes[currentQuestionIndex].question_text }}
-      </p>
 
-      <!-- Choices Section -->
-      <div class="flex flex-col gap-2">
-        <div class="grid grid-cols-2 gap-4">
+      <div class="flex justify-between items-center">
+        <!-- Question Section -->
+        <div>
+          <div class="text-2xl font-bold mb-2">
+            {{ quizzes[currentQuestionIndex].question_text }}
+          </div>
+          <img
+            class="max-h-72"
+            :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/quizes/tebak-budaya/${quizzes[currentQuestionIndex].question_img_filename}`"
+          >
+        </div>
+        <div class="grid grid-cols-2 grid-rows-2 gap-2 w-fit">
+          <!-- Choices Section -->
           <ChoiceButton
             v-for="choice in quizzes[currentQuestionIndex].choices"
             :key="choice.id"
