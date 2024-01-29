@@ -18,11 +18,17 @@ const {
 } = storeToRefs(tebakBudaya)
 
 watch(isSubmitted, () => {
+  tebakBudaya.$reset()
   navigateTo('/quiz-games/tebak-budaya')
   toast('Selamat, kamu telah menyelesaikan quiz tebak budaya', {
     type: toast.TYPE.SUCCESS,
   })
 })
+
+function exitQuiz() {
+  tebakBudaya.$reset()
+  navigateTo('/quiz-games/tebak-budaya')
+}
 </script>
 
 <template>
@@ -122,7 +128,7 @@ watch(isSubmitted, () => {
           Progres kamu tidak tersimpan loh...
         </div>
         <form class="flex space-x-2 w-full justify-end" method="dialog">
-          <button class="btn btn-outline btn-sm" @click="navigateTo('/quiz-games/tebak-budaya')">
+          <button class="btn btn-outline btn-sm" @click="exitQuiz">
             Ya
           </button>
           <button class="btn btn-neutral btn-sm">
