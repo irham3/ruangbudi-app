@@ -43,12 +43,6 @@ export const useTebakBudayaStore = defineStore('tebakBudaya', {
         .select('student_name, score') as { data: QuizLeaderboard[] }
 
       this.leaderboard = supaData
-      // supaData.map(sd =>
-      //   this.leaderboard.push({
-      //     student_name: sd.student_name,
-      //     score: sd.score,
-      //   }),
-      // )
     },
 
     setStudentUUID(studentUUID: string) {

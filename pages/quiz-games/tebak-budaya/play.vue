@@ -34,7 +34,7 @@ watch(isSubmitted, () => {
         Quiz Tebak Budaya
       </div>
     </template>
-    <div>
+    <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-7xl bg-white shadow-lg rounded px-8 pt-6 pb-8">
       <button
         class="flex gap-1 font-semibold transition-transform hover:scale-105 "
         onclick="stop_modal.showModal()"
