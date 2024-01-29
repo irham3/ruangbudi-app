@@ -5,10 +5,7 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     'nuxt-icon',
     '@vueuse/sound/nuxt',
-    'nuxt-primevue',
-    'vue3-carousel-nuxt',
-    '@vueuse/nuxt',
-    'nuxt-aos',
+    '@pinia/nuxt',
   ],
   css: [
     '~/assets/css/main.css',
