@@ -105,7 +105,7 @@ definePageMeta({
         style="background-image: url('/images/background/komodo.png');"
       />
 
-      <div class="flex px-2 lg:px-36 gap-12 items-center">
+      <div class="flex flex-col lg:flex-row px-2 lg:px-36 gap-12 items-center">
         <div class="items-center flex flex-col w-fit">
           <div class="group transition ease-in-out hover:translate-y-[-4px]">
             <div class="flex items-center justify-between translate-y-5 px-6">
@@ -145,10 +145,10 @@ definePageMeta({
           </div>
         </div>
 
-        <div class="card w-3/4 h-64 bg-base-100 shadow-xl">
+        <div class="card w-full lg:w-3/4 rounded-lg overflow-hidden lg:h-64 bg-base-100 shadow-xl">
           <figure>
             <iframe
-              class="w-full h-64" :src="`https://www.youtube.com/embed/${cultureDetail?.signlanguage_yt_id ?? 'kqk1k_ISx_8'}`"
+              class="w-full aspect-video lg:h-64" :src="`https://www.youtube.com/embed/${cultureDetail?.signlanguage_yt_id ?? 'kqk1k_ISx_8'}`"
               title="Penjelasan versi bahasa isyarat" frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen

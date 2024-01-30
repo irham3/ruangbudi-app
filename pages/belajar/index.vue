@@ -51,22 +51,22 @@ onMounted(async () => {
     <img
       src="/images/background/batik-2.png"
       alt=""
-      class="w-[8rem] md:w-[15rem] absolute right-0 top-[30%] md:top-[12%]"
+      class="w-[8rem] md:w-[15rem] absolute right-0 top-[30%] md:top-[12%] -z-10"
     >
     <img
       src="/images/background/batik.png"
       alt=""
-      class="w-[8rem] md:w-[15rem] absolute left-0 top-[50%] md:top-[25%]"
+      class="w-[8rem] md:w-[15rem] absolute left-0 top-[50%] md:top-[25%] -z-10"
     >
     <img
       src="/images/background/beok.png"
       alt=""
-      class="w-[15rem] absolute left-0 top-[300%] md:top-[120%]"
+      class="w-[15rem] absolute left-0 top-[300%] md:top-[120%] -z-10"
     >
     <img
       src="/images/background/buku2.png"
       alt=""
-      class="w-[15rem] absolute right-0 top-[240%] md:top-[120%]"
+      class="w-[15rem] absolute right-0 top-[240%] md:top-[120%] -z-10"
     >
     <div class="container flex flex-col px-10 md:px-36 py-8">
       <div class="text-4xl font-bold self-center text-center md:text-start">
