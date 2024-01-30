@@ -33,6 +33,8 @@ async function signIn() {
 
   if (route.query.from === 'tebak-budaya')
     await navigateTo('/quiz-games/tebak-budaya/')
+  else if (route.query.from === 'susun-kalimat')
+    await navigateTo('/quiz-games/susun-kalimat/')
   else
     await navigateTo('/')
 

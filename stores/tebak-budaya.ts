@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Quiz, QuizLeaderboard, QuizUser } from '~/utils/types'
+import type { Leaderboard, Quiz, QuizUser } from '~/utils/types'
 
 export const useTebakBudayaStore = defineStore('tebakBudaya', {
   state: (): QuizUser => ({
@@ -40,7 +40,7 @@ export const useTebakBudayaStore = defineStore('tebakBudaya', {
       const { data: supaData } = await useSupabaseClient()
         .schema('quiz' as never)
         .from('v_tebak_budaya_leaderboard')
-        .select('student_name, score') as { data: QuizLeaderboard[] }
+        .select('student_name, score') as { data: Leaderboard[] }
 
       this.leaderboard = supaData
     },
@@ -50,8 +50,6 @@ export const useTebakBudayaStore = defineStore('tebakBudaya', {
     },
 
     selectChoice(selectedChoiceId: number) {
-      console.log(selectedChoiceId)
-
       if (!this.quizzes[this.currentQuestionIndex].isChecked) {
         if (this.quizzes[this.currentQuestionIndex].selectedChoiceId === selectedChoiceId)
           this.quizzes[this.currentQuestionIndex].selectedChoiceId = 0
