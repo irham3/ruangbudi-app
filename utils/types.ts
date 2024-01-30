@@ -86,3 +86,40 @@ export type CraftDetail = {
   description: string
   youtube_id: string
 }
+
+export type QuizCategory = {
+  id: number
+  title: string
+  slug: string
+  type: string
+}
+
+export type QuizChoice = {
+  id: number
+  text: string
+  is_right: boolean
+}
+
+export type Quiz = {
+  question_id: number
+  question_text: string
+  question_img_filename: string
+  choices: QuizChoice[]
+  selectedChoiceId: number
+  isChecked: boolean
+}
+
+export type QuizUser = {
+  quizzes: Quiz[]
+  studentUUID: string
+  score: number
+  currentQuestionIndex: number
+  completedQuiz: number
+  isSubmitted: boolean
+  leaderboard: QuizLeaderboard[]
+}
+
+export type QuizLeaderboard = {
+  student_name: string
+  score: number
+}

@@ -33,15 +33,16 @@ onMounted(async () => {
         {{ craft?.title }}
       </p>
 
-      <figure class="w-full aspect-video image-full object-cover">
+      <div id="player" class="plyr__video-embed w-full h-[32rem] image-full object-cover">
         <iframe
           class="w-full aspect-video rounded-md" :src="`https://www.youtube.com/embed/${craft?.youtube_id}`"
           :title="craft?.title" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allow="autoplay"
           allowfullscreen
+          allowtransparency
         />
-      </figure>
-      <div class="flex px-5 lg:px-36 gap-12 w-[100dvw] items-center">
+      </div>
+      <div class="flex px-36 gap-12 items-center">
         <div class="w-full lg:w-fit">
           <div class="group w-full transition ease-in-out hover:translate-y-[-4px]">
             <div class="flex items-center justify-between translate-y-5 px-6">

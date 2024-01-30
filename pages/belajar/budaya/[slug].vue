@@ -126,10 +126,10 @@ definePageMeta({
           </div>
         </div>
 
-        <div v-if="cultureDetail?.signlanguage_yt_id" class="card w-3/4 h-64 bg-base-100 shadow-xl">
+        <div class="card w-3/4 h-64 bg-base-100 shadow-xl">
           <figure>
             <iframe
-              class="w-full h-64" :src="`https://www.youtube.com/embed/${cultureDetail?.signlanguage_yt_id}`"
+              class="w-full h-64" :src="`https://www.youtube.com/embed/${cultureDetail?.signlanguage_yt_id ?? 'kqk1k_ISx_8'}`"
               title="Penjelasan versi bahasa isyarat" frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen

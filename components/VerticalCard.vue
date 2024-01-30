@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { useSound } from '@vueuse/sound'
+import { useSound } from '@vueuse/sound'
 
 const props = defineProps<{
   to: string

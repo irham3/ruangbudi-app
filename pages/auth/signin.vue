@@ -5,11 +5,12 @@ definePageMeta({
 
 const supabase = useSupabaseClient()
 const { $toast: toast } = useNuxtApp()
-const isLoading = ref(false)
+const route = useRoute()
 
 // Form Data
 const email = ref('')
 const password = ref('')
+const isLoading = ref(false)
 
 async function signIn() {
   isLoading.value = true
@@ -29,7 +30,12 @@ async function signIn() {
   }
 
   isLoading.value = false
-  await navigateTo('/')
+
+  if (route.query.from === 'tebak-budaya')
+    await navigateTo('/quiz-games/tebak-budaya/')
+  else
+    await navigateTo('/')
+
   toast('Berhasil masuk!', {
     type: toast.TYPE.SUCCESS,
   })
