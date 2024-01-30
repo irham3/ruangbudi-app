@@ -13,6 +13,7 @@ const {
   score,
   completedSentence,
   getUserAnswer,
+  getRightAnswer,
   getIsChecked,
   isSubmitted,
 } = storeToRefs(susunKalimat)
@@ -31,11 +32,6 @@ function refreshPage() {
   <NuxtLayout
     name="quiz"
   >
-    <template #title>
-      <div class="text-center text-2xl font-bold text-slate-100 drop-shadow-[0_0_10px_rgba(0,255,255,0.7)] mb-2">
-        Susun Kalimat
-      </div>
-    </template>
     <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-7xl bg-white shadow-lg rounded px-8 pt-6 pb-8">
       <button
         class="flex gap-1 font-semibold transition-transform hover:scale-105 "
@@ -44,6 +40,9 @@ function refreshPage() {
         <Icon name="mdi:keyboard-backspace" class="text-2xl" />
         Kembali ke menu
       </button>
+      <div class="text-center text-2xl font-bold text-amber-700 mb-4">
+        Susun Kalimat
+      </div>
       <progress class="progress progress-success w-full h-4" :value="completedSentence" :max="sentences.length" />
       <div class="flex justify-between mb-4">
         <div class="flex flex-col text-base">
@@ -54,22 +53,20 @@ function refreshPage() {
         </div>
       </div>
 
-      <div class="flex justify-between items-center">
+      <div class="flex flex-col justify-center items-center gap-4">
         <!-- Question Section -->
-        <div>
-          <div class="text-2xl font-bold mb-2">
-            {{ sentences[currentQuestionIndex].question_text }}
-          </div>
-          <img
-            class="max-h-72"
-            :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/quizes/susun-kalimat/${sentences[currentQuestionIndex].question_img_filename}`"
-          >
+        <div class="text-2xl font-bold">
+          {{ sentences[currentQuestionIndex].question_text }}
         </div>
-        <div class="grid grid-cols-2 grid-rows-2 gap-2 w-fit">
+        <img
+          class="max-h-56"
+          :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/quizes/susun-kalimat/${sentences[currentQuestionIndex].question_img_filename}`"
+        >
+        <div class="w-full">
           <TextInput
             v-model="sentences[currentQuestionIndex].userAnswerText"
             class="w-full"
-            placeholder="Masukkan jawaban kamu"
+            placeholder="Masukkan jawaban kamu di sini"
           />
         </div>
       </div>
@@ -78,7 +75,15 @@ function refreshPage() {
         <button v-if="!getIsChecked() && currentQuestionIndex !== sentences.length - 1" class="btn btn-sm" @click="susunKalimat.nextQuestion">
           Lewati
         </button>
-        <div v-else />
+        <div v-else-if="!getIsChecked() && currentQuestionIndex === sentences.length - 1" />
+        <div v-else class="font-semibold text-lg">
+          <div v-if="getRightAnswer() === getUserAnswer()" class="text-green-600">
+            ✅ Benar, Kamu Hebat
+          </div>
+          <div v-else class="text-red-600">
+            ❌ Jawaban benar: {{ getRightAnswer() }}
+          </div>
+        </div>
         <div class="flex justify-end gap-2">
           <button
             v-if="currentQuestionIndex !== 0"
@@ -139,7 +144,7 @@ function refreshPage() {
           Selamat, kamu telah menyelesaikan quiz 🎉
         </div>
         <div class="font-semibold text-base mt-2 mb-5">
-          Skor kamu adalah <span class="text-amber-700">{{ score }}</span>/{{ sentences.length * 100 }}
+          Skor kamu adalah <span class="text-amber-700">{{ score }}</span>/{{ sentences.length * 200 }}
         </div>
         <form class="flex flex-col gap-2 w-full justify-center" method="dialog">
           <button class="btn btn-sm bg-amber-700 text-white hover:bg-amber-800" @click="refreshPage">

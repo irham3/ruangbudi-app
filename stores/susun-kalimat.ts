@@ -74,7 +74,7 @@ export const useSusunKalimatStore = defineStore('susunKalimat', {
         .schema('quiz' as never)
         .from('quiz_scores')
         .insert({
-          quiz_id: 1,
+          quiz_id: 2,
           student_id: this.studentUUID,
           score: this.score,
         } as never)

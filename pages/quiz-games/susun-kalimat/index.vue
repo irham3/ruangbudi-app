@@ -47,7 +47,7 @@ rounded-lg shadow-xl font-bold text-white focus:outline-none"
         <button
           class="btn w-full bg-yellow-400 hover:bg-yellow-500
 rounded-lg shadow-xl font-bold text-slate-800 focus:outline-none"
-          @click="navigateTo('/quiz-games/tebak-budaya/leaderboard')"
+          @click="navigateTo('/quiz-games/susun-kalimat/leaderboard')"
         >
           <Icon name="mdi:crown" class="text-2xl" />
           Lihat Skor Tertinggi
