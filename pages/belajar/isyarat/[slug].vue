@@ -193,7 +193,7 @@ function stopRecording() {
     .forEach(track => track.stop())
 }
 
-onMounted(async () => {
+onBeforeMount(async () => {
   const slug = route.params.slug as string
   const youtubeId = route.hash.substring(1)
 
@@ -221,10 +221,13 @@ const navigasi = ref<Navigasi>(Navigasi.KirimVideo)
       <div class="ml-4 w-full">
         <div v-if="$route.hash.substring(1).length !== 0">
           <!-- Video was selected -->
-          <iframe
-            class="aspect-video w-full rounded-xl"
-            :src="`https://www.youtube.com/embed/${$route.hash.substring(1)}`"
-          />
+          <div class="plyr__video-embed">
+            <iframe
+              class="aspect-video w-full rounded-xl"
+              :src="`https://www.youtube.com/embed/${$route.hash.substring(1)}?rel=0&modestbranding=1`"
+              allowfullscreen allowtransparency allow="autoplay"
+            />
+          </div>
 
           <div v-if="user" class="space-y-4 mt-4">
             <div class="bg-[#CA855F1A] px-4 py-2 rounded-xl">

@@ -50,6 +50,8 @@ export const useTebakBudayaStore = defineStore('tebakBudaya', {
     },
 
     selectChoice(selectedChoiceId: number) {
+      console.log(selectedChoiceId)
+
       if (!this.quizzes[this.currentQuestionIndex].isChecked) {
         if (this.quizzes[this.currentQuestionIndex].selectedChoiceId === selectedChoiceId)
           this.quizzes[this.currentQuestionIndex].selectedChoiceId = 0
@@ -79,17 +81,17 @@ export const useTebakBudayaStore = defineStore('tebakBudaya', {
     },
 
     async submit() {
-      // const { error } = await useSupabaseClient()
-      //   .schema('quiz' as never)
-      //   .from('quiz_scores')
-      //   .insert({
-      //     quiz_id: 1,
-      //     student_id: this.studentUUID,
-      //     score: this.score,
-      //   } as never)
+      const { error } = await useSupabaseClient()
+        .schema('quiz' as never)
+        .from('quiz_scores')
+        .insert({
+          quiz_id: 1,
+          student_id: this.studentUUID,
+          score: this.score,
+        } as never)
 
-      // if (!error)
-      this.isSubmitted = true
+      if (!error)
+        this.isSubmitted = true
     },
   },
 })
