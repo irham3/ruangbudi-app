@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@vueuse/sound/nuxt',
     '@pinia/nuxt',
+    'nuxt-aos',
   ],
   css: [
     '~/assets/css/main.css',
