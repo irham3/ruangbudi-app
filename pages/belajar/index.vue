@@ -34,10 +34,15 @@ async function fetchCrafts() {
   return Promise.all(data)
 }
 
+const loadingFetch = ref(true)
+
 onMounted(async () => {
   studyVideos.value = await fetchSignLanguages()
   cultures.value = await fetchCultures()
   crafts.value = await fetchCrafts()
+  setTimeout(() => {
+    loadingFetch.value = false
+  }, 500)
 })
 </script>
 
@@ -84,7 +89,7 @@ onMounted(async () => {
             Lihat Semua &rarr;
           </NuxtLink>
         </div>
-        <div class="flex gap-4 flex-col items-center md:items-stretch md:flex-row">
+        <div class="flex gap-4 flex-col items-center md:items-stretch md:flex-row" v-if="!loadingFetch">
           <VerticalCard
             v-for="(culture, index) in cultures" :key="index"
             :to="`belajar/budaya/${culture.culture_slug}`"
@@ -92,6 +97,9 @@ onMounted(async () => {
             :img-path="`cultures/${culture.id}/${culture.image_filenames[0]}`"
             class="!max-w-[80%] md:!max-w-[16rem]"
           />
+        </div>
+        <div class="flex gap-4 flex-col items-center md:items-stretch md:flex-row" v-else>
+          <div class="w-full h-[11.5rem] rounded-lg animate-pulse bg-slate-200" v-for="i in 4"></div>
         </div>
       </section>
 
@@ -108,7 +116,7 @@ onMounted(async () => {
             Lihat Semua &rarr;
           </NuxtLink>
         </div>
-        <div class="flex gap-4 flex-col items-center md:items-baseline md:flex-nowrap md:flex-row">
+        <div class="flex gap-4 flex-col items-center md:items-baseline md:flex-nowrap md:flex-row" v-if="!loadingFetch">
           <VerticalCard
             v-for="(studyVideo, index) in studyVideos" :key="index"
             :to="`belajar/isyarat/${studyVideo.slug}`"
@@ -116,6 +124,9 @@ onMounted(async () => {
             :img-path="`video/${studyVideo.slug}.png`"
             class="!max-w-[80%] md:!max-w-[16rem]"
           />
+        </div>
+        <div class="flex gap-4 flex-col items-center md:items-stretch md:flex-row" v-else>
+          <div class="w-full h-[11.5rem] rounded-lg animate-pulse bg-slate-200" v-for="i in 4"></div>
         </div>
       </section>
 
@@ -132,7 +143,7 @@ onMounted(async () => {
             Lihat Semua &rarr;
           </NuxtLink>
         </div>
-        <div class="flex gap-4 flex-col items-center md:items-start md:flex-row">
+        <div class="flex gap-4 flex-col items-center md:items-start md:flex-row" v-if="!loadingFetch">
           <VerticalCard
             v-for="(craft, index) in crafts" :key="index"
             :to="`belajar/kerajinan/${craft.slug}`"
@@ -140,6 +151,9 @@ onMounted(async () => {
             :img-path="`crafts/${craft.id}.png`"
             class="!max-w-[80%] md:!max-w-[16rem]"
           />
+        </div>
+        <div class="flex gap-4 flex-col items-center md:items-stretch md:flex-row" v-else>
+          <div class="w-full h-[11.5rem] rounded-lg animate-pulse bg-slate-200" v-for="i in 4"></div>
         </div>
       </section>
     </div>

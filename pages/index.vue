@@ -60,7 +60,7 @@ function navigateToBelajar() {
           <p>Belajar sambil bermain akan lebih asyik dengan RuangBudi!</p>
         </div>
         <div class="sm:flex-row flex flex-col gap-8">
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center" data-aos="fade-right">
             <div style="background-image: url('/images/wayang.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Wayang" />
 
             <h3 class="text-xl font-bold mt-3">
@@ -68,21 +68,21 @@ function navigateToBelajar() {
             </h3>
             <p>Kekayaan Budaya Indonesia sangat beragam dan menarik loh!</p>
           </div>
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center" data-aos="fade-right">
             <div style="background-image: url('/images/belajar-bahasa-isyarat.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Papan Tulis" />
             <h3 class="text-xl font-bold mt-3">
               Belajar Bahasa Isyarat
             </h3>
             <p>Belajar menyusun kalimat sederhana dengan menyenangkan. Adik-adik pasti suka!</p>
           </div>
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center" data-aos="fade-right">
             <div style="background-image: url('/images/kerajinan.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Kerajinan Tangan" />
             <h3 class="text-xl font-bold mt-3">
               Belajar Membuat Kerajinan
             </h3>
             <p>Belajar menyusun kalimat sederhana dengan menyenangkan. Adik-adik pasti suka!</p>
           </div>
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center" data-aos="fade-right">
             <div style="background-image: url('/images/kuis-games.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Mobil Mainan" />
             <h3 class="text-xl font-bold mt-3">
               Kuis dan Games
@@ -93,7 +93,7 @@ function navigateToBelajar() {
       </section>
 
       <!-- About Section -->
-      <section class="flex flex-col sm:flex-row items-center justify-center -mt-16 sm:gap-28 gap-6 h-screen sm:px-40 px-2 relative">
+      <section class="flex flex-col sm:flex-row items-center justify-center -mt-16 sm:gap-28 gap-6 h-screen sm:px-40 px-2 relative" data-aos="fade-up">
         <div class="absolute top-4 left-0 w-[13rem] h-[16rem] bg-contain bg-no-repeat" style="background-image: url('/images/background/beok.png');" />
 
         <div class="sm:w-2/5 w-full text-center sm:text-start">
