@@ -36,8 +36,15 @@ const props = defineProps<{
         v-for="(slide, index) in props.slides" :id="`slide${index + 2}`" :key="index + 1"
         class="carousel-item relative w-full"
       >
-        <img :src="slide.image" class="w-full h-[32rem] image-full object-cover">
-
+        <img :src="slide.image" class="w-full h-[32rem] image-full object-cover" onclick="my_modal_3.showModal()">
+        <dialog id="my_modal_3" class="modal">
+          <div class="modal-box">
+            <form method="dialog">
+              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <img :src="slide.image" class=" h-[32rem] image-full object-cover mt-4 aspect-auto">
+          </div>
+        </dialog>
         <div
           class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
         >
@@ -45,6 +52,8 @@ const props = defineProps<{
           <a :href="index === props.slides.length - 1 ? `#slide1` : `#slide${index + 3}`" class="btn btn-circle">❯</a>
         </div>
       </div>
+      <!-- <button class="btn" onclick="my_modal_3.showModal()">open modal</button> -->
+
     </div>
 
     <div class="flex">

@@ -22,11 +22,11 @@ function navigateToBelajar() {
   <NuxtLayout>
     <!-- Hero Section -->
     <div class="overflow-hidden">
-      <section class="flex flex-col-reverse sm:flex-row items-center h-screen sm:-mt-14">
-        <div class="absolute top-[25%] sm:top-[42%] right-0 w-[230px] h-[450px] bg-contain bg-no-repeat bg-center z-[-1]" style="background-image: url('/images/background/wayang-bg.png');" />
-        <div class="bg-contain bg-no-repeat bg-center w-3/5 h-[60vh] bg-[url('/images/hero-left.png')] transition-transform hover:scale-110" />
-        <div class=" w-full px-2 text-center items-center sm:text-left sm:items-start py-4 sm:py-0 sm:w-1/2 flex flex-col">
-          <h1 class="text-[2.8rem] w-10/12 font-bold mb-4">
+      <div class="absolute top-[25%] sm:top-[42%] right-0 w-[230px] h-[450px] bg-contain bg-no-repeat bg-center z-[-1]" style="background-image: url('/images/background/wayang-bg.png');" />
+      <section class="flex flex-col-reverse justify-center sm:flex-row items-center min-h-[90dvh] lg:min-h-screen lg:-mt-14">
+        <div class="bg-contain bg-no-repeat bg-center w-3/5 h-[30vh] lg:h-[60vh] bg-[url('/images/hero-left.png')] transition-transform hover:scale-110 hidden lg:block" />
+        <div class=" w-full px-2 text-center items-center lg:text-left lg:items-start py-0 lg:py-0 lg:w-1/2 flex flex-col justify-center h-[70vh] lg:h-fit">
+          <h1 class="text-[1.7rem] lg:text-[2.8rem] w-10/12 font-bold mb-4">
             Belajar Budaya dan Bahasa Isyarat dengan Menyenangkan!
           </h1>
           <p class="w-10/12 mb-4">
