@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 const user = useSupabaseUser()
 const tebakBudaya = useTebakBudayaStore()
-const { $toast: toast } = useNuxtApp()
 
 await useAsyncData('tebakBudaya', () => tebakBudaya.fetchQuizzes())
 tebakBudaya.setStudentUUID(user.value!.id)
@@ -17,17 +16,13 @@ const {
   isSubmitted,
 } = storeToRefs(tebakBudaya)
 
-watch(isSubmitted, () => {
-  tebakBudaya.$reset()
-  navigateTo('/quiz-games/tebak-budaya')
-  toast('Selamat, kamu telah menyelesaikan quiz tebak budaya', {
-    type: toast.TYPE.SUCCESS,
-  })
-})
-
 function exitQuiz() {
-  tebakBudaya.$reset()
   navigateTo('/quiz-games/tebak-budaya')
+  tebakBudaya.$reset()
+}
+
+function refreshPage() {
+  window.location.reload()
 }
 </script>
 
@@ -48,7 +43,7 @@ function exitQuiz() {
         <Icon name="mdi:keyboard-backspace" class="text-2xl" />
         Kembali ke menu
       </button>
-      <progress class="progress progress-info w-full" :value="completedQuiz" :max="quizzes.length" />
+      <progress class="progress progress-success w-full h-4" :value="completedQuiz" :max="quizzes.length" />
       <div class="flex justify-between mb-4">
         <div class="flex flex-col text-base">
           Soal {{ currentQuestionIndex + 1 }}
@@ -140,5 +135,32 @@ function exitQuiz() {
         <button>close</button>
       </form>
     </dialog>
+
+    <!-- After Finishing Quiz -->
+    <dialog v-if="isSubmitted" class="w-screen h-screen flex justify-center items-center bg-slate-700 bg-opacity-25">
+      <div class="modal-box flex flex-col items-center">
+        <div class="font-bold text-xl mb-2 text-center">
+          Selamat, kamu telah menyelesaikan quiz 🎉
+        </div>
+        <div class="font-semibold text-base mt-2 mb-5">
+          Skor kamu adalah <span class="text-amber-700">{{ score }}</span>/{{ quizzes.length * 100 }}
+        </div>
+        <form class="flex flex-col gap-2 w-full justify-center" method="dialog">
+          <button class="btn btn-sm bg-amber-700 text-white hover:bg-amber-800" @click="refreshPage">
+            Main  Lagi
+          </button>
+          <button class="btn btn-outline border-amber-700 hover:bg-amber-800 btn-sm" @click="exitQuiz">
+            Kembali ke menu
+          </button>
+        </form>
+      </div>
+    </dialog>
   </NuxtLayout>
 </template>
+
+<!-- <style scoped>
+progress::-moz-progress-bar
+{
+  background-color: #b45309 !important;
+}
+</style> -->

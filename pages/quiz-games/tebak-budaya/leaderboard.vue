@@ -3,8 +3,6 @@ const tebakBudaya = useTebakBudayaStore()
 onMounted(async () => {
   await useAsyncData('tebakBudaya', () => tebakBudaya.fetchLeaderboard().then(() => true))
 })
-
-// console.log(tebakBudaya.leaderboard)
 </script>
 
 <template>
@@ -23,8 +21,8 @@ onMounted(async () => {
       <h1 class="text-3xl font-bold text-center text-purple-700">
         Skor Tertinggi
       </h1>
-      <div class="overflow-x-auto">
-        <table class="table text-center">
+      <div class="max-h-96 overflow-auto">
+        <table class="table table-xs text-center">
           <!-- head -->
           <thead>
             <tr class="text-xl text-amber-800">
@@ -33,22 +31,24 @@ onMounted(async () => {
               <th>Skor</th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="(item, index) in tebakBudaya.leaderboard" :key="index" class="hover font-semibold">
+          <tbody class="">
+            <tr v-for="(item, index) in tebakBudaya.leaderboard" :key="index" class="hover font-base">
               <th class="text-xl">
                 <div v-if="index < 3" class="text-3xl">
                   <Icon v-if="index === 0" name="fluent-emoji-flat:1st-place-medal" />
                   <Icon v-if="index === 1" name="fluent-emoji-flat:2nd-place-medal" />
                   <Icon v-if="index === 2" name="fluent-emoji-flat:3rd-place-medal" />
                 </div>
-                <div v-else>
+                <div v-else class="text-base">
                   {{ index + 1 }}
                 </div>
               </th>
-              <td class="max-w-48 truncate">
+              <td class="max-w-48 truncate text-base">
                 {{ item.student_name }}
               </td>
-              <td>{{ item.score }}</td>
+              <td class="max-w-48 truncate text-base">
+                {{ item.score }}
+              </td>
             </tr>
           </tbody>
         </table>
