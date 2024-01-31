@@ -31,7 +31,7 @@ onMounted(async () => {
               <th>Skor</th>
             </tr>
           </thead>
-          <tbody class="">
+          <tbody>
             <tr v-for="(item, index) in tebakBudaya.leaderboard" :key="index" class="hover font-base">
               <th class="text-xl">
                 <div v-if="index < 3" class="text-3xl">

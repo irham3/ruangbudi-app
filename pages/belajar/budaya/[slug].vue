@@ -67,15 +67,19 @@ definePageMeta({
         <div class="text-4xl font-bold text-amber-800">
           {{ cultureDetail?.culture_name }}
         </div>
-  
+
         <p v-if="cultureDetail?.city_name" class="text-nowrap text-xl">
           Asal Budaya: <b>{{ cultureDetail?.city_name! }}</b>
         </p>
-        <button class="btn" onclick="lihat_nilai_siswa.showModal()">Lihat Nilai</button>
+        <button class="btn" onclick="lihat_nilai_siswa.showModal()">
+          Lihat Nilai
+        </button>
         <dialog id="lihat_nilai_siswa" class="modal">
           <div class="modal-box">
             <form method="dialog">
-              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+              </button>
             </form>
             <div v-if="user">
               <div class="text-4xl font-semibold">
@@ -156,7 +160,6 @@ definePageMeta({
           </figure>
         </div>
       </div>
-
     </div>
   </NuxtLayout>
 </template>

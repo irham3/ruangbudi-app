@@ -60,8 +60,8 @@ function refreshPage() {
             {{ quizzes[currentQuestionIndex].question_text }}
           </div>
           <img
-            class="max-h-72"
-            :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/quizes/tebak-budaya/${quizzes[currentQuestionIndex].question_img_filename}`"
+            class="max-w-xl"
+            :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/quizes/tebak-budaya/${encodeURIComponent(quizzes[currentQuestionIndex].question_img_filename)}`"
           >
         </div>
         <div class="grid grid-cols-2 grid-rows-2 gap-2 w-fit">
