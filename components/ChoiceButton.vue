@@ -11,8 +11,8 @@ defineProps<{
 
 <template>
   <button
-  class="btn text-left w-fit transition-transform hover:scale-105 text-white hover:bg-amber-700 h-fit py-4"
-  :class="{ 'bg-amber-700': isSelected && !isChecked, 'bg-green-600': isChecked && isRight, 'bg-red-600': isSelected && isChecked && !isRight, 'bg-blue-600': !isSelected }"
+    class="btn text-left w-fit transition-transform hover:scale-105 text-white hover:bg-amber-700 h-fit py-4"
+    :class="{ 'bg-amber-700': isSelected && !isChecked, 'bg-green-600': isChecked && isRight, 'bg-red-600': isSelected && isChecked && !isRight, 'bg-blue-600': !isSelected }"
   >
     <div class="flex flex-col gap-2 items-center">
       <img
