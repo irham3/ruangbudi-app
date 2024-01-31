@@ -63,13 +63,32 @@ definePageMeta({
         :slides="slides"
         :preview-yt-video-id="cultureDetail?.preview_yt_id"
       />
-      <div class="text-4xl font-bold text-amber-800">
-        {{ cultureDetail?.culture_name }}
+      <div class="flex flex-col items-center gap-2">
+        <div class="text-4xl font-bold text-amber-800">
+          {{ cultureDetail?.culture_name }}
+        </div>
+  
+        <p v-if="cultureDetail?.city_name" class="text-nowrap text-xl">
+          Asal Budaya: <b>{{ cultureDetail?.city_name! }}</b>
+        </p>
+        <button class="btn" onclick="lihat_nilai_siswa.showModal()">Lihat Nilai</button>
+        <dialog id="lihat_nilai_siswa" class="modal">
+          <div class="modal-box">
+            <form method="dialog">
+              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <div v-if="user">
+              <div class="text-4xl font-semibold">
+                Nilai siswa
+              </div>
+              <ul>
+                <li><b>Nilai: </b> {{ cultureScore?.student_score ?? 'belum ada nilai' }}</li>
+                <li><b>Evaluasi: </b> {{ cultureScore?.student_evaluation ?? 'belum ada evaluasi' }}</li>
+              </ul>
+            </div>
+          </div>
+        </dialog>
       </div>
-
-      <p v-if="cultureDetail?.city_name" class="text-nowrap text-xl float-right">
-        Asal Budaya: <b>{{ cultureDetail?.city_name! }}</b>
-      </p>
       <div class="flex justify-end w-full">
         <!-- <p class="text-stone-600 text-sm bg-white px-2">Kota asal budaya: <b class="text-lg">{{ cultureDetail?.city_name }}</b></p> -->
       </div>
@@ -86,7 +105,7 @@ definePageMeta({
         style="background-image: url('/images/background/komodo.png');"
       />
 
-      <div class="flex px-2 lg:px-36 gap-12 items-center">
+      <div class="flex flex-col lg:flex-row px-2 lg:px-36 gap-12 items-center">
         <div class="items-center flex flex-col w-fit">
           <div class="group transition ease-in-out hover:translate-y-[-4px]">
             <div class="flex items-center justify-between translate-y-5 px-6">
@@ -126,10 +145,10 @@ definePageMeta({
           </div>
         </div>
 
-        <div class="card w-3/4 h-64 bg-base-100 shadow-xl">
+        <div class="card w-full lg:w-3/4 rounded-lg overflow-hidden lg:h-64 bg-base-100 shadow-xl">
           <figure>
             <iframe
-              class="w-full h-64" :src="`https://www.youtube.com/embed/${cultureDetail?.signlanguage_yt_id ?? 'kqk1k_ISx_8'}`"
+              class="w-full aspect-video lg:h-64" :src="`https://www.youtube.com/embed/${cultureDetail?.signlanguage_yt_id ?? 'kqk1k_ISx_8'}`"
               title="Penjelasan versi bahasa isyarat" frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
@@ -138,15 +157,6 @@ definePageMeta({
         </div>
       </div>
 
-      <div v-if="user">
-        <div class="text-4xl font-semibold">
-          Nilai siswa
-        </div>
-        <ul>
-          <li><b>Nilai: </b> {{ cultureScore?.student_score ?? 'belum ada nilai' }}</li>
-          <li><b>Evaluasi: </b> {{ cultureScore?.student_evaluation ?? 'belum ada evaluasi' }}</li>
-        </ul>
-      </div>
     </div>
   </NuxtLayout>
 </template>
