@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <Header />
-    <div class="flex flex-col transition-opacity duration-500" :style="{opacity: loading?'0%': '100%'} transition-all duration-1000" :style="{opacity: show?'100%':'0%'}">
+    <div class="flex flex-col transition-opacity duration-500" :style="{opacity: loading?'0%': '100%'}">
       <slot />
     </div>
     <Footer />
