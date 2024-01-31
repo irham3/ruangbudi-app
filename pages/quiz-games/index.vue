@@ -24,7 +24,7 @@ onMounted(async () => {
 
 <template>
   <NuxtLayout>
-    <div class="container flex flex-col px-36 py-8">
+    <div class="container flex flex-col px-6 lg:px-36 py-8">
       <h1 class="text-4xl text-amber-900 font-bold self-center mb-6">
         Quiz & Games
       </h1>

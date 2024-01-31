@@ -53,7 +53,7 @@ function refreshPage() {
         </div>
       </div>
 
-      <div class="flex justify-between items-center">
+      <div class="flex flex-col gap-4 lg:gap-0 lg:flex-row justify-between items-center">
         <!-- Question Section -->
         <div>
           <div class="text-2xl font-bold mb-2">
@@ -78,12 +78,12 @@ function refreshPage() {
         </div>
       </div>
       <!-- Question Control Flow Section -->
-      <div class="flex justify-between mt-8">
+      <div class="flex flex-col-reverse gap-2 lg:gap-0 lg:flex-row justify-between mt-8">
         <button v-if="!getIsChecked() && currentQuestionIndex !== quizzes.length - 1" class="btn btn-sm" @click="tebakBudaya.nextQuestion">
           Lewati
         </button>
         <div v-else />
-        <div class="flex justify-end gap-2">
+        <div class="flex justify-between lg:justify-end gap-2">
           <button
             v-if="currentQuestionIndex !== 0"
             class="btn btn-sm btn-neutral" @click="tebakBudaya.prevQuestion"
@@ -99,7 +99,7 @@ function refreshPage() {
           >
             Kumpulkan
           </button>
-          <button v-else :disabled="!getSelectedChoiceId()" class="btn btn-sm btn-neutral">
+          <button v-else :disabled="!getSelectedChoiceId()" class="btn btn-sm lg:w-fit btn-neutral" :class="{'!w-full': currentQuestionIndex === 0}">
             <div v-if="!getIsChecked()" @click="tebakBudaya.checkChoice()">
               Cek Jawaban
               <Icon name="material-symbols:search-rounded" class="text-xl" />
