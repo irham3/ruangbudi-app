@@ -1,75 +1,22 @@
-# Nuxt 3 Minimal Starter
+# Ruang Budi
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Belajar Budaya dan Bahasa Isyarat dengan Menyenangkan!
 
-## Setup
+## Fitur - fitur kami
 
-Make sure to install the dependencies:
+- ### Belajar Budaya Indonesia
+  Kekayaan Budaya Indonesia sangat beragam dan menarik loh!
 
-```bash
-# npm
-npm install
+- ### Belajar Bahasa Isyarat
+  Belajar menyusun kalimat sederhana dengan menyenangkan. Adik-adik pasti suka!
 
-# pnpm
-pnpm install
+- ### Belajar Membuat Kerajinan
+  Belajar menyusun kalimat sederhana dengan menyenangkan. Adik-adik pasti suka!
 
-# yarn
-yarn install
+- ### Kuis dan Games
+  Kuis untuk melatih pemahaman adik-adik, permainan untuk bersenang-senang!
 
-# bun
-bun install
-```
+## Tentang Ruang Budi
+  RuangBudi membantu siswa/i SD SLB Negeri Sukapura Bandung untuk mempelajari budaya Indonesia sekaligus meningkatkan kemampuan komunikasi siswa/i dengan pembelajaran yang seru dan menyenangkan
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Yuk kunjungi web kami di [website Ruang Budi](https://ruangbudi.com) untuk menikmati semuat fitur kami.

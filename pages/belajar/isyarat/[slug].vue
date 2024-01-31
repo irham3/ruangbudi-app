@@ -328,7 +328,7 @@ const navigasi = ref<Navigasi>(Navigasi.KirimVideo)
           </div>
           <nav class="w-full">
             <ul class="steps steps-vertical w-full">
-              <li v-for="(videoDetail, index) in videoDetails" :key="index" class="step step-primary w-full">
+              <li v-for="(videoDetail, index) in videoDetails" :key="index" class="step step-coklat w-full">
                 <button
                   :class="videoDetails!.findIndex(obj => obj.id === videoDetailId) === index ? 'bg-gray-800' : 'bg-gray-500'"
                   class="flex items-center px-4 py-2 w-full rounded-md text-gray-200 hover:bg-gray-800 mt-4"
@@ -345,3 +345,27 @@ const navigasi = ref<Navigasi>(Navigasi.KirimVideo)
     </div>
   </NuxtLayout>
 </template>
+
+<style scoped>
+.steps .step-coklat + .step-coklat:before,
+  .steps .step-coklat:after {
+  --tw-bg-opacity: 1;
+  background-color: #d97706;
+  --tw-text-opacity: 1;
+  color: #d97706;
+}
+.steps .step-coklat + .step-coklat:before,
+  .steps .step-coklat:after {
+  --tw-bg-opacity: 1;
+  background-color: #d97706;
+  --tw-text-opacity: 1;
+  color: #d97706;
+}
+.steps .step-coklat + .step-coklat:before,
+  .steps .step-coklat:after {
+  --tw-bg-opacity: 1;
+  background-color: #d97706;
+  --tw-text-opacity: 1;
+  color: white
+}
+</style>
