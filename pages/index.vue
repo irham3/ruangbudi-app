@@ -22,11 +22,11 @@ function navigateToBelajar() {
   <NuxtLayout>
     <!-- Hero Section -->
     <div class="overflow-hidden">
-      <section class="flex flex-col-reverse sm:flex-row items-center h-screen sm:-mt-14">
-        <div class="absolute top-[25%] sm:top-[42%] right-0 w-[230px] h-[450px] bg-contain bg-no-repeat bg-center z-[-1]" style="background-image: url('/images/background/wayang-bg.png');" />
-        <div class="bg-contain bg-no-repeat bg-center w-3/5 h-[60vh] bg-[url('/images/hero-left.png')] transition-transform hover:scale-110" />
-        <div class=" w-full px-2 text-center items-center sm:text-left sm:items-start py-4 sm:py-0 sm:w-1/2 flex flex-col">
-          <h1 class="text-[2.8rem] w-10/12 font-bold mb-4">
+      <div class="absolute top-[25%] sm:top-[42%] right-0 w-[230px] h-[450px] bg-contain bg-no-repeat bg-center z-[-1]" style="background-image: url('/images/background/wayang-bg.png');" />
+      <section class="flex flex-col-reverse justify-center sm:flex-row items-center min-h-[90dvh] lg:min-h-screen lg:-mt-14">
+        <div class="bg-contain bg-no-repeat bg-center w-3/5 h-[30vh] lg:h-[60vh] bg-[url('/images/hero-left.png')] transition-transform hover:scale-110 hidden lg:block" />
+        <div class=" w-full px-2 text-center items-center lg:text-left lg:items-start py-0 lg:py-0 lg:w-1/2 flex flex-col justify-center h-[70vh] lg:h-fit">
+          <h1 class="text-[1.7rem] lg:text-[2.8rem] w-10/12 font-bold mb-4">
             Belajar Budaya dan Bahasa Isyarat dengan Menyenangkan!
           </h1>
           <p class="w-10/12 mb-4">
@@ -60,7 +60,7 @@ function navigateToBelajar() {
           <p>Belajar sambil bermain akan lebih asyik dengan RuangBudi!</p>
         </div>
         <div class="sm:flex-row flex flex-col gap-8">
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center" data-aos="fade-right">
             <div style="background-image: url('/images/wayang.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Wayang" />
 
             <h3 class="text-xl font-bold mt-3">
@@ -68,21 +68,21 @@ function navigateToBelajar() {
             </h3>
             <p>Kekayaan Budaya Indonesia sangat beragam dan menarik loh!</p>
           </div>
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center" data-aos="fade-right">
             <div style="background-image: url('/images/belajar-bahasa-isyarat.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Papan Tulis" />
             <h3 class="text-xl font-bold mt-3">
               Belajar Bahasa Isyarat
             </h3>
             <p>Belajar menyusun kalimat sederhana dengan menyenangkan. Adik-adik pasti suka!</p>
           </div>
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center" data-aos="fade-right">
             <div style="background-image: url('/images/kerajinan.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Kerajinan Tangan" />
             <h3 class="text-xl font-bold mt-3">
               Belajar Membuat Kerajinan
             </h3>
             <p>Belajar menyusun kalimat sederhana dengan menyenangkan. Adik-adik pasti suka!</p>
           </div>
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-center" data-aos="fade-right">
             <div style="background-image: url('/images/kuis-games.png');" class="tooltip w-40 h-48 bg-contain bg-center bg-no-repeat transition-transform hover:scale-110" data-tip="Mobil Mainan" />
             <h3 class="text-xl font-bold mt-3">
               Kuis dan Games
@@ -93,7 +93,7 @@ function navigateToBelajar() {
       </section>
 
       <!-- About Section -->
-      <section class="flex flex-col sm:flex-row items-center justify-center -mt-16 sm:gap-28 gap-6 h-screen sm:px-40 px-2 relative">
+      <section class="flex flex-col sm:flex-row items-center justify-center -mt-16 sm:gap-28 gap-6 h-screen sm:px-40 px-2 relative" data-aos="fade-up">
         <div class="absolute top-4 left-0 w-[13rem] h-[16rem] bg-contain bg-no-repeat" style="background-image: url('/images/background/beok.png');" />
 
         <div class="sm:w-2/5 w-full text-center sm:text-start">

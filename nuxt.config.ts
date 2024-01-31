@@ -1,11 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  // devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: [
     '@nuxtjs/supabase',
     'nuxt-icon',
     '@vueuse/sound/nuxt',
     '@pinia/nuxt',
+    'nuxt-aos',
   ],
   css: [
     '~/assets/css/main.css',

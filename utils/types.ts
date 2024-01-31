@@ -116,10 +116,29 @@ export type QuizUser = {
   currentQuestionIndex: number
   completedQuiz: number
   isSubmitted: boolean
-  leaderboard: QuizLeaderboard[]
+  leaderboard: Leaderboard[]
 }
 
-export type QuizLeaderboard = {
+export type Leaderboard = {
   student_name: string
   score: number
+}
+
+export type Sentence = {
+  question_id: number
+  question_text: string
+  question_img_filename: string
+  answer_text: string
+  userAnswerText: string
+  isChecked: boolean
+}
+
+export type SentenceUser = {
+  sentences: Sentence[]
+  currentQuestionIndex: number
+  studentUUID: string
+  score: number
+  completedSentence: number
+  isSubmitted: boolean
+  leaderboard: Leaderboard[]
 }

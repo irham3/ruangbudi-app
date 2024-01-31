@@ -58,10 +58,15 @@ async function search() {
   cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
 }
 
+const loadingFetch = ref(true)
+
 onMounted(async () => {
   cultures.value = await fetchCultures(selectedCategoryId.value, selectedCityId.value)
   cities.value = await fetchCities()
   categories.value = await fetchCategories()
+  setTimeout(() => {
+    loadingFetch.value = false
+  }, 500)
 })
 </script>
 
@@ -70,22 +75,22 @@ onMounted(async () => {
     <img
       src="/images/background/batik-2.png"
       alt=""
-      class="w-[15rem] absolute right-0 top-[12%] -z-10"
+      class=" w-[8rem] lg:w-[15rem] absolute right-0 top-[12%] -z-10"
     >
     <img
       src="/images/background/batik.png"
       alt=""
-      class="w-[15rem] absolute left-0 top-[12%] -z-10"
+      class=" w-[8rem] lg:w-[15rem] absolute left-0 top-[12%] -z-10"
     >
     <img
       src="/images/background/komodo.png"
       alt=""
-      class="w-[15rem] absolute left-0 top-[200%] -z-10"
+      class=" w-[8rem] lg:w-[15rem] absolute left-0 top-[200%] -z-10"
     >
     <img
       src="/images/background/wayang-bg.png"
       alt=""
-      class="w-[15rem] absolute right-0 top-[200%] -z-10"
+      class=" w-[8rem] lg:w-[15rem] absolute right-0 top-[200%] -z-10"
     >
     <div class="flex flex-col py-14">
       <h1 class="text-4xl text-amber-900 font-bold self-center mb-6">
@@ -100,7 +105,7 @@ onMounted(async () => {
       <div class="sm:px-32 px-4">
         <!-- Filter Section -->
         <div class="flex justify-center mb-12">
-          <div class="flex gap-6 border border-stone-400 sm:w-fit w-full px-4 py-2.5 rounded-md items-center">
+          <div class="flex flex-col lg:flex-row gap-2 lg:gap-6 border border-stone-400 sm:w-fit w-full px-4 py-2.5 rounded-md items-center">
             <div class="flex items-center gap-4">
               <div class="flex gap-3 items-center hover:scale-105 transition-all">
                 <Icon name="icon-park-outline:city" class="rotate-180 text-stone-600" />
@@ -138,22 +143,30 @@ onMounted(async () => {
                 </select>
               </div>
             </div>
-            <button class="px-6 py-1 bg-[#aa6c4a] rounded-sm text-white font-semibold sm:text-base text-sm transition-transform hover:scale-105" @click="search">
+            <button class="px-6 py-1 bg-[#aa6c4a] w-full lg:w-fit rounded-sm text-white font-semibold sm:text-base text-sm transition-transform hover:scale-105" @click="search">
               Telusuri
             </button>
           </div>
         </div>
 
         <!-- Culture Card List -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8 px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8 px-8" v-if="!loadingFetch">
           <NuxtLink
             v-for="culture in cultures"
             :key="culture.id"
             :to="`/belajar/budaya/${culture.culture_slug}`"
             class="max-w-sm w-full lg:max-w-full lg:flex cursor-pointer transition-all hover:shadow-md hover:bg-slate-50 hover:scale-105 rounded-md"
+            data-aos="fade-right"
           >
             <HorizontalCard :culture="culture" />
           </NuxtLink>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8 px-8" v-else>
+          <div
+            v-for="culture in 4"
+            class="w-full h-[10rem] rounded-lg bg-slate-200 animate-pulse"
+          >
+          </div>
         </div>
       </div>
     </div>

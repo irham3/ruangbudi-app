@@ -1,24 +1,26 @@
 <script lang="ts" setup>
-const user = useSupabaseUser()
-const tebakBudaya = useTebakBudayaStore()
+import { useSusunKalimatStore } from '~/stores/susun-kalimat'
 
-await useAsyncData('tebakBudaya', () => tebakBudaya.fetchQuizzes())
-tebakBudaya.setStudentUUID(user.value!.id)
+const user = useSupabaseUser()
+const susunKalimat = useSusunKalimatStore()
+
+await useAsyncData('susunKalimat', () => susunKalimat.fetchSentences())
+susunKalimat.setStudentUUID(user.value!.id)
 
 const {
-  quizzes,
+  sentences,
   currentQuestionIndex,
   score,
-  completedQuiz,
-  getSelectedChoiceId,
-  getRightChoiceId,
+  completedSentence,
+  getUserAnswer,
+  getRightAnswer,
   getIsChecked,
   isSubmitted,
-} = storeToRefs(tebakBudaya)
+} = storeToRefs(susunKalimat)
 
 function exitQuiz() {
-  navigateTo('/quiz-games/tebak-budaya')
-  tebakBudaya.$reset()
+  navigateTo('/quiz-games/susun-kalimat')
+  susunKalimat.$reset()
 }
 
 function refreshPage() {
@@ -30,11 +32,6 @@ function refreshPage() {
   <NuxtLayout
     name="quiz"
   >
-    <template #title>
-      <div class="text-center text-2xl font-bold text-slate-100 drop-shadow-[0_0_10px_rgba(0,255,255,0.7)] mb-2">
-        Quiz Tebak Budaya
-      </div>
-    </template>
     <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-7xl bg-white shadow-lg rounded px-8 pt-6 pb-8">
       <button
         class="flex gap-1 font-semibold transition-transform hover:scale-105 "
@@ -43,7 +40,10 @@ function refreshPage() {
         <Icon name="mdi:keyboard-backspace" class="text-2xl" />
         Kembali ke menu
       </button>
-      <progress class="progress progress-success w-full h-4" :value="completedQuiz" :max="quizzes.length" />
+      <div class="text-center text-2xl font-bold text-amber-700 mb-4">
+        Susun Kalimat
+      </div>
+      <progress class="progress progress-success w-full h-4" :value="completedSentence" :max="sentences.length" />
       <div class="flex justify-between mb-4">
         <div class="flex flex-col text-base">
           Soal {{ currentQuestionIndex + 1 }}
@@ -53,58 +53,59 @@ function refreshPage() {
         </div>
       </div>
 
-      <div class="flex justify-between items-center">
+      <div class="flex flex-col justify-center items-center gap-4">
         <!-- Question Section -->
-        <div>
-          <div class="text-2xl font-bold mb-2">
-            {{ quizzes[currentQuestionIndex].question_text }}
-          </div>
-          <img
-            class="max-w-xl"
-            :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/quizes/tebak-budaya/${encodeURIComponent(quizzes[currentQuestionIndex].question_img_filename)}`"
-          >
+        <div class="text-2xl font-bold">
+          {{ sentences[currentQuestionIndex].question_text }}
         </div>
-        <div class="grid grid-cols-2 grid-rows-2 gap-2 w-fit">
-          <!-- Choices Section -->
-          <ChoiceButton
-            v-for="choice in quizzes[currentQuestionIndex].choices"
-            :key="choice.id"
-            :choice="choice"
-            :is-selected="getSelectedChoiceId() === choice.id"
-            :is-right="choice.id === getRightChoiceId()"
-            :is-checked="quizzes[currentQuestionIndex].isChecked"
-            @click="tebakBudaya.selectChoice(choice.id)"
+        <img
+          class="max-h-56"
+          :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/quizes/susun-kalimat/${sentences[currentQuestionIndex].question_img_filename}`"
+        >
+        <div class="w-full">
+          <TextInput
+            v-model="sentences[currentQuestionIndex].userAnswerText"
+            class="w-full"
+            placeholder="Masukkan jawaban kamu di sini"
           />
         </div>
       </div>
       <!-- Question Control Flow Section -->
       <div class="flex justify-between mt-8">
-        <button v-if="!getIsChecked() && currentQuestionIndex !== quizzes.length - 1" class="btn btn-sm" @click="tebakBudaya.nextQuestion">
+        <button v-if="!getIsChecked() && currentQuestionIndex !== sentences.length - 1" class="btn btn-sm" @click="susunKalimat.nextQuestion">
           Lewati
         </button>
-        <div v-else />
+        <div v-else-if="!getIsChecked() && currentQuestionIndex === sentences.length - 1" />
+        <div v-else class="font-semibold text-lg">
+          <div v-if="getRightAnswer() === getUserAnswer()" class="text-green-600">
+            ✅ Benar, Kamu Hebat
+          </div>
+          <div v-else class="text-red-600">
+            ❌ Jawaban benar: {{ getRightAnswer() }}
+          </div>
+        </div>
         <div class="flex justify-end gap-2">
           <button
             v-if="currentQuestionIndex !== 0"
-            class="btn btn-sm btn-neutral" @click="tebakBudaya.prevQuestion"
+            class="btn btn-sm btn-neutral" @click="susunKalimat.prevQuestion"
           >
             <Icon name="material-symbols:arrow-left-alt" />
             Kembali
           </button>
           <button
-            v-if="currentQuestionIndex === quizzes.length - 1 && getIsChecked()"
+            v-if="currentQuestionIndex === sentences.length - 1 && getIsChecked()"
             class="btn btn-sm bg-amber-700 hover:bg-amber-800 text-white"
-            :disabled="completedQuiz !== quizzes.length"
-            @click="tebakBudaya.submit()"
+            :disabled="completedSentence !== sentences.length"
+            @click="susunKalimat.submit()"
           >
             Kumpulkan
           </button>
-          <button v-else :disabled="!getSelectedChoiceId()" class="btn btn-sm btn-neutral">
-            <div v-if="!getIsChecked()" @click="tebakBudaya.checkChoice()">
+          <button v-else :disabled="!getUserAnswer()" class="btn btn-sm btn-neutral">
+            <div v-if="!getIsChecked()" @click="susunKalimat.checkAnswer()">
               Cek Jawaban
               <Icon name="material-symbols:search-rounded" class="text-xl" />
             </div>
-            <div v-else @click="tebakBudaya.nextQuestion()">
+            <div v-else @click="susunKalimat.nextQuestion()">
               Lanjut
               <Icon name="material-symbols:arrow-right-alt" class="text-xl" />
             </div>
@@ -143,7 +144,7 @@ function refreshPage() {
           Selamat, kamu telah menyelesaikan quiz 🎉
         </div>
         <div class="font-semibold text-base mt-2 mb-5">
-          Skor kamu adalah <span class="text-amber-700">{{ score }}</span>/{{ quizzes.length * 100 }}
+          Skor kamu adalah <span class="text-amber-700">{{ score }}</span>/{{ sentences.length * 200 }}
         </div>
         <form class="flex flex-col gap-2 w-full justify-center" method="dialog">
           <button class="btn btn-sm bg-amber-700 text-white hover:bg-amber-800" @click="refreshPage">

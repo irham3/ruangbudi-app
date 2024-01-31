@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-const tebakBudaya = useTebakBudayaStore()
+import { useSusunKalimatStore } from '~/stores/susun-kalimat'
+
+const susunKalimat = useSusunKalimatStore()
 onMounted(async () => {
-  await useAsyncData('tebakBudaya', () => tebakBudaya.fetchLeaderboard().then(() => true))
+  await useAsyncData('susunKalimat', () => susunKalimat.fetchLeaderboard().then(() => true))
 })
 </script>
 
@@ -13,13 +15,13 @@ onMounted(async () => {
     <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-lg bg-white shadow-lg rounded px-8 pt-6 pb-8 flex flex-col gap-4">
       <button
         class="flex gap-1 font-semibold transition-transform hover:scale-105 "
-        @click="navigateTo('/quiz-games/tebak-budaya/')"
+        @click="navigateTo('/quiz-games/susun-kalimat/')"
       >
         <Icon name="mdi:keyboard-backspace" class="text-2xl" />
         Kembali ke menu
       </button>
       <h1 class="text-3xl font-bold text-center text-purple-700">
-        Skor Tertinggi Tebak Budaya
+        Skor Tertinggi Susun Kalimat
       </h1>
       <div class="max-h-96 overflow-auto">
         <table class="table table-xs text-center">
@@ -31,8 +33,8 @@ onMounted(async () => {
               <th>Skor</th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="(item, index) in tebakBudaya.leaderboard" :key="index" class="hover font-base">
+          <tbody class="">
+            <tr v-for="(item, index) in susunKalimat.leaderboard" :key="index" class="hover font-base">
               <th class="text-xl">
                 <div v-if="index < 3" class="text-3xl">
                   <Icon v-if="index === 0" name="fluent-emoji-flat:1st-place-medal" />
