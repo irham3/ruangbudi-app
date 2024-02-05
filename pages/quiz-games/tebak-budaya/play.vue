@@ -30,12 +30,7 @@ function refreshPage() {
   <NuxtLayout
     name="quiz"
   >
-    <template #title>
-      <div class="text-center text-2xl font-bold text-slate-100 drop-shadow-[0_0_10px_rgba(0,255,255,0.7)] mb-2">
-        Quiz Tebak Budaya
-      </div>
-    </template>
-    <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-7xl bg-white shadow-lg rounded px-8 pt-6 pb-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-7xl shadow-lg rounded p-8 bg-slate-50">
       <button
         class="flex gap-1 font-semibold transition-transform hover:scale-105 "
         onclick="stop_modal.showModal()"
@@ -43,6 +38,9 @@ function refreshPage() {
         <Icon name="mdi:keyboard-backspace" class="text-2xl" />
         Kembali ke menu
       </button>
+      <div class="text-center text-2xl font-bold text-amber-700 mb-4">
+        Quiz Tebak Budaya
+      </div>
       <progress class="progress progress-success w-full h-4" :value="completedQuiz" :max="quizzes.length" />
       <div class="flex justify-between mb-4">
         <div class="flex flex-col text-base">
@@ -53,16 +51,18 @@ function refreshPage() {
         </div>
       </div>
 
-      <div class="flex flex-col gap-4 lg:gap-0 lg:flex-row justify-between items-center">
+      <div class="flex flex-col gap-2 lg:flex-row justify-between items-center">
         <!-- Question Section -->
         <div>
           <div class="text-2xl font-bold mb-2">
             {{ quizzes[currentQuestionIndex].question_text }}
           </div>
-          <img
-            class="max-w-xl"
+          <NuxtImg
+            preload
+            class="max-w-md max-h-60"
             :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/quizes/tebak-budaya/${encodeURIComponent(quizzes[currentQuestionIndex].question_img_filename)}`"
-          >
+            placeholder
+          />
         </div>
         <div class="grid grid-cols-2 grid-rows-2 gap-2 w-fit">
           <!-- Choices Section -->
@@ -99,7 +99,7 @@ function refreshPage() {
           >
             Kumpulkan
           </button>
-          <button v-else :disabled="!getSelectedChoiceId()" class="btn btn-sm lg:w-fit btn-neutral" :class="{'!w-full': currentQuestionIndex === 0}">
+          <button v-else :disabled="!getSelectedChoiceId()" class="btn btn-sm lg:w-fit btn-neutral" :class="{ '!w-full': currentQuestionIndex === 0 }">
             <div v-if="!getIsChecked()" @click="tebakBudaya.checkChoice()">
               Cek Jawaban
               <Icon name="material-symbols:search-rounded" class="text-xl" />

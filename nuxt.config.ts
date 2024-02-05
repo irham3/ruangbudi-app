@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@vueuse/sound/nuxt',
     '@pinia/nuxt',
     'nuxt-aos',
+    "@nuxt/image"
   ],
   css: [
     '~/assets/css/main.css',

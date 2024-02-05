@@ -15,11 +15,12 @@ defineProps<{
     :class="{ 'bg-amber-700': isSelected && !isChecked, 'bg-green-600': isChecked && isRight, 'bg-red-600': isSelected && isChecked && !isRight, 'bg-blue-600': !isSelected }"
   >
     <div class="flex flex-col gap-2 items-center">
-      <img
-        class="max-h-32"
+      <NuxtImg
+        preload
+        width="200"
         :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/assets/gif/${choice.text}.gif`"
-      >
-      {{ choice.text }}
+      />
+      <p>{{ choice.text }}</p>
     </div>
   </button>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-100 flex items-center justify-center">
     <div class="text-center">
-      <img src="/images/background/error-img.svg" width="400" alt="404">
+      <NuxtImg src="/images/background/error-img.svg" width="400" alt="404" />
       <h2 class="text-6xl font-bold text-gray-600">
         Opps!!!
       </h2>

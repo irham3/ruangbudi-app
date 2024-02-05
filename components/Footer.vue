@@ -16,7 +16,7 @@ const currentYear = date.getFullYear()
           <ul class="space-y-1">
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
               <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Daerah asal budaya
+                Daerah Asal budaya
               </a>
             </li>
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
@@ -53,7 +53,7 @@ const currentYear = date.getFullYear()
           </p>
           <ul class="space-y-1">
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <NuxtLink to="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+              <NuxtLink to="https://www.youtube.com/@RuangBudi" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
                 Youtube
               </NuxtLink>
             </li>
@@ -91,9 +91,10 @@ const currentYear = date.getFullYear()
       </div>
       <div class="flex flex-col justify-center items-center">
         <div class="mb-4">
-          <img src="/images/logo.png" class="transition-transform hover:scale-110" alt="">
+          <NuxtImg src="/images/logo.png" class="transition-transform hover:scale-110" alt="Logo" />
         </div>
-        <p>Innovillage {{ currentYear }} - Ruang Budi - HearWeAre Team</p>
+        <p>Innovillage - Ruang Budi - HearWeAre Team</p>
+        <p>Copyright © 2023-{{ currentYear }}</p>
       </div>
     </div>
     <div class="absolute w-[230px] h-[450px] left-0 -top-7" style="background-image: url('/images/background/wayang-bg-2.png');" />

@@ -41,10 +41,10 @@ function refreshPage() {
         Kembali ke menu
       </button>
       <div class="text-center text-2xl font-bold text-amber-700 mb-4">
-        Susun Kalimat
+        Yuk Susun Kalimat Berikut
       </div>
       <progress class="progress progress-success w-full h-4" :value="completedSentence" :max="sentences.length" />
-      <div class="flex justify-between mb-4">
+      <div class="flex justify-between">
         <div class="flex flex-col text-base">
           Soal {{ currentQuestionIndex + 1 }}
         </div>
@@ -58,10 +58,11 @@ function refreshPage() {
         <div class="text-2xl font-bold">
           {{ sentences[currentQuestionIndex].question_text }}
         </div>
-        <img
-          class="max-h-56"
+        <NuxtImg
+          preload
           :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/quizes/susun-kalimat/${sentences[currentQuestionIndex].question_img_filename}`"
-        >
+          class="max-w-md max-h-60"
+        />
         <div class="w-full">
           <TextInput
             v-model="sentences[currentQuestionIndex].userAnswerText"
