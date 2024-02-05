@@ -150,7 +150,7 @@ onMounted(async () => {
         </div>
 
         <!-- Culture Card List -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8 px-8" v-if="!loadingFetch">
+        <div v-if="!loadingFetch" class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8 px-8">
           <NuxtLink
             v-for="culture in cultures"
             :key="culture.id"
@@ -161,12 +161,12 @@ onMounted(async () => {
             <HorizontalCard :culture="culture" />
           </NuxtLink>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8 px-8" v-else>
+        <div v-else class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8 px-8">
           <div
-            v-for="culture in 4"
+            v-for="i in 4"
+            :key="i"
             class="w-full h-[10rem] rounded-lg bg-slate-200 animate-pulse"
-          >
-          </div>
+          />
         </div>
       </div>
     </div>

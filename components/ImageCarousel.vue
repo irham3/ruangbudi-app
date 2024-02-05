@@ -40,7 +40,9 @@ const props = defineProps<{
         <dialog id="my_modal_3" class="modal">
           <div class="modal-box">
             <form method="dialog">
-              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+              </button>
             </form>
             <img :src="slide.image" class="w-full aspect-video lg:h-[32rem] image-full object-cover mt-4 lg:aspect-auto">
           </div>
@@ -53,7 +55,6 @@ const props = defineProps<{
         </div>
       </div>
       <!-- <button class="btn" onclick="my_modal_3.showModal()">open modal</button> -->
-
     </div>
 
     <div class="flex">

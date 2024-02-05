@@ -89,7 +89,7 @@ onMounted(async () => {
             Lihat Semua &rarr;
           </NuxtLink>
         </div>
-        <div class="flex gap-4 flex-col items-center md:items-stretch md:flex-row" v-if="!loadingFetch">
+        <div v-if="!loadingFetch" class="flex gap-4 flex-col items-center md:items-stretch md:flex-row">
           <VerticalCard
             v-for="(culture, index) in cultures" :key="index"
             :to="`belajar/budaya/${culture.culture_slug}`"
@@ -97,8 +97,8 @@ onMounted(async () => {
             :img-path="`cultures/${culture.id}/${culture.image_filenames[0]}`"
           />
         </div>
-        <div class="flex gap-4 flex-col items-center md:items-stretch md:flex-row" v-else>
-          <div class="w-full h-[11.5rem] rounded-lg animate-pulse bg-slate-200" v-for="i in 4"></div>
+        <div v-else class="flex gap-4 flex-col items-center md:items-stretch md:flex-row">
+          <div v-for="i in 4" :key="i" class="w-full h-[11.5rem] rounded-lg animate-pulse bg-slate-200" />
         </div>
       </section>
 
@@ -115,7 +115,7 @@ onMounted(async () => {
             Lihat Semua &rarr;
           </NuxtLink>
         </div>
-        <div class="flex gap-4 flex-col items-center md:items-baseline md:flex-nowrap md:flex-row" v-if="!loadingFetch">
+        <div v-if="!loadingFetch" class="flex gap-4 flex-col items-center md:items-baseline md:flex-nowrap md:flex-row">
           <VerticalCard
             v-for="(studyVideo, index) in studyVideos" :key="index"
             :to="`belajar/isyarat/${studyVideo.slug}`"
@@ -123,8 +123,8 @@ onMounted(async () => {
             :img-path="`video/${studyVideo.slug}.png`"
           />
         </div>
-        <div class="flex gap-4 flex-col items-center md:items-stretch md:flex-row" v-else>
-          <div class="w-full h-[11.5rem] rounded-lg animate-pulse bg-slate-200" v-for="i in 4"></div>
+        <div v-else class="flex gap-4 flex-col items-center md:items-stretch md:flex-row">
+          <div v-for="i in 4" :key="i" class="w-full h-[11.5rem] rounded-lg animate-pulse bg-slate-200" />
         </div>
       </section>
 
@@ -141,7 +141,7 @@ onMounted(async () => {
             Lihat Semua &rarr;
           </NuxtLink>
         </div>
-        <div class="flex gap-4 flex-col items-center md:items-start md:flex-row" v-if="!loadingFetch">
+        <div v-if="!loadingFetch" class="flex gap-4 flex-col items-center md:items-start md:flex-row">
           <VerticalCard
             v-for="(craft, index) in crafts" :key="index"
             :to="`belajar/kerajinan/${craft.slug}`"
@@ -149,8 +149,8 @@ onMounted(async () => {
             :img-path="`crafts/${craft.id}.png`"
           />
         </div>
-        <div class="flex gap-4 flex-col items-center md:items-stretch md:flex-row" v-else>
-          <div class="w-full h-[11.5rem] rounded-lg animate-pulse bg-slate-200" v-for="i in 4"></div>
+        <div v-else class="flex gap-4 flex-col items-center md:items-stretch md:flex-row">
+          <div v-for="i in 4" :key="i" class="w-full h-[11.5rem] rounded-lg animate-pulse bg-slate-200" />
         </div>
       </section>
     </div>
