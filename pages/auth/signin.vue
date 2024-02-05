@@ -1,6 +1,15 @@
 <script setup lang="ts">
 definePageMeta({
   title: 'Masuk',
+  middleware: [
+    // Check if user has logged in
+    function () {
+      const user = useSupabaseUser()
+
+      if (user.value)
+        return navigateTo('/')
+    },
+  ],
 })
 
 const supabase = useSupabaseClient()

@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import type { CultureDetail, CultureScore, Slide, Student } from '~/utils/types'
 
+definePageMeta({
+  title: 'Belajar Budaya',
+})
+
 const route = useRoute()
 const slug = route.params.slug as string
 const client = useSupabaseClient()
@@ -50,10 +54,6 @@ onMounted(async () => {
     cultureScore.value = await fetchCultureScore(cultureDetail.value.id)
   }
 })
-
-definePageMeta({
-  title: 'Belajar Budaya',
-})
 </script>
 
 <template>
@@ -71,7 +71,7 @@ definePageMeta({
         <p v-if="cultureDetail?.city_name" class="text-nowrap text-xl">
           Asal Budaya: <b>{{ cultureDetail?.city_name! }}</b>
         </p>
-        <button class="btn" onclick="lihat_nilai_siswa.showModal()">
+        <button v-if="user" class="btn" onclick="lihat_nilai_siswa.showModal()">
           Lihat Nilai
         </button>
         <dialog id="lihat_nilai_siswa" class="modal">

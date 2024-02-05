@@ -66,6 +66,7 @@ function refreshPage() {
         <div class="w-full">
           <TextInput
             v-model="sentences[currentQuestionIndex].userAnswerText"
+            :disabled="!!getIsChecked()"
             class="w-full"
             placeholder="Masukkan jawaban kamu di sini"
           />

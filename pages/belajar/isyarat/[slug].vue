@@ -129,8 +129,17 @@ async function getUserData(videoDetailId: number, userData: User) {
     uploadedVideoUrl.value = undefined
 }
 
-async function getVideoData(youtube_id: string) {
-  await navigateTo(`#${youtube_id}`)
+async function getVideoData(youtube_id?: string) {
+  if (!youtube_id) {
+    const firstYtVideoId = videoDetails.value![0].youtube_id
+    await navigateTo(`#${firstYtVideoId}`, {
+      replace: true,
+    })
+    reloadNuxtApp()
+  }
+  else {
+    await navigateTo(`#${youtube_id}`)
+  }
   videoDetailId.value = videoDetails.value!.find(item => item.youtube_id === youtube_id)!.id!
 
   if (user.value) {
@@ -195,18 +204,17 @@ function stopRecording() {
 
 const loadingFetch = ref(true)
 
-onBeforeMount(async () => {
+onMounted(async () => {
   const slug = route.params.slug as string
   const youtubeId = route.hash.substring(1)
 
   title.value = await fetchTitle(slug)
   videoDetails.value = await fetchVideos(slug)
-  const firstYtVideoId = videoDetails.value![0].youtube_id
 
   if (youtubeId.length !== 0)
     await getVideoData(youtubeId)
   else
-    await getVideoData(firstYtVideoId)
+    await getVideoData()
 
   setTimeout(() => {
     loadingFetch.value = false
