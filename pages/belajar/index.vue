@@ -95,7 +95,6 @@ onMounted(async () => {
             :to="`belajar/budaya/${culture.culture_slug}`"
             :title="culture.culture_name"
             :img-path="`cultures/${culture.id}/${culture.image_filenames[0]}`"
-            class="!max-w-[80%] md:!max-w-[16rem]"
           />
         </div>
         <div class="flex gap-4 flex-col items-center md:items-stretch md:flex-row" v-else>
@@ -122,7 +121,6 @@ onMounted(async () => {
             :to="`belajar/isyarat/${studyVideo.slug}`"
             :title="studyVideo.title"
             :img-path="`video/${studyVideo.slug}.png`"
-            class="!max-w-[80%] md:!max-w-[16rem]"
           />
         </div>
         <div class="flex gap-4 flex-col items-center md:items-stretch md:flex-row" v-else>
@@ -149,7 +147,6 @@ onMounted(async () => {
             :to="`belajar/kerajinan/${craft.slug}`"
             :title="craft.title"
             :img-path="`crafts/${craft.id}.png`"
-            class="!max-w-[80%] md:!max-w-[16rem]"
           />
         </div>
         <div class="flex gap-4 flex-col items-center md:items-stretch md:flex-row" v-else>

@@ -31,7 +31,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="relative flex cursor-pointer max-w-[16rem] flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 hover:shadow-md hover:shadow-amber-900 shadow-lg transform active:scale-90 transition-transform"
+    class="relative flex cursor-pointer max-w-[20rem] w-full flex-col overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700 hover:shadow-md hover:shadow-amber-900 shadow-lg transform active:scale-90 transition-transform"
     @click="playButtonSound"
   >
     <NuxtLink
