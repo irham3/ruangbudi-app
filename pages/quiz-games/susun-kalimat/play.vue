@@ -32,7 +32,7 @@ function refreshPage() {
   <NuxtLayout
     name="quiz"
   >
-    <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-7xl bg-white shadow-lg rounded px-8 pt-6 pb-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-7xl bg-white shadow-lg rounded px-8 pt-6 pb-8">
       <button
         class="flex gap-1 font-semibold transition-transform hover:scale-105 "
         onclick="stop_modal.showModal()"
@@ -44,7 +44,7 @@ function refreshPage() {
         Yuk Susun Kalimat Berikut
       </div>
       <progress class="progress progress-success w-full h-4" :value="completedSentence" :max="sentences.length" />
-      <div class="flex justify-between">
+      <div class="flex justify-between mb-4">
         <div class="flex flex-col text-base">
           Soal {{ currentQuestionIndex + 1 }}
         </div>
@@ -61,7 +61,7 @@ function refreshPage() {
         <NuxtImg
           preload
           :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/quizes/susun-kalimat/${sentences[currentQuestionIndex].question_img_filename}`"
-          class="max-w-md max-h-60"
+          class="max-w-md lg:max-h-60 max-h-40"
         />
         <div class="w-full">
           <TextInput

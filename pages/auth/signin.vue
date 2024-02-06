@@ -63,7 +63,7 @@ async function signIn() {
       method="post"
       @submit.prevent="signIn"
     >
-      <div class="flex flex-wrap -mx-3 md:mb-4">
+      <div class="flex flex-wrap -mx-3 mb-4">
         <div class="w-full px-3">
           <TextInput
             id="grid-email"
@@ -74,7 +74,7 @@ async function signIn() {
           />
         </div>
       </div>
-      <div class="flex flex-wrap -mx-3 md:mb-4">
+      <div class="flex flex-wrap -mx-3 mb-4">
         <div class="w-full px-3">
           <TextInput
             id="grid-password"
@@ -87,8 +87,8 @@ async function signIn() {
       </div>
       <button
         class="btn w-full bg-amber-700 hover:bg-amber-900
-      rounded-lg shadow-xl font-bold text-white my-10
-      py-2.5 px-5 focus:outline-none"
+      rounded-lg shadow-xl font-bold text-white my-6
+      text-base focus:outline-none"
         type="submit"
       >
         Masuk

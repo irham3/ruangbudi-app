@@ -59,12 +59,12 @@ function refreshPage() {
           </div>
           <NuxtImg
             preload
-            class="max-w-md max-h-60"
+            class="max-w-md lg:max-h-60 max-h-48"
             :src="`https://igdhuwnfxnlgnizlnjjc.supabase.co/storage/v1/object/public/images/quizes/tebak-budaya/${encodeURIComponent(quizzes[currentQuestionIndex].question_img_filename)}`"
             placeholder
           />
         </div>
-        <div class="grid grid-cols-2 grid-rows-2 gap-2 w-fit">
+        <div class="grid lg:grid-cols-2 grid-rows-2 gap-2 w-full lg:w-fit mt-6 lg:mt-0">
           <!-- Choices Section -->
           <ChoiceButton
             v-for="choice in quizzes[currentQuestionIndex].choices"

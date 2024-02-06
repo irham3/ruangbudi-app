@@ -79,30 +79,30 @@ async function signUp() {
 
 <template>
   <NuxtLayout name="auth" title="Daftar Akun">
-    <form class="w-full max-w-lg" method="post" @submit.prevent="signUp">
-      <div class="flex flex-wrap -mx-3 md:mb-4">
-        <div class="w-full md:w-1/2 px-3">
+    <form class="flex flex-col w-full max-w-lg gap-4" method="post" @submit.prevent="signUp">
+      <div class="flex flex-wrap lg:-mx-3">
+        <div class="w-full lg:w-1/2 lg:px-3 lg:mb-0 mb-4">
           <TextInput id="grid-first-name" v-model="firstName" type="text" placeholder="Nama Depan" required />
         </div>
-        <div class="w-full md:w-1/2 px-3">
+        <div class="w-full lg:w-1/2 lg:px-3">
           <TextInput id="grid-last-name" v-model="lastName" type="text" placeholder="Nama Belakang" required />
         </div>
       </div>
-      <div class="flex flex-wrap -mx-3 md:mb-4">
-        <div class="w-full px-3">
+      <div class="flex flex-wrap lg:-mx-3">
+        <div class="w-full lg:px-3">
           <TextInput id="grid-email" v-model="email" type="email" placeholder="Email" required />
         </div>
       </div>
-      <div class="flex flex-wrap -mx-3 md:mb-4">
-        <div class="w-full md:w-1/2 px-3">
+      <div class="flex flex-wrap lg:-mx-3">
+        <div class="w-full md:w-1/2 lg:px-3 lg:mb-0 mb-4">
           <TextInput id="grid-password" v-model="password" type="password" placeholder="Password" required />
         </div>
-        <div class="w-full md:w-1/2 px-3">
+        <div class="w-full md:w-1/2 lg:px-3">
           <TextInput id="grid-confirm-password" v-model="confirmPassword" type="password" placeholder="Konfirmasi Password" required />
         </div>
       </div>
-      <div class="flex flex-wrap -mx-3 md:mb-4">
-        <div class="w-full md:w-1/2 px-3">
+      <div class="flex flex-wrap lg:-mx-3">
+        <div class="w-full md:w-1/2 lg:px-3 lg:mb-0 mb-4">
           <select
             v-model="studentClass"
             class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -124,7 +124,7 @@ async function signUp() {
             </option>
           </select>
         </div>
-        <div class="w-full md:w-1/2 px-3">
+        <div class="w-full md:w-1/2 lg:px-3">
           <select v-model="gender" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required>
             <option value="" selected disabled>
               -Pilih Jenis Kelamin-
@@ -140,8 +140,8 @@ async function signUp() {
       </div>
       <button
         class="btn w-full bg-amber-700 hover:bg-amber-900
-      rounded-lg shadow-xl font-bold text-white my-10
-      py-2.5 px-5 focus:outline-none items-center"
+      rounded-lg shadow-xl font-bold text-white my-6
+      focus:outline-none items-center text-base"
         type="submit"
       >
         Daftar

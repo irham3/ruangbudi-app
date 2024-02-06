@@ -24,7 +24,7 @@ async function navigateToPlay() {
   <NuxtLayout
     name="quiz"
   >
-    <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-lg bg-white shadow-lg rounded px-8 pt-6 pb-8">
+    <div class="mt-5 sm:mx-auto w-full sm:max-w-lg bg-white shadow-lg rounded px-8 pt-6 pb-8">
       <button
         class="flex gap-1 font-semibold transition-transform hover:scale-105"
         @click="navigateTo('/quiz-games')"
