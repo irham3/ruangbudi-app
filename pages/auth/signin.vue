@@ -6,8 +6,11 @@ definePageMeta({
     function () {
       const user = useSupabaseUser()
 
-      if (user.value)
-        return navigateTo('/')
+      if (user.value) {
+        return navigateTo('/', {
+          redirectCode: 301,
+        })
+      }
     },
   ],
 })
@@ -45,7 +48,7 @@ async function signIn() {
   else if (route.query.from === 'susun-kalimat')
     await navigateTo('/quiz-games/susun-kalimat/')
   else
-    await navigateTo('/')
+    await navigateTo('/', { replace: true })
 
   toast('Berhasil masuk!', {
     type: toast.TYPE.SUCCESS,

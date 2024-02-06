@@ -6,8 +6,11 @@ definePageMeta({
     function () {
       const user = useSupabaseUser()
 
-      if (user.value)
-        return navigateTo('/')
+      if (user.value) {
+        return navigateTo('/', {
+          redirectCode: 301,
+        })
+      }
     },
   ],
 })

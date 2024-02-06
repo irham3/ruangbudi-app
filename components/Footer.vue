@@ -15,14 +15,14 @@ const currentYear = date.getFullYear()
           </p>
           <ul class="space-y-1">
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+              <NuxtLink to="" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
                 Daerah Asal budaya
-              </a>
+              </NuxtLink>
             </li>
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+              <NuxtLink to="" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
                 Jenis Budaya
-              </a>
+              </NuxtLink>
             </li>
           </ul>
         </div>
@@ -34,14 +34,14 @@ const currentYear = date.getFullYear()
           </p>
           <ul class="space-y-1">
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+              <NuxtLink to="" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
                 SIBI
-              </a>
+              </NuxtLink>
             </li>
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+              <NuxtLink to="" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
                 Buat Kalimat
-              </a>
+              </NuxtLink>
             </li>
           </ul>
         </div>
@@ -53,12 +53,12 @@ const currentYear = date.getFullYear()
           </p>
           <ul class="space-y-1">
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <NuxtLink to="https://www.youtube.com/@RuangBudi" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+              <NuxtLink to="https://www.youtube.com/@RuangBudi" target="_blank" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
                 Youtube
               </NuxtLink>
             </li>
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <NuxtLink to="https://www.instagram.com/ruang_budi/" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+              <NuxtLink to="https://www.instagram.com/ruang_budi/" target="_blank" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
                 Instagram
               </NuxtLink>
             </li>
@@ -72,19 +72,19 @@ const currentYear = date.getFullYear()
           </p>
           <ul class="space-y-1">
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
-                Ruang Budi
-              </a>
-            </li>
-            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+              <NuxtLink to="https://innovillage.id/" target="_blank" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
                 Innovillage
-              </a>
+              </NuxtLink>
             </li>
             <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-              <a href="#" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+              <NuxtLink to="" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
+                Ruang Budi
+              </NuxtLink>
+            </li>
+            <li class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
+              <NuxtLink to="" class="inline-block py-1 pr-2 transition-transform hover:scale-105">
                 Our Team
-              </a>
+              </NuxtLink>
             </li>
           </ul>
         </div>
